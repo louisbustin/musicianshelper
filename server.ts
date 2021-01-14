@@ -8,6 +8,8 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { router } from './src/api/routes';
+import mongoose from 'mongoose';
+import { dbconfig } from './config/database';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -24,7 +26,17 @@ export function app(): express.Express {
   server.set('views', distFolder);
 
   //wire up the api routes so we do not have to do it all in this file
+  server.use(express.json());
   server.use("/api", router);
+
+
+
+  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: true, useCreateIndex: true });
+  mongoose.connection.on('error', console.error.bind(console, 'Database connection error:'));
+  mongoose.connection.once('open', function () {
+    console.info('Successfully connected to the database');
+  });
+
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
