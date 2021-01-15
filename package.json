@@ -1,5 +1,5 @@
 {
-  "name": "testsite7",
+  "name": "braccketweb",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,10 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:ssr": "ng run testsite7:serve-ssr",
-    "serve:ssr": "node dist/testsite7/server/main.js",
-    "build:ssr": "ng build --prod && ng run testsite7:server:production",
-    "prerender": "ng run testsite7:prerender"
+    "dev:ssr": "ng run bracketweb:serve-ssr",
+    "serve:ssr": "node dist/bracketweb/server/main.js",
+    "build:ssr": "ng build --prod && ng run bracketweb:server:production",
+    "prerender": "ng run bracketweb:prerender"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "@angular/router": "~11.0.6",
     "@nguniversal/express-engine": "^11.0.1",
     "@types/mongoose": "^5.10.3",
+    "bulma": "^0.9.1",
     "express": "^4.15.2",
     "mongoose": "^5.11.12",
     "rxjs": "~6.6.0",

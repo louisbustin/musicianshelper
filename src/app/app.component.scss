@@ -1,0 +1,21 @@
+@import '../../node_modules/bulma/bulma.sass';
+@import '../styles.scss';
+
+.entirepage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.topnav {
+    display: flex;
+    flex-direction: row;
+    background-color: $light-green;
+    width: 100%;
+}
+.topnav a {
+    font-size: large;
+    margin: 10px;
+
+}
