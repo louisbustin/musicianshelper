@@ -31,7 +31,7 @@ export function app(): express.Express {
 
 
 
-  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: true, useCreateIndex: true });
+  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true });
   mongoose.connection.on('error', console.error.bind(console, 'Database connection error:'));
   mongoose.connection.once('open', function () {
     console.info('Successfully connected to the database');
