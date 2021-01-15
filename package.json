@@ -26,6 +26,8 @@
     "@angular/router": "~11.0.6",
     "@nguniversal/express-engine": "^11.0.1",
     "@types/mongoose": "^5.10.3",
+    "ag-grid-angular": "^25.0.1",
+    "ag-grid-community": "^25.0.1",
     "bulma": "^0.9.1",
     "express": "^4.15.2",
     "mongoose": "^5.11.12",

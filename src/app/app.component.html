@@ -1,9 +1,14 @@
 <div class="entirepage">
-  <div class="topnav">
-    <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/admin" routerLinkActive="active">Admin</a>
+ <div class="topnav">
+    <div class="lefttopmenu">
+      <a routerLink="/" routerLinkActive="active">Home</a>
+    </div>
+    <div class="righttopmenu">
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </div>
   </div>
   <div class="pagecontent">
+
     <router-outlet></router-outlet>
   </div>
 </div>

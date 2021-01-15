@@ -10,6 +10,7 @@ import { existsSync } from 'fs';
 import { router } from './src/api/routes';
 import mongoose from 'mongoose';
 import { dbconfig } from './config/database';
+import logger from './src/logger';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -31,16 +32,12 @@ export function app(): express.Express {
 
 
 
-  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true });
-  mongoose.connection.on('error', console.error.bind(console, 'Database connection error:'));
-  mongoose.connection.once('open', function () {
-    console.info('Successfully connected to the database');
+  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true }).then(() => {
+    logger.info('Successfully connected to mongo server');
+  }).catch((e) => {
+    logger.error('Error connecting to database', e);
   });
 
-
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
   }));
