@@ -1,0 +1,47 @@
+@import '../../node_modules/bulma/bulma.sass';
+@import '../styles.scss';
+
+.entirepage {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.topnav {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    background-color: $light-green;
+}
+.topnav div a {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bolder;
+    :hover {
+        background-color: red;
+    }
+}
+
+.lefttopmenu {
+    flex: 1 1 200px;
+    padding-left: 50px;
+}
+
+
+.righttopmenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 50px;
+}
+
+.pagecontent {
+    height:100%;
+    width: 100%;
+}
