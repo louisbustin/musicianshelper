@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { configs } from '../../../config/enviroment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class WebRequestService {
 
   constructor(private http: HttpClient) { 
   
-    this.API_URL = configs.API_URL;
+    this.API_URL = environment.API_URL;
   }
 
   get(uri: string) {
