@@ -9,8 +9,9 @@ import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { router } from './src/api/routes';
 import mongoose from 'mongoose';
-import { dbconfig } from './config/database';
 import logger from './src/logger';
+import { environment } from './src/environments/environment';
+import { dbconfig } from './src/environments/database';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
