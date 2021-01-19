@@ -1,8 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
-@import '../node_modules/ag-grid-community/dist/styles/ag-grid.scss';
-@import '../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine.scss';
+@import '~ag-grid-community/dist/styles/ag-grid.scss';
+@import '~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine.scss';
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~bulma/bulma.sass';
+
 
 $turquoise: #44ddd0;
 $green: #27d7a1;
