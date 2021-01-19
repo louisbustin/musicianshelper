@@ -50,6 +50,10 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if (result === "true") {
+        this.userData = this.userService.getAll();
+        
+      }
     });
   }
 

@@ -22,6 +22,8 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.userService.update(this.model);
+    this.userService.update(this.model).subscribe((response: Response) => {
+      console.log(response);
+    });
   }
 }
