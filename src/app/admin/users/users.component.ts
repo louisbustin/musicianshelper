@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { ButtonCellRendererComponent } from '../../button-cell-renderer.component';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-users',
@@ -36,6 +37,10 @@ export class UsersComponent implements OnInit {
   frameworkComponents = {
     btnCellRenderer: ButtonCellRendererComponent
   }
+  gridOptions: GridOptions = {
+    columnDefs: this.columnDefs,
+    frameworkComponents: this.frameworkComponents
+  }
 
   constructor(private userService: UserService, private dialog: MatDialog) {   
   }
@@ -47,12 +52,11 @@ export class UsersComponent implements OnInit {
 
   openDialog(user: any) {
     const dialogRef = this.dialog.open(UserFormComponent, { data: user });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if (result === "true") {
-        this.userData = this.userService.getAll();
-        
+      if (result !== "false") {
+        this.gridOptions.api.refreshCells();
       }
     });
   }

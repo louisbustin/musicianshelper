@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 
 import { User } from '../../../models/user';
@@ -15,7 +15,10 @@ export class UserFormComponent implements OnInit {
 
   hidden = false;
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: User, private userService: UserService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: User, 
+    private userService: UserService, 
+    public dialogRef: MatDialogRef<UserFormComponent>) 
+    { }
 
   ngOnInit(): void {
     this.model = this.data;
@@ -24,6 +27,7 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     this.userService.update(this.model).subscribe((response: Response) => {
       console.log(response);
+      this.dialogRef.close(this.model);
     });
   }
 }
