@@ -6,6 +6,7 @@ import { PublicComponent } from "./public/public.component";
 import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { AppComponent } from "./app.component";
 import { ButtonCellRendererComponent } from './button-cell-renderer.component';
+import { LoginPageComponent } from "./public/pages/login-page/login-page.component";
 
 
 export const appRoutes: Routes = [
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
       ]
     
     },
+    { path: 'login', component: LoginPageComponent },
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
