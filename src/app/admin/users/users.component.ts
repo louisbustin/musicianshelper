@@ -4,7 +4,7 @@ import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { ButtonCellRendererComponent } from '../../button-cell-renderer.component';
-import { GridOptions } from 'ag-grid-community';
+import { GridOptions, RowDataTransaction } from 'ag-grid-community';
 
 @Component({
   selector: 'app-users',
@@ -21,7 +21,6 @@ export class UsersComponent implements OnInit {
       cellRenderer: "btnCellRenderer",
       cellRendererParams: {
         clicked: (rowData: any) => {
-          console.log(rowData);
           this.openDialog(rowData);
         },
         buttonText: "Edit",
@@ -61,6 +60,18 @@ export class UsersComponent implements OnInit {
     });
   }
 
-
-
+  addClicked() {
+    let newUser = new User(null, null, null, null);
+    const dialogRef = this.dialog.open(UserFormComponent, { data: newUser });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result !== "false") {
+        this.gridOptions.api.applyTransaction({
+          add: [result]
+        });
+        this.gridOptions.api.refreshCells();
+      }
+    });
+  }
 }
