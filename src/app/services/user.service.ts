@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebRequestService } from './web-request.service';
-import { IUser } from '../../api/models/user.model';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,16 @@ export class UserService {
 
   constructor(private webRequestService: WebRequestService) { }
 
-  createUser(user: IUser) {
+  createUser(user: User) {
     return this.webRequestService.post(`${this.BASE_PATH}`, user);    
   }
 
   getAll() { 
-    let stuff = this.webRequestService.get(this.BASE_PATH); 
-    console.log(stuff);
-    return stuff;
+    return this.webRequestService.get(this.BASE_PATH); 
+  }
+
+  update(user: User) {
+    return this.webRequestService.put(`${this.BASE_PATH}/${user._id}`, user);
   }
 
 }

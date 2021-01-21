@@ -34,7 +34,7 @@ class UserController {
 
     static update = (request: Request, response: Response) => {
         User.findByIdAndUpdate(request.params.userId, request.body).then((user) => {
-            return response.status(200).send();
+            return response.status(200).json(user);
         }).catch((e: any) => {
             logger.error(e);
         });

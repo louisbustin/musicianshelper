@@ -1,0 +1,31 @@
+
+<div class="container">
+  <div [hidden]="hidden">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="text" class="form-control" id="email"
+                required
+                [(ngModel)]="model.email" name="email">
+      </div>
+      
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text"  class="form-control" id="firstName"
+               [(ngModel)]="model.firstName" name="firstName">
+      </div>
+      
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text"  class="form-control" id="lastName"
+               [(ngModel)]="model.lastName" name="lastName">
+      </div>
+      <mat-dialog-actions>
+        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-cancel"  mat-button [mat-dialog-close]="false">Cancel</button>
+      </mat-dialog-actions>     
+    </form>
+ 
+  </div>
+</div>
