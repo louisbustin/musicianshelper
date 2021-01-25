@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -7,6 +7,7 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./login-button.component.scss']
 })
 export class LoginButtonComponent implements OnInit {
+  @Input() cssClass: string;
 
   constructor(public auth: AuthService) {}
 

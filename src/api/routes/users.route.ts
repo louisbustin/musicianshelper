@@ -7,13 +7,13 @@ const router = express.Router();
 router.get('/', checkJwt, controller.getAll);
 router.get('/:userId', controller.getOne);
 
-router.post('/', controller.create);
+router.post('/', checkJwt, controller.create);
 
 //should we do put or patch? i guess both?
-router.patch('/:userId', controller.update);
-router.put('/:userId', controller.update);
+router.patch('/:userId', checkJwt, controller.update);
+router.put('/:userId',  checkJwt, controller.update);
 
 //delete may end up not deleting, but disabling somehow. but for now, here we go
-router.delete('/:userId', controller.delete);
+router.delete('/:userId',  checkJwt, controller.delete);
 
 export default router;

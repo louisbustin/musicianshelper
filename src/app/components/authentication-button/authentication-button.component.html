@@ -1,5 +1,5 @@
-<app-login-button *ngIf="(auth.isAuthenticated$ | async) === false">
+<app-login-button *ngIf="(auth.isAuthenticated$ | async) === false" [cssClass]="topnavitem">
 </app-login-button>
 
-<app-logout-button *ngIf="auth.isAuthenticated$ | async">
+<app-logout-button *ngIf="auth.isAuthenticated$ | async" [cssClass]="topnavitem">
 </app-logout-button>

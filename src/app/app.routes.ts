@@ -11,7 +11,9 @@ import { LoginButtonComponent } from './components/login-button/login-button.com
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
 import { SignupButtonComponent } from './components/signup-button/signup-button.component';
 import { ProfilePageComponent } from "./public/pages/profile-page/profile-page.component";
-import { AuthGuard } from "@auth0/auth0-angular";
+import { AuthGuard } from '@auth0/auth0-angular';
+import { AuthenticatedNavlinksComponent } from "./components/authenticated-navlinks/authenticated-navlinks.component";
+import { TopNavComponent } from "./components/top-nav/top-nav.component";
 
 
 export const appRoutes: Routes = [
@@ -41,5 +43,7 @@ export const appRoutes: Routes = [
         LoginButtonComponent,
         LogoutButtonComponent,
         SignupButtonComponent,
-        ProfilePageComponent
+        ProfilePageComponent,
+        AuthenticatedNavlinksComponent,
+        TopNavComponent
   ]

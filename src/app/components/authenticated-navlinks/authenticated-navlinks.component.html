@@ -1,0 +1,2 @@
+<a routerLink="/admin" routerLinkActive="active" *ngIf="(auth.isAuthenticated$ | async) === true" class="topnavitem">Admin</a>
+<app-authentication-button></app-authentication-button>

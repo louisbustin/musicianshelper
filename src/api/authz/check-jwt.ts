@@ -1,14 +1,15 @@
 import jwt from "express-jwt";
-import jwks from "jwks-rsa";
+import jwks from 'jwks-rsa';
+import { environment } from '../../environments/environment';
 
 export const checkJwt = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: 'https://bracketweb.us.auth0.com/.well-known/jwks.json'
+        jwksUri: `https://${environment.auth.domain}/.well-known/jwks.json`
   }),
-  audience: 'https://eforge.bracket.web/api/v2.0/',
-  issuer: 'https://bracketweb.us.auth0.com/',
+  audience: environment.auth.audience,
+  issuer: `https://${environment.auth.domain}/`,
   algorithms: ['RS256']
 });

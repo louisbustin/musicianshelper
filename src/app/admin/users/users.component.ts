@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { ButtonCellRendererComponent } from '../../button-cell-renderer.component';
-import { GridOptions, RowDataTransaction } from 'ag-grid-community';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-users',
@@ -65,7 +65,6 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(UserFormComponent, { data: newUser });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result !== "false") {
         this.gridOptions.api.applyTransaction({
           add: [result]
