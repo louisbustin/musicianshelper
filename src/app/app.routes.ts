@@ -6,7 +6,6 @@ import { PublicComponent } from "./public/public.component";
 import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { AppComponent } from "./app.component";
 import { ButtonCellRendererComponent } from './button-cell-renderer.component';
-import { LoginPageComponent } from "./public/pages/login-page/login-page.component";
 import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
@@ -25,7 +24,6 @@ export const appRoutes: Routes = [
       ],
       canActivate: [AuthGuard]    
     },
-    { path: 'login', component: LoginPageComponent },
     { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
