@@ -1,10 +1,10 @@
 import express from 'express';
-
 import controller from '../controllers/user.controller';
-
+import { checkJwt }  from '../authz/check-jwt';
 const router = express.Router();
 
-router.get('/', controller.getAll);
+
+router.get('/', checkJwt, controller.getAll);
 router.get('/:userId', controller.getOne);
 
 router.post('/', controller.create);

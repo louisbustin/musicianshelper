@@ -7,6 +7,12 @@ import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { AppComponent } from "./app.component";
 import { ButtonCellRendererComponent } from './button-cell-renderer.component';
 import { LoginPageComponent } from "./public/pages/login-page/login-page.component";
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { ProfilePageComponent } from "./public/pages/profile-page/profile-page.component";
+import { AuthGuard } from "@auth0/auth0-angular";
 
 
 export const appRoutes: Routes = [
@@ -16,10 +22,11 @@ export const appRoutes: Routes = [
       children: [
         { path: 'users', component: UsersComponent },
         { path: 'users/edit', component: UserFormComponent }
-      ]
-    
+      ],
+      canActivate: [AuthGuard]    
     },
     { path: 'login', component: LoginPageComponent },
+    { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
@@ -31,5 +38,10 @@ export const appRoutes: Routes = [
         PageNotFoundComponent,
         UsersComponent,
         UserFormComponent,
-        ButtonCellRendererComponent
+        ButtonCellRendererComponent,
+        AuthenticationButtonComponent,
+        LoginButtonComponent,
+        LogoutButtonComponent,
+        SignupButtonComponent,
+        ProfilePageComponent
   ]

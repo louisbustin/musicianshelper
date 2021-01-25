@@ -12,6 +12,13 @@ import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { UsersComponent } from './admin/users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonCellRendererComponent } from './button-cell-renderer.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment } from '../environments/environment';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+
+
 @NgModule({
   declarations: appDeclarations,
   imports: [
@@ -24,9 +31,20 @@ import { ButtonCellRendererComponent } from './button-cell-renderer.component';
     RouterModule.forRoot(
       appRoutes
     ),
-    AgGridModule.withComponents([ButtonCellRendererComponent])
+    AgGridModule.withComponents([ButtonCellRendererComponent]),
+    AuthModule.forRoot({
+      ...environment.auth,
+      httpInterceptor: {
+        allowedList: [`http://localhost:4200/api/users`],
+      },
+    })
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthHttpInterceptor,
+    multi: true,
+  }
+],
   bootstrap: [AppComponent],
   entryComponents: [UsersComponent, UserFormComponent]
 })
