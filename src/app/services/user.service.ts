@@ -23,4 +23,7 @@ export class UserService {
     return this.webRequestService.put(`${this.BASE_PATH}/${user._id}`, user);
   }
 
+  getByEmail(email: string) {
+    return this.webRequestService.post(`${this.BASE_PATH}/getOneByEmail`, {email})
+  }
 }
