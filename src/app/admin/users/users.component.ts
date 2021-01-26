@@ -31,7 +31,8 @@ export class UsersComponent implements OnInit {
     },
     { field: 'email', sortable: true, filter: true },
     { field: 'firstName', sortable: true, filter: true },
-    { field: 'lastName', sortable: true, filter: true }
+    { field: 'lastName', sortable: true, filter: true },
+    { field: 'userType', sortable: true, filter: true }
   ]; 
   frameworkComponents = {
     btnCellRenderer: ButtonCellRendererComponent
@@ -61,11 +62,11 @@ export class UsersComponent implements OnInit {
   }
 
   addClicked() {
-    let newUser = new User(null, null, null, null);
+    let newUser = new User(null, null, null, null, 'user');
     const dialogRef = this.dialog.open(UserFormComponent, { data: newUser });
     
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== "false") {
+      if (result === "true") {
         this.gridOptions.api.applyTransaction({
           add: [result]
         });

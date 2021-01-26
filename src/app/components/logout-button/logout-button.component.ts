@@ -8,8 +8,6 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./logout-button.component.scss']
 })
 export class LogoutButtonComponent implements OnInit {
-  @Input() cssClass: string;
-
   constructor(
     public auth: AuthService,
     @Inject(DOCUMENT) private doc: Document

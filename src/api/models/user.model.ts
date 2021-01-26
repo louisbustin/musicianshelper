@@ -4,6 +4,7 @@ export interface IUser extends Document {
     email: string;
     firstName: string;
     lastName: string;
+    userType: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -20,6 +21,12 @@ const UserSchema: Schema = new Schema({
         type: String, 
         required: true 
     },
+    userType: {
+        type: String,
+        enum : ['user','admin'],
+        default: 'user',
+        required: true
+    }
 });
 
 const User: Model<IUser> = model<IUser>('User', UserSchema);

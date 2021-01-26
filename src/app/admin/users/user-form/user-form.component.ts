@@ -26,11 +26,11 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     if (this.model._id === null) {
-      this.userService.createUser(this.model).subscribe((response: Response) => {
+      this.userService.createUser(this.model).toPromise().then((response: Response) => {
         this.dialogRef.close(this.model);
       });
     } else {
-      this.userService.update(this.model).subscribe((response: Response) => {
+      this.userService.update(this.model).toPromise().then((response: Response) => {
         this.dialogRef.close(this.model);
       });      
     }
