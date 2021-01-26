@@ -9,6 +9,8 @@ router.get('/:userId', controller.getOne);
 
 router.post('/', checkJwt, controller.create);
 
+router.post('/getOneByEmail', checkJwt, controller.getOneByEmail);
+
 //should we do put or patch? i guess both?
 router.patch('/:userId', checkJwt, controller.update);
 router.put('/:userId',  checkJwt, controller.update);

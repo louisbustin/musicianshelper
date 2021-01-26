@@ -13,6 +13,13 @@ export class UserService {
         return User.findById(id);
     }
 
+    static getOneByEmail = (email: string) => {
+        return User.findOne({email});
+    }
+    
+    static search = (body: any) => {
+        return User.find(body);
+    }
 
     static create = (user: IUser) => {
         return User.create(user);

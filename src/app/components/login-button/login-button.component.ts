@@ -7,7 +7,6 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./login-button.component.scss']
 })
 export class LoginButtonComponent implements OnInit {
-  @Input() cssClass: string;
 
   constructor(public auth: AuthService) {}
 
