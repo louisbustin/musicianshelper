@@ -16,7 +16,7 @@
             <div class="admin-menu">
                 <a class="admin-menu-item">Bracket Items</a>
                 <a class="admin-menu-item">Item Categories</a>
-                <a  routerLink="/admin/users" routerLinkActive="is-active" class="admin-menu-item">Users</a>
+                <a  routerLink="/admin/users" routerLinkActive="is-active" class="admin-menu-item" *ngIf="this.isSuperUser">Users</a>
             </div>
         </div>
         <div class="admin-content">

@@ -8,17 +8,16 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~bulma/bulma.sass';
 
+$blue: #498ba6;
+$light: #f0f3f8;
+$shade: #cbccc7;
+$darkblue: #1a4173;
+$blue2: #5a86bf;
 
-$turquoise: #44ddd0;
-$green: #27d7a1;
-$light-green: #45f69e;
-$dark-green: rgb(0,100,80);
-
-$light: #f8f8f8;
 
 $family-sans-serif: 'Nunito', sans-serif;
-$primary: $green;
-$link: $light-green;
+$primary: $blue;
+$link: $darkblue;
 
 
 $control-border-width: 2px;
@@ -26,7 +25,7 @@ $input-border-color: transparent;
 $input-shadow: none;
 
 html {
-    background: linear-gradient(to right top, $turquoise, $green);
+    background: linear-gradient(to right top, $blue, $blue2);
 }
 
 html, body {
@@ -55,7 +54,7 @@ html, body {
     display: flex;
     width: 100%;
     flex-direction: row;
-    background-color: $light-green;
+    background-color: #498ba6;
 }
 
 .lefttopmenu {

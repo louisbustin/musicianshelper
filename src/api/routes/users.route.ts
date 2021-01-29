@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/', checkJwt, controller.getAll);
-router.get('/:userId', controller.getOne);
+router.get('/:userId', checkJwt, controller.getOne);
 
 router.post('/', checkJwt, controller.create);
 
