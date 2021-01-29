@@ -1,6 +1,7 @@
 /**
  * This is a business layer between the conttroller for API and the raw mongoose models
  */
+import logger from 'src/logger';
 import User, { IUser } from '../models/user.model';
 
 export class UserService { 
@@ -22,7 +23,25 @@ export class UserService {
     }
 
     static create = (user: IUser) => {
-        return User.create(user);
+        return new Promise((resolve, reject) => {
+            User.findOne({email: user.email}).then((found: IUser) => {
+                if (found) {
+                    resolve(found);
+                } else {
+                    User.create(user).then((created: IUser) => {
+                        if (created) {
+                            resolve(created);
+                        } else {
+                            logger.error("unable to create user")
+                            reject("unable to create user");
+                        }
+                    });
+                }
+            }).catch((e: any) => {
+                logger.error("unable to create user: " + e);
+                reject(e);
+            });
+        });
     }
 
 

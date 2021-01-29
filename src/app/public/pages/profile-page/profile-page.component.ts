@@ -9,6 +9,7 @@ import { AuthService } from '@auth0/auth0-angular';
 export class ProfilePageComponent implements OnInit {
 
   profileJson: string = null;
+  userJson: string = null;
 
   constructor(public auth: AuthService) {}
 
@@ -16,5 +17,6 @@ export class ProfilePageComponent implements OnInit {
     this.auth.user$.subscribe(
       (profile) => (this.profileJson = JSON.stringify(profile, null, 2))
     );
+    this.userJson = localStorage.getItem('user');
   }
 }

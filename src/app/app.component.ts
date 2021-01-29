@@ -17,22 +17,23 @@ export class AppComponent  implements OnInit {
     //check local storage for the email, if we are authenticated.
     //if the email is in local storage, we can assume we have a record in the db
     //if the email is NOT in local storage, we should create a user record for this Auth0 user
-    console.log("onint");
-    this.auth.isAuthenticated$.toPromise().then((isAuthenticated) => {
-      console.log("auth");
+
+    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
       console.log(isAuthenticated);
       if (isAuthenticated) {
         this.auth.user$.toPromise().then((profileInfo) => {
           console.log(profileInfo);
-          let localEmail = localStorage.getItem("user");
-          console.log(localEmail);
-          if (localEmail === profileInfo.email) {
+          let localUser = JSON.parse(localStorage.getItem("user"));
+          console.log(localUser);
+          if (localUser !== null && localUser.email === profileInfo.email) {
+            console.log('it thinkgs its good');
             //everything is good
           } else {
             //create the user
-            let user: User = new User(null, profileInfo.email, profileInfo.given_name, profileInfo.family_name);
-            this.userService.createUser(user).toPromise().then((createad) => {
-              localStorage.setItem("user", user.email);
+            console.log('attempting to create user');
+            let user: User = new User(null, profileInfo.email, profileInfo.given_name, profileInfo.family_name, 'user');
+            this.userService.createUser(user).toPromise().then((created) => {
+              localStorage.setItem("user", JSON.stringify(created));
             });
           }
         })
