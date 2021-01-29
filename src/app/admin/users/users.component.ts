@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(UserFormComponent, { data: user });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result !== "false") {
         this.gridOptions.api.refreshCells();
       }

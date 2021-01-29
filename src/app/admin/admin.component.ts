@@ -16,7 +16,6 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe((isAuth) => {
       if (isAuth) {
-        console.log(localStorage.getItem('user'));
         let user: User = JSON.parse(localStorage.getItem('user'));
         this.isSuperUser = user.userType === 'admin';
       }
