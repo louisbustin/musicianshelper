@@ -31,8 +31,6 @@ export function app(): express.Express {
   server.use(express.json());
   server.use("/api", router);
 
-
-
   mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true }).then(() => {
     logger.info('Successfully connected to mongo server');
   }).catch((e) => {
