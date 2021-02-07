@@ -46,7 +46,7 @@ export class UserService {
 
 
     static update = (id: string, user: IUser) => {
-        return User.findByIdAndUpdate(id, user);
+        return User.findByIdAndUpdate(id, user, {new : true});
     }
 
     static delete = (id: string) => {

@@ -35,7 +35,7 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
     AuthModule.forRoot({
       ...environment.auth,
       httpInterceptor: {
-        allowedList: ['/api/users/*', '/api/users'],
+        allowedList: ['/api/users/*', '/api/users', '/api/bracketgroups', '/api/bracketgroups/*'],
       },
     })
   ],
