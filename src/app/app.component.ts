@@ -25,7 +25,7 @@ export class AppComponent  implements OnInit {
       } else {
         //create the user
         let user: User = new User(null, profileInfo.email, profileInfo.given_name, profileInfo.family_name, 'user');
-        this.userService.createUser(user).toPromise().then((created) => {
+        this.userService.createUser(user).pipe(first()).toPromise().then((created) => {
           localStorage.setItem("user", JSON.stringify(created));
         });
       }

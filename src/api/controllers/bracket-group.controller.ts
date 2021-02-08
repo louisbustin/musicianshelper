@@ -10,7 +10,7 @@ class  BracketGroupController {
     static getAll = (request: Request, response: Response) => {
         BracketGroupService.getAll().then((bracketGroups) => {
             return response.status(200).json(bracketGroups);
-        }).catch((e) => {
+        }).catch((e: any) => {
             logger.error("Error getting bracketGroups: " + e);
             return response.status(500).send();
         })
@@ -27,7 +27,15 @@ class  BracketGroupController {
             logger.error("unable to get bracketGroup: " + e);
             return response.status(500).send();
         });
+    }
 
+    static getAllByOwnerId = (request: Request, response: Response) => {
+        BracketGroupService.getAllByOwner(request.params.ownerId).then((bracketGroups) => {
+            return response.status(200).json(bracketGroups);
+        }).catch((e: any) => {
+            logger.error("Error getting bracketGroups: " + e);
+            return response.status(500).send();
+        })
     }
 
     static create = (request: Request, response: Response) => {

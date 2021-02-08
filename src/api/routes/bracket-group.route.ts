@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/', checkJwt, controller.getAll);
 router.get('/:bracketGroupId', checkJwt, controller.getOne);
+router.get('/byowner/:ownerId', checkJwt, controller.getAllByOwnerId);
 
 router.post('/', checkJwt, controller.create);
 

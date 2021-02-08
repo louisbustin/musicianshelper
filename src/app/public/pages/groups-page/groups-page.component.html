@@ -2,3 +2,13 @@
     We're going to need a list of groups
 -->
 
+<div *ngIf="(bracketGroupsData$ | async)?.length > 0">
+    <div *ngFor="let data in bracketGroupsData$ | async">
+        <span>{{data.name}}</span>
+
+    </div>
+</div>
+
+<div *ngIf="(bracketGroupsData$ | async)?.length == 0">
+    No groups found for this user. Create one!
+</div>
