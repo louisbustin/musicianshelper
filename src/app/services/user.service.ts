@@ -29,11 +29,26 @@ export class UserService {
     return this.webRequestService.post(`${this.BASE_PATH}/getOneByEmail`, {email})
   }
 
+  /**
+   * Returns a Promise of the local users User object.
+   * the promise is rejected 
+   *  1) if the request is not authenticated
+   *  2) if the local user is not in localStorage for some reason
+   */
   getLocalUser() {
-    this.authService.isAuthenticated$.pipe(first()).toPromise().then((isAuthenticated) => {
-      if (isAuthenticated) {
-        return localStorage.get('user');
-      }
+    return new Promise((resolve, reject) => {
+      this.authService.isAuthenticated$.pipe(first()).toPromise().then((isAuthenticated) => {
+        if (isAuthenticated) {
+          let localUser = localStorage.getItem('user');
+          if (localUser) {
+            resolve(JSON.parse(localUser));
+          } else {
+            reject("no local user");
+          }
+        } else {
+          reject("not authenticated");
+        }
+      });
     })
   }
 }

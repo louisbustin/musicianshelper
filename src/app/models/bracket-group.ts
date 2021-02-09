@@ -5,6 +5,7 @@ export class BracketGroup {
         public _id: string,
         public name: string,
         public description: string,
-        public members: User[]
+        public members: User[],
+        public owner: User
     ) {}
 }

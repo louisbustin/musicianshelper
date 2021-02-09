@@ -3,12 +3,11 @@
 -->
 
 <div *ngIf="(bracketGroupsData$ | async)?.length > 0">
-    <div *ngFor="let data in bracketGroupsData$ | async">
+    <div *ngFor="let data of bracketGroupsData$ | async">
         <span>{{data.name}}</span>
-
     </div>
 </div>
 
 <div *ngIf="(bracketGroupsData$ | async)?.length == 0">
-    No groups found for this user. Create one!
+    No groups found for this user. <a (click)="addClicked()">Create one</a>!
 </div>

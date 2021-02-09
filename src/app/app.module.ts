@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { GroupsFormComponent } from './public/pages/groups-page/groups-form/groups-form.component';
 
 
 @NgModule({
@@ -46,6 +47,6 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
   }
 ],
   bootstrap: [AppComponent],
-  entryComponents: [UsersComponent, UserFormComponent]
+  entryComponents: [UsersComponent, UserFormComponent, GroupsFormComponent]
 })
 export class AppModule { }

@@ -21,6 +21,6 @@ const BracketGroupSchema: Schema = new Schema({
     members: { type: [Schema.Types.ObjectId], required: false }
 });
 
-const BracketGroup: Model<IBracketGroup> = model<IBracketGroup>('Bracket', BracketGroupSchema);
+const BracketGroup: Model<IBracketGroup> = model<IBracketGroup>('BracketGroup', BracketGroupSchema);
 
 export default BracketGroup;

@@ -15,6 +15,7 @@ import { AuthGuard } from '@auth0/auth0-angular';
 import { AuthenticatedNavlinksComponent } from "./components/authenticated-navlinks/authenticated-navlinks.component";
 import { TopNavComponent } from "./components/top-nav/top-nav.component";
 import { GroupsPageComponent } from "./public/pages/groups-page/groups-page.component";
+import { GroupsFormComponent } from "./public/pages/groups-page/groups-form/groups-form.component";
 
 
 export const appRoutes: Routes = [
@@ -49,4 +50,5 @@ export const appRoutes: Routes = [
         AuthenticatedNavlinksComponent,
         TopNavComponent,
         GroupsPageComponent,
+        GroupsFormComponent
   ]
