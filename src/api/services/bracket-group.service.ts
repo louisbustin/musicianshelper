@@ -14,6 +14,9 @@ export class BracketGroupService {
         return BracketGroup.findById(id);
     }
 
+    static getAllByOwner = (ownerId: string) => {
+        return BracketGroup.find({owner: ownerId});
+    }
     
     static search = (body: any) => {
         return BracketGroup.find(body);

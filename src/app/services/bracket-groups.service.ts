@@ -23,6 +23,10 @@ export class BracketGroupsService {
     return this.webRequestService.get(`${this.BASE_PATH}/${id}`);
   }
 
+  getAllByOwnerId(ownerId: string) {
+    return this.webRequestService.get(`${this.BASE_PATH}/byowner/${ownerId}`);
+  }
+
   update(group: BracketGroup) {
     return this.webRequestService.put(`${this.BASE_PATH}/${group._id}`, group);
   }
