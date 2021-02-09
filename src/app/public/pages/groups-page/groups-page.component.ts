@@ -14,6 +14,12 @@ export class GroupsPageComponent implements OnInit {
   constructor(private groupsService: BracketGroupsService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.isAuthenticated$.pipe(first()).toPromise().then((isAuthenticated) => {
+      if (isAuthenticated) {
+        let localUser = localStorage.get('user');
+        this.bracketGroupsData$ = this.groupsService.getAllByOwnerId(localUser._id);
+      }
+    })
     
   }
 
