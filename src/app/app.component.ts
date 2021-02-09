@@ -19,15 +19,17 @@ export class AppComponent  implements OnInit {
     //if the email is NOT in local storage, we should create a user record for this Auth0 user
 
     this.auth.user$.pipe(first()).subscribe((profileInfo) => {
-      let localUser = JSON.parse(localStorage.getItem("user"));
-      if (localUser !== null && localUser.email === profileInfo.email) {
-        //everything is good
-      } else {
-        //create the user
-        let user: User = new User(null, profileInfo.email, profileInfo.given_name, profileInfo.family_name, 'user');
-        this.userService.createUser(user).pipe(first()).toPromise().then((created) => {
-          localStorage.setItem("user", JSON.stringify(created));
-        });
+      if (localStorage) {
+        let localUser = JSON.parse(localStorage.getItem("user"));
+        if (localUser !== null && localUser.email === profileInfo.email) {
+          //everything is good
+        } else {
+          //create the user
+          let user: User = new User(null, profileInfo.email, profileInfo.given_name, profileInfo.family_name, 'user');
+          this.userService.createUser(user).pipe(first()).toPromise().then((created) => {
+            localStorage.setItem("user", JSON.stringify(created));
+          });
+        }
       }
     })    
   }

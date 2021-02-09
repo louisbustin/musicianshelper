@@ -1,7 +1,7 @@
 /**
- * This is a business layer between the conttroller for API and the raw mongoose models
+ * This is a business layer between the controller for API and the raw mongoose models
  */
-import logger from 'src/logger';
+
 import BracketGroup, { IBracketGroup } from '../models/bracket-group.model';
 
 export class BracketGroupService { 

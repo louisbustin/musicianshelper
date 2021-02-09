@@ -1,4 +1,4 @@
-import BracketGroup, { IBracketGroup } from '../models/bracket-group.model';
+import { IBracketGroup } from '../models/bracket-group.model';
 import logger from '../../logger';
 import { Request, Response } from 'express';
 import { BracketGroupService } from '../services/bracket-group.service';

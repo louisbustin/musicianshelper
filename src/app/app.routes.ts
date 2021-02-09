@@ -16,6 +16,7 @@ import { AuthenticatedNavlinksComponent } from "./components/authenticated-navli
 import { TopNavComponent } from "./components/top-nav/top-nav.component";
 import { GroupsPageComponent } from "./public/pages/groups-page/groups-page.component";
 import { GroupsFormComponent } from "./public/pages/groups-page/groups-form/groups-form.component";
+import { GroupDetailsComponent } from "./public/pages/groups-page/group-details/group-details.component";
 
 
 export const appRoutes: Routes = [
@@ -30,6 +31,7 @@ export const appRoutes: Routes = [
     },
     { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
     { path: 'groups', component: GroupsPageComponent, canActivate: [AuthGuard]},
+    { path: 'groups/:id', component: GroupDetailsComponent, canActivate: [AuthGuard]},
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
@@ -50,5 +52,6 @@ export const appRoutes: Routes = [
         AuthenticatedNavlinksComponent,
         TopNavComponent,
         GroupsPageComponent,
-        GroupsFormComponent
+        GroupsFormComponent,
+        GroupDetailsComponent
   ]

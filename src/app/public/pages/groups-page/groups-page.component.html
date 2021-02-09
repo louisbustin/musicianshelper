@@ -1,10 +1,12 @@
 <!--
     We're going to need a list of groups
 -->
-
+<div>
+    <button (click)="addClicked()">Add</button>
+</div>
 <div *ngIf="(bracketGroupsData$ | async)?.length > 0">
     <div *ngFor="let data of bracketGroupsData$ | async">
-        <span>{{data.name}}</span>
+        <span><a [routerLink]="['/groups', data._id]">{{data.name}}</a></span>
     </div>
 </div>
 

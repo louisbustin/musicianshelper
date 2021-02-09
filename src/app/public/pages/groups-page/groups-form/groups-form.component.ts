@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { first } from 'rxjs/operators';
 import { BracketGroup } from 'src/app/models/bracket-group';
 import { BracketGroupsService } from 'src/app/services/bracket-groups.service';
 
@@ -24,12 +25,12 @@ export class GroupsFormComponent implements OnInit {
 
   onSubmit() {
     if (this.model._id === null) {
-      this.bracketGroupService.create(this.model).toPromise().then((response: Response) => {
-        this.dialogRef.close(response.body);
+      this.bracketGroupService.create(this.model).pipe(first()).toPromise().then((response: Response) => {
+        this.dialogRef.close(response);
       });
     } else {
-      this.bracketGroupService.update(this.model).toPromise().then((response: Response) => {
-        this.dialogRef.close(response.body);
+      this.bracketGroupService.update(this.model).pipe(first()).toPromise().then((response: Response) => {
+        this.dialogRef.close(response);
       });      
     }
   }

@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { GroupsFormComponent } from './groups-form/groups-form.component';
 import { UserService } from 'src/app/services/user.service';
 import { BracketGroup } from 'src/app/models/bracket-group';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-groups-page',
@@ -12,7 +14,7 @@ import { BracketGroup } from 'src/app/models/bracket-group';
   styleUrls: ['./groups-page.component.scss']
 })
 export class GroupsPageComponent implements OnInit {
-  bracketGroupsData$: any; //this will be an observable list of BracketGroups
+  bracketGroupsData$ = new BehaviorSubject([]); //this will be an observable list of BracketGroups
 
   constructor(
     private groupsService: BracketGroupsService, 
@@ -22,7 +24,7 @@ export class GroupsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getLocalUser().then((user: User) => {
-      this.bracketGroupsData$ = this.groupsService.getAllByOwnerId(user._id);
+      this.groupsService.getAllByOwnerId(user._id).subscribe((groups: any[]) => this.bracketGroupsData$.next(groups));
     });
   }
 
@@ -43,8 +45,11 @@ export class GroupsPageComponent implements OnInit {
       const dialogRef = this.dialog.open(GroupsFormComponent, { data: newGroup });
       
       dialogRef.afterClosed().subscribe(result => {
-        if (result === "true") {
-        }
+        if (result) {
+          this.userService.getLocalUser().then((user: User) => {
+            this.groupsService.getAllByOwnerId(user._id).subscribe((groups: any[]) => this.bracketGroupsData$.next(groups));
+          });
+        }        
       });
     })
   }
