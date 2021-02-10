@@ -31,4 +31,16 @@ export class BracketGroupsService {
     return this.webRequestService.put(`${this.BASE_PATH}/${group._id}`, group);
   }
 
+  /**
+   * This method adds a user, by email address, to the bracket group.
+   * the user will get an email. If a user does not exist with this email address, one
+   * will be created.
+   * @param group the bracket group to which to add the user
+   * @param emailToAdd email address of the user to add
+   */
+  addMember(group: BracketGroup, emailToAdd: string) {
+    
+
+  }
+
 }

@@ -10,15 +10,29 @@ export interface IBracketGroup extends Document {
     owner: IUser['_id'];
     name: string;
     description: string;
-    members: IUser['_id'][];
+    members: IBracketGroupMember[];
 
+}
+
+export interface IBracketGroupMember {
+    user: IUser['_id'];
+    role: string;
+    verifyToken: string;
+    verifyDate: Date;
 }
 
 const BracketGroupSchema: Schema = new Schema({
     owner: {type: Schema.Types.ObjectId, ref: 'Users'},
     name: { type: String, required: true, maxlength: 100 },
     description: { type: String, required: false, maxlength: 5000},
-    members: { type: [Schema.Types.ObjectId], required: false }
+    members: { type: [
+        { 
+            user: { type: Schema.Types.ObjectId, ref: 'Users', required: true }, 
+            role: { type: String, enum : ['user','admin'], default: 'user', required: true },
+            verifyToken: { type: String, required: true },
+            verifyDate: { type: Date, required: false }
+        }
+    ], required: false }
 });
 
 const BracketGroup: Model<IBracketGroup> = model<IBracketGroup>('BracketGroup', BracketGroupSchema);
