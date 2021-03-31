@@ -14,10 +14,6 @@ import { ProfilePageComponent } from "./public/pages/profile-page/profile-page.c
 import { AuthGuard } from '@auth0/auth0-angular';
 import { AuthenticatedNavlinksComponent } from "./components/authenticated-navlinks/authenticated-navlinks.component";
 import { TopNavComponent } from "./components/top-nav/top-nav.component";
-import { GroupsPageComponent } from "./public/pages/groups-page/groups-page.component";
-import { GroupsFormComponent } from "./public/pages/groups-page/groups-form/groups-form.component";
-import { GroupDetailsComponent } from "./public/pages/groups-page/group-details/group-details.component";
-
 
 export const appRoutes: Routes = [
     { 
@@ -30,8 +26,6 @@ export const appRoutes: Routes = [
       canActivate: [AuthGuard]    
     },
     { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
-    { path: 'groups', component: GroupsPageComponent, canActivate: [AuthGuard]},
-    { path: 'groups/:id', component: GroupDetailsComponent, canActivate: [AuthGuard]},
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
@@ -50,8 +44,5 @@ export const appRoutes: Routes = [
         SignupButtonComponent,
         ProfilePageComponent,
         AuthenticatedNavlinksComponent,
-        TopNavComponent,
-        GroupsPageComponent,
-        GroupsFormComponent,
-        GroupDetailsComponent
+        TopNavComponent
   ]
