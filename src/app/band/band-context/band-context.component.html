@@ -1,0 +1,6 @@
+<span class="bd-navbar-icon navbar-item" *ngIf="auth.isAuthenticated$ | async">
+    <select (change)="bandContextChanged($event.target.value)">
+        <option value="1">Average Joes</option>
+        <option value="2">Silence Falls</option>
+    </select>
+</span>
