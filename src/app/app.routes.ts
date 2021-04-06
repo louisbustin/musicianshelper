@@ -5,15 +5,8 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { PublicComponent } from "./public/public.component";
 import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { AppComponent } from "./app.component";
-import { ButtonCellRendererComponent } from './button-cell-renderer.component';
-import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
-import { LoginButtonComponent } from './components/login-button/login-button.component';
-import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
-import { SignupButtonComponent } from './components/signup-button/signup-button.component';
 import { ProfilePageComponent } from "./public/pages/profile-page/profile-page.component";
 import { AuthGuard } from '@auth0/auth0-angular';
-import { AuthenticatedNavlinksComponent } from "./components/authenticated-navlinks/authenticated-navlinks.component";
-import { TopNavComponent } from "./components/top-nav/top-nav.component";
 
 export const appRoutes: Routes = [
     { 
@@ -37,12 +30,5 @@ export const appRoutes: Routes = [
         PageNotFoundComponent,
         UsersComponent,
         UserFormComponent,
-        ButtonCellRendererComponent,
-        AuthenticationButtonComponent,
-        LoginButtonComponent,
-        LogoutButtonComponent,
-        SignupButtonComponent,
-        ProfilePageComponent,
-        AuthenticatedNavlinksComponent,
-        TopNavComponent
+        ProfilePageComponent
   ]

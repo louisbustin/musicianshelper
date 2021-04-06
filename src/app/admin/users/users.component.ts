@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from '../../models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
-import { ButtonCellRendererComponent } from '../../button-cell-renderer.component';
 import { GridOptions } from 'ag-grid-community';
+import { ButtonCellRendererComponent } from 'src/app/shared/button-cell-renderer/button-cell-renderer.component';
 
 @Component({
   selector: 'app-users',
