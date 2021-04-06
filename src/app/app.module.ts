@@ -33,7 +33,12 @@ import { ButtonCellRendererComponent } from './shared/button-cell-renderer/butto
     AuthModule.forRoot({
       ...environment.auth,
       httpInterceptor: {
-        allowedList: ['/api/users/*', '/api/users', '/api/bracketgroups', '/api/bracketgroups/*'],
+        allowedList: [
+          '/api/users/*', 
+          '/api/users', 
+          '/api/bands', 
+          '/api/bands/*'
+        ],
       },
     })
   ],

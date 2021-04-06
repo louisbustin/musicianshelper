@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BandService } from '../band/band.service';
 
 @Component({
   selector: 'app-public',
   templateUrl: './public.component.html',
-  styleUrls: ['./public.component.scss']
+  styleUrls: ['./public.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublicComponent implements OnInit {
+export class PublicComponent {
 
-  constructor() { }
+  currentBand$ = this.bandService.selectedBand$;
 
-  ngOnInit(): void {
-  }
+  constructor(private bandService: BandService) { }
 
 }

@@ -1,3 +1,3 @@
-<p>localSettings user object is:</p>
+<p *ngIf="currentBand$ | async as currentBand">Current band of context is: {{ currentBand.name }}</p>
 
 <p></p>

@@ -16,6 +16,11 @@ export class WebRequestService {
   get(uri: string) {
     return this.http.get(`${this.API_URL}/${uri}`);
   }
+  
+  getTyped<T>(uri: string) {
+    return this.http.get<T>(`${this.API_URL}/${uri}`);
+  }
+
   delete(uri: string) {
     return this.http.delete(`${this.API_URL}/${uri}`);
   }

@@ -1,4 +1,4 @@
-import User, { IUser } from '../models/user.model';
+import { IUser } from '../models/user.model';
 import logger from '../../logger';
 import { Request, Response } from 'express';
 import { UserService } from '../services/user.service';
