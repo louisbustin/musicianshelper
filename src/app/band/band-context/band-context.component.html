@@ -1,7 +1,7 @@
 <div class="bd-navbar-icon navbar-item" *ngIf="auth.isAuthenticated$ | async">
     <div class="control has-icons-left">
         <div class="select is-small">
-            <select (change)="bandContextChanged($event.target.value)" *ngIf="bands$ | async as bands ">
+            <select (change)="bandContextChanged($event.target.value)" *ngIf="bands$ | async as bands">
                 <option *ngFor="let band of bands" value="{{band._id}}">{{band.name}}</option>
             </select>
         </div>
