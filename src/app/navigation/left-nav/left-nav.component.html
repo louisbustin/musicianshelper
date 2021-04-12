@@ -1,18 +1,21 @@
 <aside class="menu">
-    <ul class="menu-list">
+  <p class="menu-label">
+    General
+  </p>
+  <ul class="menu-list">
       <li><a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
       <li><a routerLink="/news" routerLinkActive='is-active'>News</a></li>
+      <li><a routerLink='/band/add' routerLinkActive='is-active'>Add a new band</a></li>
     </ul>
     <p class="menu-label">
       Bands
     </p>
     <ul class="menu-list">
-      <li><a>Add a new band</a></li>
       <li>
         <a>Manage Your Band</a>
         <ul>
+          <li><a routerLink='/band/members' routerLinkActive='is-active'>Members</a></li>
           <li><a>Band Settings</a></li>
-          <li><a>Members</a></li>
           <li><a>Add a member</a></li>
         </ul>
       </li>

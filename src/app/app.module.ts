@@ -21,7 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ProfilePageComponent } from './public/pages/profile-page/profile-page.component';
 import { NewsComponent } from './public/news/news.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { BandModule } from './band/band.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { AdminComponent } from './admin/admin.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     RouterModule.forRoot(
       appRoutes
-    ),
+      ),
+    BandModule,
     AgGridModule.withComponents([ButtonCellRendererComponent]),
     AuthModule.forRoot({
       ...environment.auth,

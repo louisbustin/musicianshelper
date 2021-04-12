@@ -7,8 +7,8 @@ import { LogoutButtonComponent } from './logout-button/logout-button.component';
 import { SignupButtonComponent } from './signup-button/signup-button.component';
 import { AuthenticatedNavlinksComponent } from './authenticated-navlinks/authenticated-navlinks.component';
 import { LeftNavComponent } from './left-nav/left-nav.component';
-import { BandModule } from '../band/band.module';
 import { RouterModule } from '@angular/router';
+import { BandModule } from '../band/band.module';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     SharedModule,
-    BandModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]), 
+    BandModule
   ],
   exports: [
     TopNavComponent,

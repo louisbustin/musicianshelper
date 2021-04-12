@@ -20,13 +20,6 @@ export const appRoutes: Routes = [
     },
     { path: 'news', component: NewsComponent },
     { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
-    { 
-      path: 'band', 
-      canActivate: [AuthGuard], 
-      data: { preload: false }, 
-      loadChildren: () =>
-        import('./band/band.module').then(m => m.BandModule)
-    },
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
