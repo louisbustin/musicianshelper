@@ -8,6 +8,7 @@ import { SignupButtonComponent } from './signup-button/signup-button.component';
 import { AuthenticatedNavlinksComponent } from './authenticated-navlinks/authenticated-navlinks.component';
 import { LeftNavComponent } from './left-nav/left-nav.component';
 import { BandModule } from '../band/band.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BandModule } from '../band/band.module';
   ],
   imports: [
     SharedModule,
-    BandModule
+    BandModule,
+    RouterModule.forChild([])
   ],
   exports: [
     TopNavComponent,

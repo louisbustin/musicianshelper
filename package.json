@@ -42,6 +42,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.12.3",
     "lodash": "^4.17.21",
+    "mongodb-client-encryption": "^1.2.3",
     "mongoose": "^5.12.3",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
