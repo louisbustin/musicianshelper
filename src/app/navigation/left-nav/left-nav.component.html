@@ -8,11 +8,11 @@
       <li><a routerLink='/band/add' routerLinkActive='is-active'>Add a new band</a></li>
     </ul>
     <p class="menu-label">
-      Bands
+      <span *ngIf="currentBand$ | async as currentBand">{{currentBand.name}}</span>
     </p>
     <ul class="menu-list">
       <li>
-        <a>Manage Your Band</a>
+        <a routerLink="/band/manage" routerLinkActive="is-active">Manage Your Band</a>
         <ul>
           <li><a routerLink='/band/members' routerLinkActive='is-active'>Members</a></li>
           <li><a>Band Settings</a></li>
