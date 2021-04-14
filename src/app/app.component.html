@@ -1,7 +1,8 @@
 <div>
   <navigation-top-nav></navigation-top-nav>
+  
   <div class="columns">
-    <div class="column is-2">
+    <div class="column is-2" *ngIf="auth.isAuthenticated$ | async">
       <navigation-left-nav></navigation-left-nav>
     </div>
     <div class='column is-10'>
@@ -9,10 +10,24 @@
     </div>
   </div>
   <footer class="footer">
+
+
     <div class="content has-text-centered">
-      <p>
-        <strong>Musician's Helper</strong> by Louis Bustin.
-      </p>
+      <!--
+      <a class="bd-navbar-icon navbar-item" href="https://twitter.com/louisbustin" target="_blank">
+        <span class="icon" style="color: var(--twitter);">
+          <em class="fab fa-lg fa-twitter"></em>
+        </span>
+      </a>-->
+      <strong>Musician's Helper</strong> by Louis Bustin.
+      <!--
+      <a class="bd-navbar-icon navbar-item" href="https://facebook.com" target="_blank">
+        <span class="icon" style="color: var(--facebook);">
+          <em class="fab fa-lg fa-facebook"></em>
+        </span>
+      </a>
+    -->
     </div>
   </footer>
 </div>
+  

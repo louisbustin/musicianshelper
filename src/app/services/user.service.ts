@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WebRequestService } from './web-request.service';
+import { WebRequestService } from '../shared/services/web-request.service';
 import { User } from '../models/user';
 import { AuthService } from '@auth0/auth0-angular';
 import { first } from 'rxjs/operators';

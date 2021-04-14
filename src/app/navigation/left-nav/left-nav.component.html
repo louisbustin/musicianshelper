@@ -1,34 +1,38 @@
 <aside class="menu">
-    <p class="menu-label">
-      General
-    </p>
-    <ul class="menu-list">
-      <li><a>Dashboard</a></li>
-      <li><a>Customers</a></li>
+  <p class="menu-label">
+    General
+  </p>
+  <ul class="menu-list">
+      <li><a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a routerLink="/news" routerLinkActive='is-active'>News</a></li>
+      <li><a routerLink='/band/add' routerLinkActive='is-active'>Add a new band</a></li>
     </ul>
     <p class="menu-label">
-      Administration
+      <span *ngIf="currentBand$ | async as currentBand">{{currentBand.name}}</span>
     </p>
     <ul class="menu-list">
-      <li><a>Team Settings</a></li>
       <li>
-        <a class="is-active">Manage Your Team</a>
+        <a routerLink="/band/manage" routerLinkActive="is-active">Manage Your Band</a>
         <ul>
-          <li><a>Members</a></li>
-          <li><a>Plugins</a></li>
+          <li><a routerLink='/band/members' routerLinkActive='is-active'>Members</a></li>
+          <li><a>Band Settings</a></li>
           <li><a>Add a member</a></li>
         </ul>
       </li>
+      <li><a>Setlists</a></li>
+      <li>
+        <ul>
+          <li><a>Add/Edit</a></li>
+          <li><a>Manage</a></li>
+        </ul>
+      </li>
       <li><a>Invitations</a></li>
-      <li><a>Cloud Storage Environment Settings</a></li>
-      <li><a>Authentication</a></li>
     </ul>
     <p class="menu-label">
-      Transactions
+      Profiles
     </p>
     <ul class="menu-list">
-      <li><a>Payments</a></li>
-      <li><a>Transfers</a></li>
-      <li><a>Balance</a></li>
+      <li><a>Edit Profile</a></li>
+      <li><a>Find Members</a></li>
     </ul>
   </aside>

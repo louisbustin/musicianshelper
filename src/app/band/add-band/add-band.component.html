@@ -1,0 +1,52 @@
+
+<div class="columns">
+    <div class="column is-one-quarter">
+        <h1 class="title">Add a band</h1>
+        <div class="block">
+            Fill out the form to add a band. When submitted, the new band will be selected 
+            as the current band of context and you will be tranferred to the band managment page.
+        </div>
+    </div>
+    <div class="column is-one-half">
+        <form class="box" (ngSubmit)="addBand()">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control has-icons-right has-icons-left">
+                    <input class="input" type="text" placeholder="Band Name" required #name="ngModel" id="bandname" name="bandname" [(ngModel)]="band.name">
+                    <span class="icon is-small is-left">
+                        <em class="fas fa-users"></em>
+                    </span>
+                    <span class="icon is-small is-right" *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <em class="fas fa-exclamation-triangle"></em>
+                    </span>
+                </div>
+                <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Band name is required</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Band Email" value="hello@" required #email="ngModel"
+                        email id="bandemail" name="bandemail" [(ngModel)]="band.email">
+                    <span class="icon is-small is-left">
+                        <em class="fas fa-envelope"></em>
+                    </span>
+                    <span class="icon is-small is-right" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <em class="fas fa-exclamation-triangle"></em>
+                    </span>
+                </div>
+                <p class="help is-danger" *ngIf="email.invalid && (email.dirty || email.touched)">This email is invalid</p>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                <button class="button is-link" type="submit">Submit</button>
+                </div>
+                <div class="control">
+                <button class="button is-link is-light" (click)="cancelAdd()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>  
+    <div class="column is-one-quarter"></div>
+</div>

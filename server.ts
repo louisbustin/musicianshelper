@@ -29,13 +29,13 @@ export function app(): express.Express {
   //wire up the api routes so we do not have to do it all in this file
   server.use(express.json());
   server.use("/api", router);
-/* 
+
   console.log(dbconfig.database);
   mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true }).then(() => {
     logger.info('Successfully connected to mongo server');
   }).catch((e) => {
     logger.error('Error connecting to database', e);
-  }); */
+  }); 
 
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'
