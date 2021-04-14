@@ -1,0 +1,6 @@
+<table class="table" *ngIf="setlists$ | async as setlists">
+    <tr *ngFor="let setlist of setlists">
+        <td>{{setlist._id}}</td>
+        <td>{{setlist.name}}</td>
+    </tr>
+</table>
