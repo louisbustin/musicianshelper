@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Subject, Observable, combineLatest, merge } from "rxjs";
-import { map, scan, shareReplay, tap } from "rxjs/operators";
+import { Subject, Observable, combineLatest, merge, EMPTY } from "rxjs";
+import { catchError, map, scan, shareReplay, tap } from "rxjs/operators";
 import { IBand } from '../models/band.model'
 import { WebRequestService } from "../shared/services/web-request.service";
 
@@ -46,10 +46,16 @@ export class BandService {
     }
 
     addBand(band: IBand, switchContext: boolean) {
-        this.bandToAdd$.next(band);
-        if (switchContext) {
-            this.selectBand(band._id);
-        }
+        this.webRequestService.post<IBand>("bands", band).pipe(
+            catchError(err => { 
+                console.log(err);
+                return EMPTY;
+            })
+        ).subscribe(addedBand => {
+            this.bandToAdd$.next(addedBand);
+            if (switchContext) {
+                this.selectBand(addedBand._id);
+            } 
+        });
     }
-
 }

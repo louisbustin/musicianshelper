@@ -24,8 +24,8 @@ export class WebRequestService {
   delete(uri: string) {
     return this.http.delete(`${this.API_URL}/${uri}`);
   }
-  post(uri: string, body: any) {
-    return this.http.post(`${this.API_URL}/${uri}`, body);
+  post<T>(uri: string, body: any) {
+    return this.http.post<T>(`${this.API_URL}/${uri}`, body);
   }
   patch(uri: string, body: any) {
     return this.http.patch(`${this.API_URL}/${uri}`, body);
