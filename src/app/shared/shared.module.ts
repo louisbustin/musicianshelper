@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonCellRendererComponent } from './button-cell-renderer/button-cell-renderer.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
-    ButtonCellRendererComponent
+    ButtonCellRendererComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule
@@ -17,7 +19,8 @@ import { ButtonCellRendererComponent } from './button-cell-renderer/button-cell-
     AuthModule,
     HttpClientModule,
     CommonModule,
-    ButtonCellRendererComponent
+    ButtonCellRendererComponent,
+    NotificationComponent
   ]
 })
 export class SharedModule { }

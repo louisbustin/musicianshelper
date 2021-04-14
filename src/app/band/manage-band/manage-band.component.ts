@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { BandService } from '../band.service';
 
 @Component({
   selector: 'app-manage-band',
   templateUrl: './manage-band.component.html',
   styleUrls: ['./manage-band.component.scss']
 })
-export class ManageBandComponent implements OnInit {
+export class ManageBandComponent {
 
-  constructor() { }
+  selectedBand$ = this.bandService.selectedBand$;
 
-  ngOnInit(): void {
-  }
-
+  constructor(private bandService: BandService) { }
 }

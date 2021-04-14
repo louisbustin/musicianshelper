@@ -25,6 +25,7 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
+    /*
     if (this.model._id === null) {
       this.userService.createUser(this.model).toPromise().then((response: Response) => {
         this.dialogRef.close(this.model);
@@ -33,6 +34,6 @@ export class UserFormComponent implements OnInit {
       this.userService.update(this.model).toPromise().then((response: Response) => {
         this.dialogRef.close(this.model);
       });      
-    }
+    }*/
   }
 }

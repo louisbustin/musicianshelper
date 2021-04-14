@@ -24,13 +24,13 @@ export class WebRequestService {
   delete(uri: string) {
     return this.http.delete(`${this.API_URL}/${uri}`);
   }
-  post<T>(uri: string, body: any) {
+  post<T>(uri: string, body: T) {
     return this.http.post<T>(`${this.API_URL}/${uri}`, body);
   }
   patch(uri: string, body: any) {
     return this.http.patch(`${this.API_URL}/${uri}`, body);
   }
-  put(uri: string, body: any) {
-    return this.http.put(`${this.API_URL}/${uri}`, body);
+  put<T>(uri: string, body: T) {
+    return this.http.put<T>(`${this.API_URL}/${uri}`, body);
   }
 }

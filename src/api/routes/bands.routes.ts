@@ -9,11 +9,9 @@ router.get('/', checkJwt, controller.getAll);
 
 router.post('/', checkJwt, controller.create);
 
-//router.post('/getOneByEmail', checkJwt, controller.getOneByEmail);
-
 //should we do put or patch? i guess both?
-//router.patch('/:userId', checkJwt, controller.update);
-//router.put('/:userId',  checkJwt, controller.update);
+router.patch('/:bandId', checkJwt, controller.update);
+router.put('/:bandId',  checkJwt, controller.update);
 
 //delete may end up not deleting, but disabling somehow. but for now, here we go
 //router.delete('/:userId',  checkJwt, controller.delete);

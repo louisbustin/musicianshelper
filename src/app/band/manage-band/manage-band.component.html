@@ -1,17 +1,15 @@
-<div>
-    This is where you can manage the aspects of your band
-</div>
-
-<div>
-    <ul>
-        <li>
-            Edit individual members and how they can interact
-        </li>
-        <li>
-            Settings for your band.
-        </li>
-        <li>
-            Add a new member here
-        </li>
-    </ul>
-</div>
+    <div class="content">
+        <h2>Manage Band</h2>
+        This is the hub for changing things for your band<span *ngIf="selectedBand$ | async as band">, {{band.name}}.</span>
+        <ul>
+            <li>
+                Edit individual members and how they can interact
+            </li>
+            <li>
+                <a routerLink="/band/settings">Settings</a> for your band.
+            </li>
+            <li>
+                Add a new member here
+            </li>
+        </ul>
+    </div>

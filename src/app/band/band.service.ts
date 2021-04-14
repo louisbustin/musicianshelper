@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Subject, Observable, combineLatest, merge, EMPTY } from "rxjs";
-import { catchError, map, scan, shareReplay, tap } from "rxjs/operators";
+import { Subject, Observable, merge, EMPTY } from "rxjs";
+import { catchError, scan, shareReplay, tap } from "rxjs/operators";
 import { IBand } from '../models/band.model'
 import { WebRequestService } from "../shared/services/web-request.service";
 
@@ -27,22 +27,28 @@ export class BandService {
         this.serverBands$,
         this.bandToAddAction$
     ).pipe(
-        scan((bands: IBand[], addedBand: IBand) => [...bands, addedBand])
+        scan((bands: IBand[], addedBand: IBand) => {
+            let i = bands.findIndex(b => b._id === addedBand._id);
+            if (i >= 0) {
+                bands[i] = addedBand;
+                return [...bands];
+            } else {
+                return [...bands, addedBand];
+            }
+        })
     );
 
 
     //combine the list of bands with the emitted id from changing the selected band in order to have the currently selected band
-    private bandSelectedSubject = new Subject<string>();
-    bandSelectedAction$ = this.bandSelectedSubject.asObservable();
-    selectedBand$: Observable<IBand> = combineLatest([this.bands$, this.bandSelectedAction$])
+    private bandSelectedSubject = new Subject<IBand>();
+    selectedBand$ = this.bandSelectedSubject.asObservable()
     .pipe(
-        map(([bands, selectedBandId]) => bands.find(band => band._id === selectedBandId)),
-        tap(band => console.log(`Selected band changed to: ${band._id}`)),
+        tap(band => console.log(`Selected band changed to: ${band._id} ${band.name}`)),
         shareReplay(1)
     );
 
-    selectBand(id: string) {
-        this.bandSelectedSubject.next(id);
+    selectBand(band: IBand) {
+        this.bandSelectedSubject.next(band);
     }
 
     addBand(band: IBand, switchContext: boolean) {
@@ -54,8 +60,20 @@ export class BandService {
         ).subscribe(addedBand => {
             this.bandToAdd$.next(addedBand);
             if (switchContext) {
-                this.selectBand(addedBand._id);
+                this.selectBand(addedBand);
             } 
+        });
+    }
+
+    editBand(band: IBand) {
+        this.webRequestService.put<IBand>(`bands/${band._id}`, band).pipe(
+            catchError(err => { 
+                console.log(err);
+                return EMPTY;
+            })
+        ).subscribe(addedBand => {
+            this.bandToAdd$.next(addedBand);
+            this.selectBand(addedBand); //make sure this band is selected
         });
     }
 }
