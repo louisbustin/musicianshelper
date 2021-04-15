@@ -14,6 +14,15 @@ export default class SetlistController {
         });
 
     }
+
+    static byBand = (request: Request, response: Response) => {
+        Setlist.find({ band: request.params.bandId }).exec().then((list) => {
+            return response.status(200).json(list);
+        }).catch(err => { 
+            logger.error("error retrieving setlists: " + err)
+            return response.status(500);
+        }); 
+    }
     static create = (request: Request, response: Response) => {
         //remove the _id field so that mongoose will populate it correct on returning
         delete request.body._id;

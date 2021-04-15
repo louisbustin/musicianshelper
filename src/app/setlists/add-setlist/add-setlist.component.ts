@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BandService } from 'src/app/band/band.service';
+import { IBand } from 'src/app/models/band.model';
 import { ISetlist } from 'src/app/models/setlist.model';
 import { SetlistService } from '../setlist.service';
 
@@ -12,19 +15,29 @@ export class AddSetlistComponent implements OnInit {
 
   setlist: ISetlist = {
     _id: null,
-    name: ""
+    name: "",
+    band: null
   }
 
-  constructor(private router: Router, private setlistService: SetlistService) { }
+  currentBand: IBand;
+  sub: Subscription;
+  
+  constructor(
+    private router: Router, 
+    private setlistService: SetlistService,
+    private bandService: BandService
+  ) { }
 
   ngOnInit(): void {
+    this.sub = this.bandService.selectedBand$.subscribe(b => this.currentBand = b);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
   
   addSetlist(setlist: ISetlist): void {
-    //here we will call the server to actually add this to the db
-    //the band service will add it to db, then add it to the bands possible for context
-    //this.bandService.addBand(band, true);
-    //this.router.navigate(['/band/manage']);
+    this.setlist.band = this.currentBand._id;
     this.setlistService.addSetlist(setlist);
     
   }

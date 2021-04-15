@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/', checkJwt, controller.getAll);
-//router.get('/:userId', checkJwt, controller.getOne);
+router.get('/byBand/:bandId', checkJwt, controller.byBand);
 
 router.post('/', checkJwt, controller.create);
 
