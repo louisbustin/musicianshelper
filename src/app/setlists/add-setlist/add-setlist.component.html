@@ -1,13 +1,6 @@
 
-<div class="columns">
-    <div class="column is-one-quarter">
-        <h1 class="title">Add a setlist</h1>
-        <div class="block">
-            Fill out the form to add a setlist.
-        </div>
-    </div>
-    <div class="column is-one-half">
-        <app-setlist-edit-form [setlist]="setlist" (cancelEvent)="cancel()" (submitEvent)="addSetlist($event)"></app-setlist-edit-form>
-    </div>  
-    <div class="column is-one-quarter"></div>
+<div class="content">
+    <h1>Add a new setlist</h1>
+
 </div>
+<app-setlist-edit-form [setlist]="setlist" (cancelEvent)="cancel()" (submitEvent)="addSetlist($event)"></app-setlist-edit-form>

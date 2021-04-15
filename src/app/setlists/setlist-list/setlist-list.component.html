@@ -1,6 +1,37 @@
-<table class="table" *ngIf="setlists$ | async as setlists">
-    <tr *ngFor="let setlist of setlists">
-        <td>{{setlist._id}}</td>
-        <td>{{setlist.name}}</td>
-    </tr>
-</table>
+<div class="columns" *ngIf="selectedBand$ | async as band">
+    <div class="column is-one-quarter">
+        <nav class="panel" *ngIf="setlists$ | async as setlists">
+            <p class="panel-heading">
+              Setlists for {{band.name}}
+              <a class="button is-rounded is-small" routerLink="/setlists/add">
+                <span class="icon is-right">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </a>
+            </p>
+            <div class="panel-block" *ngIf="setlists.length > 3">
+              <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search">
+                <span class="icon is-left">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+              </p>
+            </div>
+            <a routerLink="/setlists/{{setlist._id}}" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}" class="panel-block is-active"  *ngFor="let setlist of setlists">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              {{setlist.name}}
+            </a>
+            <div class="panel-block" *ngIf="setlists.length > 3">
+              <button class="button is-link is-outlined is-fullwidth">
+                Reset all filters
+              </button>
+            </div>
+          </nav>
+    </div>
+    <div class="column is-three-quarters">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+

@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/', checkJwt, controller.getAll);
 router.get('/byBand/:bandId', checkJwt, controller.byBand);
+router.get('/:setlistId', checkJwt, controller.getOne);
 
 router.post('/', checkJwt, controller.create);
 

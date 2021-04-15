@@ -1,0 +1,3 @@
+<p *ngIf="currentSetlist$ | async as setlist">
+    <app-setlist-edit-form [setlist]="setlist" (cancelEvent)="cancel()" (submitEvent)="editSetlist($event)"></app-setlist-edit-form>
+</p>

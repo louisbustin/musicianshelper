@@ -13,6 +13,13 @@
         <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Setlist name is required</p>
     </div>
 
+    <div class="field">
+        <label class="label">Notes</label>
+        <div class="control ">
+            <textarea class="textarea" placeholder="Notes for this setlist" id="setlistnotes" name="setlistnotes" [(ngModel)]="setlist.notes"></textarea>
+        </div>
+    </div>
+
     <div class="field is-grouped">
         <div class="control">
         <button class="button is-link" (click)="submitClick()" [disabled]="form.invalid">Submit</button>

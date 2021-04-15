@@ -4,6 +4,7 @@ import { IBand } from './band.model';
 export interface ISetlist extends Document {
     name: string;
     band: string;
+    notes: string;
 }
 
 const SetlistSchema: Schema = new Schema({
@@ -15,6 +16,10 @@ const SetlistSchema: Schema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Band',
         required: true
+    },
+    notes: {
+        type: String,
+        required: false
     }
 });
 
