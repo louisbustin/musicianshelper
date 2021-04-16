@@ -16,7 +16,6 @@ export class BandService {
     //list of bands from serverside. using "sharedReplay" to cache these locally
     serverBands$: Observable<IBand[]> = this.webRequestService.getTyped<IBand[]>(this.BASE_PATH)
     .pipe(
-        tap(x => console.log(x)),
         shareReplay(1)
     );
 

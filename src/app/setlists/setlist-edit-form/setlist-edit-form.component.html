@@ -1,0 +1,31 @@
+<form class="box" #form="ngForm">
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control has-icons-right has-icons-left">
+            <input class="input" type="text" placeholder="Setlist Name" required #name="ngModel" id="setlistname" name="setlistname" [(ngModel)]="setlist.name">
+            <span class="icon is-small is-left">
+                <em class="fas fa-users"></em>
+            </span>
+            <span class="icon is-small is-right" *ngIf="name.invalid && (name.dirty || name.touched)">
+                <em class="fas fa-exclamation-triangle"></em>
+            </span>
+        </div>
+        <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Setlist name is required</p>
+    </div>
+
+    <div class="field">
+        <label class="label">Notes</label>
+        <div class="control ">
+            <textarea class="textarea" placeholder="Notes for this setlist" id="setlistnotes" name="setlistnotes" [(ngModel)]="setlist.notes"></textarea>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+        <button class="button is-link" (click)="submitClick()" [disabled]="form.invalid">Submit</button>
+        </div>
+        <div class="control">
+        <button class="button is-link is-light" (click)="cancelClick()">Cancel</button>
+        </div>
+    </div>
+</form>

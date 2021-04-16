@@ -52,7 +52,9 @@ import { BandModule } from './band/band.module';
           '/api/users/*', 
           '/api/users', 
           '/api/bands', 
-          '/api/bands/*'
+          '/api/bands/*',
+          '/api/setlists',
+          '/api/setlists/*'
         ],
       },
     })
