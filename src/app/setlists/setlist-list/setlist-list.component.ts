@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, fromEvent, merge, Observable } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
-import { IBand } from 'src/app/models/band.model';
 import { ISetlist } from 'src/app/models/setlist.model';
 import { SetlistService } from '../setlist.service';
 
@@ -12,17 +11,24 @@ import { SetlistService } from '../setlist.service';
   templateUrl: './setlist-list.component.html',
   styleUrls: ['./setlist-list.component.scss']
 })
-export class SetlistListComponent implements OnInit, OnDestroy {
+export class SetlistListComponent {
 
-  setlists$: Observable<ISetlist[]> = this.setlistService.setlists$;
+  private searchTermSubject$ = new BehaviorSubject("");
+  searchTerm$ = this.searchTermSubject$.asObservable();
+  setlists$: Observable<ISetlist[]> = this.searchTerm$.pipe(
+    mergeMap(searchTerm => this.setlistService.setlists$.pipe(
+      map(lists =>  {
+        if (searchTerm === "") {
+          return lists;
+        } else {
+          return lists.filter(x => x.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        }
+      })
+    ))
+  );
 
-  selectedBand$ = this.bandService.selectedBand$.pipe(
-    tap(b => {
-      this.setlistService.getSetlistsByBandId(b._id);
-    })
 
-  )
-  ;
+  selectedBand$ = this.bandService.selectedBand$;
 
   constructor(
     private setlistService: SetlistService, 
@@ -30,11 +36,7 @@ export class SetlistListComponent implements OnInit, OnDestroy {
     private router: Router
     ) { }
 
-  ngOnInit(): void {
+  searchTermChanged(searchText: string) {
+    this.searchTermSubject$.next(searchText);
   }
-
-  ngOnDestroy(): void {
-  }
-
-
 }

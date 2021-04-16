@@ -2,6 +2,7 @@ import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { isArray } from "lodash";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
 import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
+import { BandService } from "../band/band.service";
 import { ISetlist } from "../models/setlist.model";
 import { WebRequestService } from "../shared/services/web-request.service";
 
@@ -10,11 +11,9 @@ import { WebRequestService } from "../shared/services/web-request.service";
   })
 export class SetlistService implements OnInit, OnDestroy {
 
-    //list of setlists from serverside
-    private selectedBandId$ = new Subject<string>();
-    serverSetlistsByBand$: Observable<ISetlist[]> = this.selectedBandId$.asObservable().pipe(
-        tap(x => console.log(x)),
-        concatMap(bandId => this.webRequestService.getTyped<ISetlist[]>(`setlists/byband/${bandId}`)),
+    //list of setlists from serverside by band
+    serverSetlistsByBand$: Observable<ISetlist[]> = this.bandService.selectedBand$.pipe(
+        concatMap(band => this.webRequestService.getTyped<ISetlist[]>(`setlists/byband/${band._id}`)),
         shareReplay(1)
     );
 
@@ -42,8 +41,10 @@ export class SetlistService implements OnInit, OnDestroy {
         shareReplay(1)
     );
 
-    constructor(private webRequestService: WebRequestService) { 
-    }
+    constructor(
+        private webRequestService: WebRequestService,
+        private bandService: BandService
+        ) { }
 
     ngOnDestroy(): void {
     }
@@ -74,10 +75,6 @@ export class SetlistService implements OnInit, OnDestroy {
         ).subscribe(changedList => {
             this.setlistToAdd$.next(changedList);
         });
-    }
-
-    getSetlistsByBandId(bandId: string) {
-        this.selectedBandId$.next(bandId);
     }
 
     getSetlist(setlistId: string) {

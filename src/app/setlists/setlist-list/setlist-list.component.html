@@ -2,16 +2,16 @@
     <div class="column is-one-quarter">
         <nav class="panel" *ngIf="setlists$ | async as setlists">
             <p class="panel-heading">
-              Setlists for {{band.name}}
+              Setlists
               <a class="button is-rounded is-small" routerLink="/setlists/add">
                 <span class="icon is-right">
                   <i class="fas fa-plus"></i>
                 </span>
               </a>
             </p>
-            <div class="panel-block" *ngIf="setlists.length > 3">
+            <div class="panel-block">
               <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Search">
+                <input class="input" type="text" placeholder="Search" (input)="searchTermChanged($event.target.value)" #searchBox >
                 <span class="icon is-left">
                   <i class="fas fa-search" aria-hidden="true"></i>
                 </span>
@@ -23,8 +23,8 @@
               </span>
               {{setlist.name}}
             </a>
-            <div class="panel-block" *ngIf="setlists.length > 3">
-              <button class="button is-link is-outlined is-fullwidth">
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" (click)="searchBox.value = ''; searchTermChanged('');">
                 Reset all filters
               </button>
             </div>
