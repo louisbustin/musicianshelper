@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, fromEvent, merge, Observable } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
 import { ISetlist } from 'src/app/models/setlist.model';
 import { SetlistService } from '../setlist.service';
