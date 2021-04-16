@@ -13,6 +13,11 @@ const BandSchema: Schema = new Schema({
     email: {
         type: String,
         required: true
+    },
+    owner: {
+        type: String,
+        required: true,
+        index: true
     }
 });
 

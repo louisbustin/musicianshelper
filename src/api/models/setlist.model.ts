@@ -1,5 +1,4 @@
 import { model, Schema, Model, Document } from 'mongoose';
-import { IBand } from './band.model';
 
 export interface ISetlist extends Document {
     name: string;
@@ -20,6 +19,11 @@ const SetlistSchema: Schema = new Schema({
     notes: {
         type: String,
         required: false
+    },
+    owner: {
+        type: String,
+        required: true,
+        index: true
     }
 });
 
