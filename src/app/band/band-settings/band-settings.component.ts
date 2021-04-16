@@ -17,7 +17,7 @@ export class BandSettingsComponent implements OnInit, OnDestroy {
   notify: NotificationComponent;
 
   bandSubscription =  this.bandService.selectedBand$.subscribe(
-    b => this.band = b
+    b => this.band = Object.assign({}, b)
   )
   band: IBand;
 

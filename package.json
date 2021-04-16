@@ -45,6 +45,7 @@
     "mongodb-client-encryption": "^1.2.3",
     "mongoose": "^5.12.3",
     "rxjs": "^6.6.7",
+    "saslprep": "^1.0.3",
     "tslib": "^2.0.0",
     "winston": "^3.3.3",
     "zone.js": "~0.10.2"

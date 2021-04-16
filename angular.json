@@ -29,9 +29,13 @@
             ],
             "styles": [
               "node_modules/bulma/bulma.sass",
+              "node_modules/bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader.min.css",
+              "node_modules/bulma-extensions/bulma-accordion/dist/css/bulma-accordion.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bulma-extensions/bulma-accordion/dist/js/bulma-accordion.min.js"
+            ]
           },
           "configurations": {
             "production": {

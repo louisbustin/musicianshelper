@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { IBand } from 'src/app/models/band.model';
 import { BandService } from '../band.service';
 
@@ -11,6 +12,8 @@ import { BandService } from '../band.service';
     styleUrls: ['./band-context.component.scss']
 })
 export class BandContextComponent implements OnInit, OnDestroy {
+    private pageloaderActiveSubject$ = new BehaviorSubject(false);
+    pageloaderActive$ = this.pageloaderActiveSubject$.asObservable();
 
     bands$ = this.bandService.bands$.pipe(
         tap(bands => {
@@ -24,7 +27,11 @@ export class BandContextComponent implements OnInit, OnDestroy {
     private bandSub: Subscription;
     selectedBand: IBand;
 
-    constructor(public auth: AuthService, private bandService: BandService) { }
+    constructor(
+        public auth: AuthService, 
+        private bandService: BandService,
+        private router: Router
+        ) { }
 
     ngOnDestroy(): void {
         this.bandSub.unsubscribe();
@@ -35,7 +42,10 @@ export class BandContextComponent implements OnInit, OnDestroy {
     }
 
     bandContextChanged() {
+        this.pageloaderActiveSubject$.next(true);
+        interval(1000).pipe(take(1)).subscribe(() => this.pageloaderActiveSubject$.next(false));
         this.bandService.selectBand(this.selectedBand);
+        this.router.navigateByUrl('/band/manage');
     }
 
 }

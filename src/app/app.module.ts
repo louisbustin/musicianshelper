@@ -41,7 +41,7 @@ import { BandModule } from './band/band.module';
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     RouterModule.forRoot(
-      appRoutes, {useHash : true}
+      appRoutes
       ),
     BandModule,
     AgGridModule.withComponents([ButtonCellRendererComponent]),
