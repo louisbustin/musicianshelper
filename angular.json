@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bracketweb": {
+    "musicianshelper": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bracketweb/browser",
+            "outputPath": "dist/musicianshelper/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bracketweb:build"
+            "browserTarget": "musicianshelper:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bracketweb:build:production"
+              "browserTarget": "musicianshelper:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bracketweb:build"
+            "browserTarget": "musicianshelper:build"
           }
         },
         "test": {
@@ -119,18 +119,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "bracketweb:serve"
+            "devServerTarget": "musicianshelper:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bracketweb:serve:production"
+              "devServerTarget": "musicianshelper:serve:production"
             }
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/bracketweb/server",
+            "outputPath": "dist/musicianshelper/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },
@@ -151,21 +151,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "bracketweb:build",
-            "serverTarget": "bracketweb:server"
+            "browserTarget": "musicianshelper:build",
+            "serverTarget": "musicianshelper:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bracketweb:build:production",
-              "serverTarget": "bracketweb:server:production"
+              "browserTarget": "musicianshelper:build:production",
+              "serverTarget": "musicianshelper:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "bracketweb:build:production",
-            "serverTarget": "bracketweb:server:production",
+            "browserTarget": "musicianshelper:build:production",
+            "serverTarget": "musicianshelper:server:production",
             "routes": [
               "/"
             ]
@@ -177,5 +177,5 @@
       }
     }
   },
-  "defaultProject": "bracketweb"
+  "defaultProject": "musicianshelper"
 }

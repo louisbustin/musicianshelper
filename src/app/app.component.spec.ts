@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'bracketweb'`, () => {
+  it(`should have as title 'musicianshelper'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('bracketweb');
+    expect(app.title).toEqual('musicianshelper');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('bracketweb app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('musicianshelper app is running!');
   });
 });
