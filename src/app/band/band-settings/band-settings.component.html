@@ -1,0 +1,14 @@
+
+<div class="columns">
+    <div class="column is-one-quarter">
+        <h1 class="title">Band Settings</h1>
+        <div class="block">
+            Here we can edit the band details.
+        </div>
+    </div>
+    <div class="column is-one-half">
+        <app-band-edit-form [band]="band" (cancelEvent)="cancel()" (submitEvent)="editBand($event)"></app-band-edit-form>
+        <app-notification [contents]="displayMessage" [closeInSeconds]="3" #notificationBox></app-notification>
+    </div>  
+    <div class="column is-one-quarter"></div>
+</div>

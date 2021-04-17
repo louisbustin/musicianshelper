@@ -1,0 +1,34 @@
+<aside class="menu">
+  <p class="menu-label">
+    General
+  </p>
+  <ul class="menu-list block">
+      <li><a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a routerLink="/news" routerLinkActive='is-active'>News</a></li>
+      <li><a routerLink='/band/add' routerLinkActive='is-active'>Add a new band</a></li>
+  </ul>
+  <span *ngIf="currentBand$ | async as currentBand">
+    <p class="menu-label">
+      {{currentBand.name}}
+    </p>
+    <ul class="menu-list">
+      <li>
+        <a routerLink="/band/manage" routerLinkActive="is-active">Manage Your Band</a>
+        <ul>
+          <li><a routerLink='/band/members' routerLinkActive='is-active'>Members</a></li>
+          <li><a routerLink='/band/settings' routerLinkActive='is-active'>Band Settings</a></li>
+          <li><a>Add a member</a></li>
+        </ul>
+      </li>
+      <li><a routerLink='/setlists' routerLinkActive='is-active'>Setlists</a></li>
+      <li><a>Invitations</a></li>
+    </ul>
+  </span>
+  <p class="menu-label">
+    Profiles
+  </p>
+  <ul class="menu-list">
+    <li><a>Edit Profile</a></li>
+    <li><a>Find Members</a></li>
+  </ul>
+</aside>

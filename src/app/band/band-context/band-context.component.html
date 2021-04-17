@@ -1,0 +1,13 @@
+<div class="bd-navbar-icon navbar-item" *ngIf="auth.isAuthenticated$ | async">
+    <div class="control has-icons-left">
+        <div class="select is-small">
+            <select (change)="bandContextChanged()" *ngIf="bands$ | async as bands" [(ngModel)]="selectedBand">
+                <option *ngFor="let band of bands" [ngValue]="band">{{band.name}}</option>
+            </select>
+        </div>
+        <div class="icon is-small is-left">
+            <em class="fas fa-users"></em>
+      </div>
+    </div>
+</div>
+<div [ngClass]="{'pageloader': true, 'is-active': pageloaderActive$ | async}"><span class="title">Loading...</span></div>

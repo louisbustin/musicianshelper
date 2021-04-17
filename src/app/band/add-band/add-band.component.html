@@ -1,0 +1,14 @@
+
+<div class="columns">
+    <div class="column is-one-quarter">
+        <h1 class="title">Add a band</h1>
+        <div class="block">
+            Fill out the form to add a band. When submitted, the new band will be selected 
+            as the current band of context and you will be tranferred to the band managment page.
+        </div>
+    </div>
+    <div class="column is-one-half">
+        <app-band-edit-form [band]="band" (cancelEvent)="cancel()" (submitEvent)="addBand($event)"></app-band-edit-form>
+    </div>  
+    <div class="column is-one-quarter"></div>
+</div>

@@ -1,0 +1,128 @@
+<nav id="navbar" class="mh-navbar navbar">
+  <div class="navbar-brand">
+    <a routerLink="/" routerLinkActive="active" class="navbar-item">Musician's Helper</a>
+  </div>
+
+  <div id="navMenuDocumentation" class="navbar-menu">
+    <div id="navbarStartOriginal" class="navbar-start bd-navbar-start bd-is-original">
+
+      <!--Home-->
+      <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more" routerLink="/">
+        <span class="icon has-text-bleeding">
+          <em class="fas fa-bookmark"></em>
+        </span>
+        <span>Home</span>
+      </a>
+
+      <!--Members-->
+        <a routerLink='/band/manage' class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more">
+        <span class="icon has-text-bleeding">
+          <em class="fas fa-user-edit"></em>
+        </span>
+        <span>Your Band</span>
+      </a> 
+
+
+      <!--Setlists-->
+      <div class="navbar-item bd-navbar-item bd-navbar-item-base has-dropdown is-hoverable">
+        <a class="navbar-link bd-navbar-ellipsis">
+          <span class="icon">
+            <em class="fas fa-clipboard-list"></em>
+          </span>
+          <span>Setlists</span>
+        </a>
+
+        <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
+          
+            <a class="navbar-item">
+                <div>
+                  <div class="icon-text">
+                    <span class="icon has-text-extensions">
+                      <em class="fas fa-list"></em>
+                    </span>
+                    <span>
+                      <strong>Lists</strong>
+                    </span>
+                  </div>
+                  Manage set lists 
+                </div>
+              
+            </a>
+            
+            <hr class="navbar-divider ">
+           
+            <a class="navbar-item">
+                <div>
+                  <div class="icon-text">
+                    <span class="icon has-text-bleeding">
+                      <em class="fas fa-guitar"></em>
+                    </span>
+                    <span>
+                      <strong>Bands</strong>
+                    </span>
+                  </div>
+                  Edit artists included in your setlists
+                </div>
+              
+            </a>
+            
+              <hr class="navbar-divider ">
+            
+          
+            
+            
+            <a class="navbar-item">
+                <div>
+                  <div class="icon-text">
+                    <span class="icon has-text-rss">
+                      <em class="fab fa-itunes-note"></em>
+                    </span>
+                    <span>
+                      <strong>Songs</strong>
+                    </span>
+                  </div>
+                  Work on songs
+                </div>
+              
+            </a>
+        </div>
+      </div>
+
+      <!--Recruit-->
+      <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more">
+        <span class="icon has-text-bleeding">
+          <em class="fas fa-people-arrows"></em>
+        </span>
+        <span>Recruit</span>
+      </a>  
+
+
+    <!--News-->
+      <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more" routerLink="/news">
+        <span class="icon has-text-bleeding">
+          <em class="fas fa-rss"></em>
+        </span>
+        <span>News</span>
+      </a>     
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+</div>
+
+
+<div class="navbar-end">
+      <div class="navbar-item bd-navbar-sponsor-button is-hidden-desktop">
+        <a class="button is-sponsor is-light">
+          <span class="icon is-small">
+            <em class="fas fa-thumbs-up"></em>
+          </span>
+        </a>
+      </div>
+    </div>
+    <app-band-context></app-band-context>
+    <app-authentication-button></app-authentication-button>
+  </div>
+</nav>

@@ -1,29 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
-@import '../node_modules/ag-grid-community/dist/styles/ag-grid.scss';
-@import '../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine.scss';
+@import '~ag-grid-community/dist/styles/ag-grid.scss';
+@import '~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine.scss';
 
-$turquoise: #44ddd0;
-$green: #27d7a1;
-$light-green: #45f69e;
-$dark-green: rgb(0,100,80);
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-$light: #f8f8f8;
+
+$blue: #498ba6;
+$light: #f0f3f8;
+$shade: #cbccc7;
+$darkblue: #1a4173;
+$blue2: #5a86bf;
+
 
 $family-sans-serif: 'Nunito', sans-serif;
-$primary: $green;
-$link: $light-green;
+$primary: $blue;
+$link: $darkblue;
 
 
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
-html {
-    background: linear-gradient(to right top, $turquoise, $green);
-}
-
-html, body {
-    height: 99%;
-}
