@@ -7,10 +7,6 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
-import { router } from './src/api/routes';
-import mongoose from 'mongoose';
-import logger from './src/logger';
-import { dbconfig } from './src/environments/database';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -25,16 +21,6 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', distFolder);
-
-  //wire up the api routes so we do not have to do it all in this file
-  server.use(express.json());
-  server.use("/api", router);
-
-  mongoose.connect(dbconfig.database, {useNewUrlParser: true, useUnifiedTopology: true , useFindAndModify: false, useCreateIndex: true }).then(() => {
-    logger.info('Successfully connected to mongo server');
-  }).catch((e) => {
-    logger.error('Error connecting to database', e);
-  }); 
 
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'

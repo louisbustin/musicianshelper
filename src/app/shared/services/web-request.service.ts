@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebRequestService {
 
-  readonly API_URL;
+  readonly API_URL = environment.API_URL;
 
   constructor(private http: HttpClient) { 
-  
-    this.API_URL = '/api';
+
   }
 
   get(uri: string) {
