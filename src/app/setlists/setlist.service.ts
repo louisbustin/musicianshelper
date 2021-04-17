@@ -1,5 +1,4 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
-import { isArray } from "lodash";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
 import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
 import { BandService } from "../band/band.service";
@@ -26,7 +25,7 @@ export class SetlistService implements OnInit, OnDestroy {
         this.setlistToAddAction$
     ).pipe(
         scan((lists: ISetlist[], addedList: ISetlist) => {
-            if (isArray(addedList)) {
+            if (Array.isArray(addedList)) {
                 return addedList;
             } else {
                 let i = lists.findIndex(b => b._id === addedList._id);
