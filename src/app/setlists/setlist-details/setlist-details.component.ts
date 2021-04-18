@@ -33,4 +33,9 @@ export class SetlistDetailsComponent {
   editSetlist(setlist: ISetlist): void {
     this.setlistService.editSetlist(setlist);
   }
+
+  deleteSetlist(setlist: ISetlist): void {
+    this.setlistService.deleteSetlist(setlist._id);
+    this.router.navigateByUrl("/setlists");
+  }
 }

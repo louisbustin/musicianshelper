@@ -1,0 +1,28 @@
+<div [ngClass]="{'modal': true, 'is-active': modalActive }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">{{title}}</p>
+          <button class="delete" aria-label="close" (click)="cancelClicked()"></button>
+        </header>
+        <section class="modal-card-body">
+            {{message}}
+        </section>
+        <footer class="modal-card-foot">
+            
+            <button class="button {{okButtonStyle}}" (click)="okButtonClicked()" >    
+                <span class="icon" *ngIf="okButtonIcon">
+                    <i class="{{okButtonIcon}}"></i>
+                </span>
+                <span>{{okButtonText}}</span>
+            </button>
+            
+            <button class="button {{cancelButtonStyle}}" (click)="cancelClicked()">
+                <span class="icon" *ngIf="cancelButtonIcon">
+                    <i class="{{cancelButtonIcon}}"></i>
+                </span>
+                <span>{{cancelButtonText}}</span>
+            </button>
+        </footer>
+      </div>
+</div>

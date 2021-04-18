@@ -9,6 +9,7 @@ import { WebRequestService } from "../shared/services/web-request.service";
     providedIn: 'root'
   })
 export class SetlistService {
+    DELETEDTEXT = "THISSETLISTHASBEENDELETED";
 
     //list of setlists from serverside by band
     serverSetlistsByBand$: Observable<ISetlist[]> = this.bandService.selectedBand$.pipe(
@@ -20,25 +21,35 @@ export class SetlistService {
     private setlistToAdd$: Subject<ISetlist> = new Subject<ISetlist>();
     setlistToAddAction$: Observable<ISetlist> = this.setlistToAdd$.asObservable();
 
+    private setlistToDelete$ = new Subject<ISetlist>();
+    setlistToDeleteAction$ = this.setlistToDelete$.asObservable();
+
     setlists$: Observable<ISetlist[]>  = merge(
         this.serverSetlistsByBand$,
-        this.setlistToAddAction$
+        this.setlistToAddAction$,
+        this.setlistToDelete$
     ).pipe(
-        scan((lists: ISetlist[], addedList: ISetlist) => {
-            if (Array.isArray(addedList)) {
-                return addedList;
+        scan((lists: ISetlist[], list: ISetlist) => {
+            if (Array.isArray(list)) {
+                return list;
             } else {
-                const i = lists.findIndex(b => b._id === addedList._id);
+                const i = lists.findIndex(b => b._id === list._id);
                 if (i >= 0) {
-                    lists[i] = addedList;
-                    return [...lists];
+                    if (list.name === this.DELETEDTEXT) {
+                        lists.splice(i, 1);
+                        return [...lists];
+                    } else {
+                        lists[i] = list;
+                        return [...lists];
+                    }
                 } else {
-                    return [...lists, addedList];
+                    return [...lists, list];
                 }
             }
         }),
         shareReplay(1)
     );
+
 
     constructor(
         private webRequestService: WebRequestService,
@@ -73,7 +84,15 @@ export class SetlistService {
         return this.webRequestService.get<ISetlist>(`setlists/${setlistId}`);
     }
 
-    deleteSetlist(setlistId: string): Observable<ISetlist> {
-        return this.webRequestService.delete<ISetlist>(`setlists/${setlistId}`);
+    deleteSetlist(setlistId: string): void {
+        this.webRequestService.delete<ISetlist>(`setlists/${setlistId}`).pipe(
+            catchError(err => {
+                console.log(err);
+                return EMPTY;
+            })
+        ).subscribe((deletedList) => {
+            deletedList.name = this.DELETEDTEXT;
+            this.setlistToDelete$.next(deletedList);
+        });
     }
 }
