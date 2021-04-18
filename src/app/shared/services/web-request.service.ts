@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -12,25 +13,21 @@ export class WebRequestService {
   constructor(private http: HttpClient) { 
 
   }
-
-  get(uri: string) {
-    return this.http.get(`${this.API_URL}/${uri}`);
-  }
   
-  getTyped<T>(uri: string) {
+  get<T>(uri: string): Observable<T> {
     return this.http.get<T>(`${this.API_URL}/${uri}`);
   }
 
-  delete(uri: string) {
-    return this.http.delete(`${this.API_URL}/${uri}`);
+  delete<T>(uri: string): Observable<T> {
+    return this.http.delete<T>(`${this.API_URL}/${uri}`);
   }
-  post<T>(uri: string, body: T) {
+  post<T>(uri: string, body: T): Observable<T> {
     return this.http.post<T>(`${this.API_URL}/${uri}`, body);
   }
-  patch(uri: string, body: any) {
-    return this.http.patch(`${this.API_URL}/${uri}`, body);
+  patch<T>(uri: string, body: T): Observable<T> {
+    return this.http.patch<T>(`${this.API_URL}/${uri}`, body);
   }
-  put<T>(uri: string, body: T) {
+  put<T>(uri: string, body: T): Observable<T> {
     return this.http.put<T>(`${this.API_URL}/${uri}`, body);
   }
 }

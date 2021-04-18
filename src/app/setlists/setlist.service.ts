@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
 import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
 import { BandService } from "../band/band.service";
@@ -8,11 +8,11 @@ import { WebRequestService } from "../shared/services/web-request.service";
 @Injectable({
     providedIn: 'root'
   })
-export class SetlistService implements OnInit, OnDestroy {
+export class SetlistService {
 
     //list of setlists from serverside by band
     serverSetlistsByBand$: Observable<ISetlist[]> = this.bandService.selectedBand$.pipe(
-        concatMap(band => this.webRequestService.getTyped<ISetlist[]>(`setlists/byband/${band._id}`)),
+        concatMap(band => this.webRequestService.get<ISetlist[]>(`setlists/byband/${band._id}`)),
         shareReplay(1)
     );
 
@@ -28,7 +28,7 @@ export class SetlistService implements OnInit, OnDestroy {
             if (Array.isArray(addedList)) {
                 return addedList;
             } else {
-                let i = lists.findIndex(b => b._id === addedList._id);
+                const i = lists.findIndex(b => b._id === addedList._id);
                 if (i >= 0) {
                     lists[i] = addedList;
                     return [...lists];
@@ -45,12 +45,7 @@ export class SetlistService implements OnInit, OnDestroy {
         private bandService: BandService
         ) { }
 
-    ngOnDestroy(): void {
-    }
-    ngOnInit(): void {
-    }
-
-    addSetlist(list: ISetlist) {
+    addSetlist(list: ISetlist): void {
         this.webRequestService.post<ISetlist>("setlists", list).pipe(
             catchError(err => { 
                 console.log(err);
@@ -63,20 +58,22 @@ export class SetlistService implements OnInit, OnDestroy {
         });
     }
 
-    editSetlist(list: ISetlist) {
+    editSetlist(list: ISetlist):void  {
         this.webRequestService.put(`setlists/${list._id}`, list).pipe(
             catchError(err => { 
                 console.log(err);
                 return EMPTY;
             })
-        ).pipe(
-            tap(s => console.log("edit"))
         ).subscribe(changedList => {
             this.setlistToAdd$.next(changedList);
         });
     }
 
-    getSetlist(setlistId: string) {
-        return this.webRequestService.getTyped<ISetlist>(`setlists/${setlistId}`);
+    getSetlist(setlistId: string): Observable<ISetlist> {
+        return this.webRequestService.get<ISetlist>(`setlists/${setlistId}`);
+    }
+
+    deleteSetlist(setlistId: string): Observable<ISetlist> {
+        return this.webRequestService.delete<ISetlist>(`setlists/${setlistId}`);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { SetlistService } from '../setlist.service';
   templateUrl: './setlist-details.component.html',
   styleUrls: ['./setlist-details.component.scss']
 })
-export class SetlistDetailsComponent implements OnInit {
+export class SetlistDetailsComponent {
 
   setlistId$: Observable<string> = this.route.params.pipe(
     map(params => params['setlistId'])
@@ -25,19 +25,12 @@ export class SetlistDetailsComponent implements OnInit {
     private setlistService: SetlistService,
     private router: Router
     ) {}
-
-  ngOnInit() {
-    
-  }
-
-  ngOnDestroy() {
-  }
   
-  cancel() {
+  cancel(): void {
     this.router.navigateByUrl("/setlists");
   }
   
-  editSetlist(setlist: ISetlist) {
+  editSetlist(setlist: ISetlist): void {
     this.setlistService.editSetlist(setlist);
   }
 }

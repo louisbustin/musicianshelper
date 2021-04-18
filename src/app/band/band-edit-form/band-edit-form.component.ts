@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBand } from 'src/app/models/band.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { IBand } from 'src/app/models/band.model';
   templateUrl: './band-edit-form.component.html',
   styleUrls: ['./band-edit-form.component.scss']
 })
-export class BandEditFormComponent implements OnInit {
+export class BandEditFormComponent {
   @Input("band")
   band: IBand;
 
@@ -15,16 +15,12 @@ export class BandEditFormComponent implements OnInit {
 
   @Output()
   submitEvent = new EventEmitter<IBand>();
-  constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  cancelClick() {
+  cancelClick(): void {
     this.cancelEvent.emit("cancelled");
   }
 
-  submitClick() {
+  submitClick(): void {
     this.submitEvent.emit(this.band);
   }
 

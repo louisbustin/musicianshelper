@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBand } from 'src/app/models/band.model';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
@@ -9,7 +9,7 @@ import { BandService } from '../band.service';
   templateUrl: './band-settings.component.html',
   styleUrls: ['./band-settings.component.scss']
 })
-export class BandSettingsComponent implements OnInit, OnDestroy {
+export class BandSettingsComponent implements OnDestroy {
 
   displayMessage: string;
 
@@ -26,16 +26,13 @@ export class BandSettingsComponent implements OnInit, OnDestroy {
     this.bandSubscription.unsubscribe();
   }
 
-  ngOnInit(): void {
-  }
-
-  editBand(band: IBand) {
+  editBand(band: IBand): void {
     this.bandService.editBand(band);
     this.displayMessage = "Edited band " + band.name;
     this.notify.open();    
   }
 
-  cancel() {
+  cancel(): void {
     this.router.navigateByUrl("/band/manage");
   }
 
