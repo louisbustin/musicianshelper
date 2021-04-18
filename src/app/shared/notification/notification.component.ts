@@ -17,13 +17,11 @@ export class NotificationComponent {
   @Input()
   closeInSeconds: number;
 
-  constructor() { }
-
-  close() {
+  close(): void {
     this.showSubject$.next(false);
   }
 
-  open() {
+  open(): void {
     this.showSubject$.next(true);
     if (this.closeInSeconds > 0) {
       timer(this.closeInSeconds * 1000).subscribe(() => this.showSubject$.next(false));
