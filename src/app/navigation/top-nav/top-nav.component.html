@@ -1,9 +1,14 @@
 <nav id="navbar" class="mh-navbar navbar">
   <div class="navbar-brand">
     <a routerLink="/" routerLinkActive="active" class="navbar-item">Musician's Helper</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="navToggle=!navToggle" [ngClass]="{'is-active': navToggle}">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div id="navMenuDocumentation" class="navbar-menu">
+  <div id="navMenuDocumentation" class="navbar-menu" [ngClass]="{'is-active': navToggle}">
     <div id="navbarStartOriginal" class="navbar-start bd-navbar-start bd-is-original">
 
       <!--Home-->

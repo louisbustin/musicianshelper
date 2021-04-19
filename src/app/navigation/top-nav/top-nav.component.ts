@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent {
-
+  navToggle: boolean = false;
 }
