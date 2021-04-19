@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserService } from 'src/app/services/user.service';
 
 import { User } from '../../../models/user';
 
@@ -16,7 +15,6 @@ export class UserFormComponent implements OnInit {
   hidden = false;
   
   constructor(@Inject(MAT_DIALOG_DATA) public data: User, 
-    private userService: UserService, 
     public dialogRef: MatDialogRef<UserFormComponent>) 
     { }
 
@@ -24,7 +22,7 @@ export class UserFormComponent implements OnInit {
     this.model = this.data;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     /*
     if (this.model._id === null) {
       this.userService.createUser(this.model).toPromise().then((response: Response) => {

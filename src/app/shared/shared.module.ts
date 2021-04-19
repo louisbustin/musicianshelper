@@ -5,11 +5,13 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonCellRendererComponent } from './button-cell-renderer/button-cell-renderer.component';
 import { NotificationComponent } from './notification/notification.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
     ButtonCellRendererComponent,
-    NotificationComponent
+    NotificationComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule
@@ -20,7 +22,8 @@ import { NotificationComponent } from './notification/notification.component';
     HttpClientModule,
     CommonModule,
     ButtonCellRendererComponent,
-    NotificationComponent
+    NotificationComponent,
+    ConfirmModalComponent
   ]
 })
 export class SharedModule { }

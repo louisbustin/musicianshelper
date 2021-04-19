@@ -36,7 +36,7 @@ export class SetlistListComponent {
     private router: Router
     ) { }
 
-  searchTermChanged(searchText: string) {
+  searchTermChanged(searchText: string): void {
     this.searchTermSubject$.next(searchText);
   }
 }

@@ -1,26 +1,20 @@
-<section class="accordions" *ngIf="currentSetlist$ | async as setlist">
-    <article class="accordion is-active">
-      <div class="accordion-header toggle">
-        <p>Details</p>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-content">
-            <app-setlist-edit-form [setlist]="setlist" (cancelEvent)="cancel()" (submitEvent)="editSetlist($event)"></app-setlist-edit-form>
+
+<div class="container" *ngIf="currentSetlist$ | async as setlist">
+    <app-setlist-edit-form 
+    [setlist]="setlist" 
+    (cancelEvent)="cancel()" 
+    (submitEvent)="editSetlist($event)" 
+    [showDeleteButton]='true'
+    (deleteEvent)="deleteSetlist($event)"
+    ></app-setlist-edit-form>
+    <app-notification contents="Setlist saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
+
+    <div class="columns">
+        <div class="column">
+            list of songs here
         </div>
-      </div>
-    </article>
-    <article class="accordion">
-      <div class="accordion-header toggle">
-        <p>Songs</p>
-      </div>
-      <div class="accordion-body">
-        <div class="accordion-content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+        <div class="column">
+            click a song, details here
         </div>
-      </div>
-    </article>
-  </section>
-  
-<script>
-    bulmaAccordion.attach(); // accordions now contains an array of all Accordion instances
-</script>
+    </div>
+</div>

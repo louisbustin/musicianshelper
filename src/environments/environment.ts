@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  'API_URL': 'http://localhost:4000/api',
+  'API_URL': 'http://localhost:4000',
   auth: {
     'domain': 'musicianshelper.us.auth0.com',
     'clientId': 'PYLxNJnR3uvITJIdJGMH4TzYeoPKzaLv',

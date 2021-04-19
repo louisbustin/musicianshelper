@@ -4,7 +4,7 @@ export const environment = {
   auth: {
     'domain': 'musicianshelper.us.auth0.com',
     'clientId': 'PYLxNJnR3uvITJIdJGMH4TzYeoPKzaLv',
-    'redirectUri': 'https://themusicianhelper.com/',
+    'redirectUri': 'https://themusicianhelper.com',
     'audience': 'https://musicianshelper.com/api/v2.0'
   }
 };

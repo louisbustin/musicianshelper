@@ -14,7 +14,7 @@ export class BandService {
     constructor(private webRequestService: WebRequestService) { }
     
     //list of bands from serverside. using "sharedReplay" to cache these locally
-    serverBands$: Observable<IBand[]> = this.webRequestService.getTyped<IBand[]>(this.BASE_PATH)
+    serverBands$: Observable<IBand[]> = this.webRequestService.get<IBand[]>(this.BASE_PATH)
     .pipe(
         shareReplay(1)
     );
@@ -27,7 +27,7 @@ export class BandService {
         this.bandToAddAction$
     ).pipe(
         scan((bands: IBand[], addedBand: IBand) => {
-            let i = bands.findIndex(b => b._id === addedBand._id);
+            const i = bands.findIndex(b => b._id === addedBand._id);
             if (i >= 0) {
                 bands[i] = addedBand;
                 return [...bands];
@@ -46,11 +46,11 @@ export class BandService {
         shareReplay(1)
     );
 
-    selectBand(band: IBand) {
+    selectBand(band: IBand): void {
         this.bandSelectedSubject.next(band);
     }
 
-    addBand(band: IBand, switchContext: boolean) {
+    addBand(band: IBand, switchContext: boolean): void {
         this.webRequestService.post<IBand>("bands", band).pipe(
             catchError(err => { 
                 console.log(err);
@@ -64,7 +64,7 @@ export class BandService {
         });
     }
 
-    editBand(band: IBand) {
+    editBand(band: IBand): void {
         this.webRequestService.put<IBand>(`bands/${band._id}`, band).pipe(
             catchError(err => { 
                 console.log(err);
