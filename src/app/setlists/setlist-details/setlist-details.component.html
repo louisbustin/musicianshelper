@@ -7,4 +7,14 @@
     [showDeleteButton]='true'
     (deleteEvent)="deleteSetlist($event)"
     ></app-setlist-edit-form>
+    <app-notification contents="Setlist saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
+
+    <div class="columns">
+        <div class="column">
+            list of songs here
+        </div>
+        <div class="column">
+            click a song, details here
+        </div>
+    </div>
 </div>

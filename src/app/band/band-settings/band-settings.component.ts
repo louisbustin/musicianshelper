@@ -11,8 +11,6 @@ import { BandService } from '../band.service';
 })
 export class BandSettingsComponent implements OnDestroy {
 
-  displayMessage: string;
-
   @ViewChild('notificationBox') 
   notify: NotificationComponent;
 
@@ -28,7 +26,6 @@ export class BandSettingsComponent implements OnDestroy {
 
   editBand(band: IBand): void {
     this.bandService.editBand(band);
-    this.displayMessage = "Edited band " + band.name;
     this.notify.open();    
   }
 

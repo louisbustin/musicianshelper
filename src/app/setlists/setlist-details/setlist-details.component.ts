@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { ISetlist } from 'src/app/models/setlist.model';
+import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 import { SetlistService } from '../setlist.service';
 
 @Component({
@@ -11,6 +12,9 @@ import { SetlistService } from '../setlist.service';
   styleUrls: ['./setlist-details.component.scss']
 })
 export class SetlistDetailsComponent {
+
+  @ViewChild('notificationBox') 
+  notify: NotificationComponent;
 
   setlistId$: Observable<string> = this.route.params.pipe(
     map(params => params['setlistId'])
@@ -32,6 +36,7 @@ export class SetlistDetailsComponent {
   
   editSetlist(setlist: ISetlist): void {
     this.setlistService.editSetlist(setlist);
+    this.notify.open();
   }
 
   deleteSetlist(setlist: ISetlist): void {
