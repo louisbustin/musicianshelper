@@ -147,32 +147,6 @@
               "optimization": true
             }
           }
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "options": {
-            "browserTarget": "musicianshelper:build",
-            "serverTarget": "musicianshelper:server"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "musicianshelper:build:production",
-              "serverTarget": "musicianshelper:server:production"
-            }
-          }
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "browserTarget": "musicianshelper:build:production",
-            "serverTarget": "musicianshelper:server:production",
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {}
-          }
         }
       }
     }

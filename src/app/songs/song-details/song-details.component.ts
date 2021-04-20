@@ -39,7 +39,7 @@ export class SongDetailsComponent {
     this.notify.open();
   }
 
-  deleteSetlist(setlist: ISong): void {
+  deleteSong(setlist: ISong): void {
     this.songService.deleteSong(setlist._id);
     this.router.navigateByUrl("/songs");
   }

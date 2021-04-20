@@ -55,7 +55,7 @@ export class SongsService {
       private bandService: BandService
       ) { }
 
-  addSongt(song: ISong): void {
+  addSong(song: ISong): void {
       this.webRequestService.post<ISong>("songs", song).pipe(
           catchError(err => { 
               console.log(err);

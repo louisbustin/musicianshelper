@@ -1,10 +1,14 @@
-<div class="container" *ngIf="song$ | async as song">
+<base href="/">
+<div class="container" *ngIf="currentSong$ | async as song">
+    <div class="content">
+        <h1>Edit song details</h1>
+    </div>
     <app-song-edit-form 
         [song]="song" 
         (cancelEvent)="cancel()" 
-        (submitEvent)="editSetlist($event)" 
+        (submitEvent)="editSong($event)" 
         [showDeleteButton]='true'
-        (deleteEvent)="deleteSetlist($event)"
+        (deleteEvent)="deleteSong($event)"
     ></app-song-edit-form>
     <app-notification contents="Song saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
 

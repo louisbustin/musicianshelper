@@ -21,8 +21,18 @@
               <span class="panel-icon">
                 <i class="fas fa-music" aria-hidden="true"></i>
               </span>
-              {{song.name}}
+              {{song.name}} <span *ngIf="showBandName">({{song.artist}})</span>
             </a>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" (click)="showBandName=!showBandName">
+                <span *ngIf="showBandName">
+                  Hide band name
+                </span>
+                <span *ngIf="!showBandName">
+                  Show band name
+                </span>              
+              </button>
+            </div>
             <div class="panel-block">
               <button class="button is-link is-outlined is-fullwidth" (click)="searchBox.value = ''; searchTermChanged('');">
                 Reset all filters

@@ -1,11 +1,15 @@
 
 <div class="container" *ngIf="currentSetlist$ | async as setlist">
+    <div class="content">
+        <h1>Edit setlist details</h1>
+    </div>
+
     <app-setlist-edit-form 
-    [setlist]="setlist" 
-    (cancelEvent)="cancel()" 
-    (submitEvent)="editSetlist($event)" 
-    [showDeleteButton]='true'
-    (deleteEvent)="deleteSetlist($event)"
+        [setlist]="setlist" 
+        (cancelEvent)="cancel()" 
+        (submitEvent)="editSetlist($event)" 
+        [showDeleteButton]='true'
+        (deleteEvent)="deleteSetlist($event)"
     ></app-setlist-edit-form>
     <app-notification contents="Setlist saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
 

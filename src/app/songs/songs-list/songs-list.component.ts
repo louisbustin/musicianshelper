@@ -12,6 +12,8 @@ import { SongsService } from '../songs.service';
 })
 export class SongsListComponent {
 
+  showBandName = true;
+  
   private searchTermSubject$ = new BehaviorSubject("");
   searchTerm$ = this.searchTermSubject$.asObservable();
   songs$: Observable<ISong[]> = this.searchTerm$.pipe(

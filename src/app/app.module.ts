@@ -39,7 +39,7 @@ import { BandModule } from './band/band.module';
     NavigationModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     RouterModule.forRoot(
       appRoutes
       ),
