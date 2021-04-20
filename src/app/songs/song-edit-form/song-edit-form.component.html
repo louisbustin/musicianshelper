@@ -1,1 +1,59 @@
-<p>song-edit-form works!</p>
+<form class="box" #form="ngForm">
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control has-icons-right has-icons-left">
+            <input class="input" type="text" placeholder="Song Name" required #name="ngModel" id="songname" name="songname" [(ngModel)]="song.name">
+            <span class="icon is-small is-left">
+                <em class="fas fa-users"></em>
+            </span>
+            <span class="icon is-small is-right" *ngIf="name.invalid && (name.dirty || name.touched)">
+                <em class="fas fa-exclamation-triangle"></em>
+            </span>
+        </div>
+        <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Song name is required</p>
+    </div>
+
+    <div class="field">
+        <label class="label">Artist</label>
+        <div class="control ">
+            <input class="input" type="text" placeholder="Artist" id="artist" name="artist" [(ngModel)]="song.artist">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Lyrics</label>
+        <div class="control ">
+            <textarea class="textarea" placeholder="Lyrics" id="lyrics" name="lyrics" [(ngModel)]="song.lyrics"></textarea>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Notes</label>
+        <div class="control ">
+            <textarea class="textarea" placeholder="Notes" id="notes" name="notes" [(ngModel)]="song.notes"></textarea>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column is-three-quarters">
+            <div class="field is-grouped">
+                <div class="control has-icons-left">
+                <button class="button is-link" (click)="submitClick()" [disabled]="form.invalid">Submit</button>
+                </div>
+                <div class="control">
+                <button class="button is-link is-light" (click)="cancelClick()">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-quarter">
+            <button class="button is-link is-danger is-pulled-right" (click)="modalActive=true;" *ngIf="showDeleteButton">Delete</button>
+        </div>
+    </div>
+</form>
+<app-confirm-modal 
+    okButtonText="Delete" 
+    okButtonStyle="is-danger" 
+    okButtonIcon="fas fa-exclamation-triangle"
+    title="Confirm Delete Setlist" 
+    message="Are you sure you want to delete this setlist?" 
+    [(modalActive)]="modalActive"
+    (cancelEvent)="modalCancel()"
+    (confirmEvent)="modalConfirm()"
+></app-confirm-modal>

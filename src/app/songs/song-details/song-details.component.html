@@ -1,1 +1,11 @@
-<p>song-details works!</p>
+<div class="container" *ngIf="song$ | async as song">
+    <app-song-edit-form 
+        [song]="song" 
+        (cancelEvent)="cancel()" 
+        (submitEvent)="editSetlist($event)" 
+        [showDeleteButton]='true'
+        (deleteEvent)="deleteSetlist($event)"
+    ></app-song-edit-form>
+    <app-notification contents="Song saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
+
+</div>
