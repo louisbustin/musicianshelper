@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
 import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
 import { BandService } from "../band/band.service";
-import { ISetlist } from "../models/setlist.model";
+import { ISetlist } from "./models/setlist.model";
 import { WebRequestService } from "../shared/services/web-request.service";
+import { ISetlistWithBands } from "./models/setlist-with-bands.model";
 
 @Injectable({
     providedIn: 'root'
@@ -80,8 +81,8 @@ export class SetlistService {
         });
     }
 
-    getSetlist(setlistId: string): Observable<ISetlist> {
-        return this.webRequestService.get<ISetlist>(`setlists/${setlistId}`);
+    getSetlist(setlistId: string): Observable<ISetlistWithBands> {
+        return this.webRequestService.get<ISetlistWithBands>(`setlists/${setlistId}`);
     }
 
     deleteSetlist(setlistId: string): void {

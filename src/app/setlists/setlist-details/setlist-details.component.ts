@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { ISetlist } from 'src/app/models/setlist.model';
+import { ISetlist } from '../models/setlist.model';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
 import { SetlistService } from '../setlist.service';
 

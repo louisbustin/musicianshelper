@@ -15,7 +15,9 @@
 
     <div class="columns">
         <div class="column">
-            list of songs here
+            <ul *ngIf="setlist.songs">
+                <li *ngFor='let song of setlist.songs'>{{song.name}}</li>
+            </ul>
         </div>
         <div class="column">
             click a song, details here

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
-import { ISetlist } from 'src/app/models/setlist.model';
+import { ISetlist } from '../models/setlist.model';
 import { SetlistService } from '../setlist.service';
 
 @Component({
