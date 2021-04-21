@@ -13,15 +13,8 @@ import { SongsService } from '../songs.service';
 })
 export class AddSongComponent implements OnInit, OnDestroy {
 
-  song: ISong = {
-    _id: null,
-    name: "",
-    artist: "",
-    lyrics: "",
-    notes: "",
-    band: ""
-  }
-
+  song: ISong = new ISong();
+  
   currentBand: IBand;
   sub: Subscription;
 

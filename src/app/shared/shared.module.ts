@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ButtonCellRendererComponent } from './button-cell-renderer/button-cell-renderer.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ListPickerComponent } from './list-picker/list-picker.component';
 
 @NgModule({
   declarations: [
     ButtonCellRendererComponent,
     NotificationComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ListPickerComponent
   ],
   imports: [
     CommonModule
@@ -23,7 +25,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     CommonModule,
     ButtonCellRendererComponent,
     NotificationComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ListPickerComponent
   ]
 })
 export class SharedModule { }

@@ -24,6 +24,7 @@
     "@angular/platform-server": "~11.0.6",
     "@angular/router": "~11.0.6",
     "@auth0/auth0-angular": "^1.4.0",
+    "@creativebulma/bulma-tooltip": "^1.2.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/lodash": "^4.14.168",
     "ag-grid-angular": "^25.1.0",
