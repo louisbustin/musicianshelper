@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Input } from '@angular/core';
 import { combineLatest, Subject, merge, BehaviorSubject, Observable } from 'rxjs';
 import { map, scan, tap } from 'rxjs/operators';
@@ -40,10 +41,11 @@ export class ListPickerComponent {
     this.pickedList$,
     this.pickedListAdd$
   ).pipe(
-    scan((pickList: unknown[], toAdd) => {
+    scan((pickList: unknown[], toAdd: any) => {
       if (Array.isArray(toAdd)) {
         return [...toAdd];
       } else {
+        toAdd.order = pickList.length;
         return [...pickList, toAdd]
       }
     })
@@ -74,8 +76,6 @@ export class ListPickerComponent {
     this.pickedListWithAddAndRemove$
   ]).pipe(
     map(([compList, pickList]) => {
-      console.log(pickList);
-      console.log(compList);
       return compList.filter(s => pickList.findIndex(setlistSong => _.isEqual(s, setlistSong))<0) 
     })
   )

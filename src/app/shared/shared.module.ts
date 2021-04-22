@@ -7,13 +7,15 @@ import { ButtonCellRendererComponent } from './button-cell-renderer/button-cell-
 import { NotificationComponent } from './notification/notification.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ListPickerComponent } from './list-picker/list-picker.component';
+import { OrderByPipe } from './order-by/order-by.pipe';
 
 @NgModule({
   declarations: [
     ButtonCellRendererComponent,
     NotificationComponent,
     ConfirmModalComponent,
-    ListPickerComponent
+    ListPickerComponent,
+    OrderByPipe
   ],
   imports: [
     CommonModule
@@ -26,7 +28,8 @@ import { ListPickerComponent } from './list-picker/list-picker.component';
     ButtonCellRendererComponent,
     NotificationComponent,
     ConfirmModalComponent,
-    ListPickerComponent
+    ListPickerComponent,
+    OrderByPipe
   ]
 })
 export class SharedModule { }
