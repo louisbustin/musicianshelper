@@ -17,10 +17,12 @@
         ></app-setlist-edit-form>
     <app-notification contents="Setlist saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
 
-    <app-list-picker 
-        [pickedList$]="currentSetlistSongs$"
-        [completeList$]="allSongs$"
-    ></app-list-picker>
+    <ng-container *ngIf="allSongs$ | async as allSongs">
+        <app-list-picker *ngIf="currentSetlistSongs$ | async as currentSongs"
+            [pickedList]="currentSongs"
+            [completeList]="allSongs"
+        ></app-list-picker>
+    </ng-container> 
 
 
 </div>

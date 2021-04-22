@@ -2,14 +2,14 @@ list picker here
 <div class="columns">
     <div class="column">
         possible songs
-        <ul *ngIf="completeListWithoutPickedItems$ | async as all">
-            <li *ngFor='let a of all'>{{a.name}}</li>
+        <ul *ngIf="completeList$ | async as all">
+            <li *ngFor='let a of all' (click)="pickItem(a)">{{a.name}}</li>
         </ul>             
 
     </div>
     <div class="column">
         <ul *ngIf="pickedListWithAddAndRemove$ | async as pickedList">
-            <li *ngFor='let p of pickedList' >{{p.name}}</li>
+            <li *ngFor='let p of pickedList'>{{p.name}}</li>
         </ul>            
     </div>
 </div>  
