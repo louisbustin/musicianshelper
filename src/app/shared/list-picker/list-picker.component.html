@@ -2,17 +2,17 @@ list picker here
 <div class="columns">
     <div class="column">
         possible songs
-        <ul *ngIf="completeList$ | async as all">
+        <ul *ngIf="completeListWithoutPickedItems$ | async as all">
             <li *ngFor='let a of all'>{{a.name}}</li>
         </ul>             
 
     </div>
     <div class="column">
-        <ul *ngIf="pickedList$ | async as pickedList">
+        <ul *ngIf="pickedListWithAddAndRemove$ | async as pickedList">
             <li *ngFor='let p of pickedList' >{{p.name}}</li>
         </ul>            
     </div>
-</div>
+</div>  
 <div class="columns">
     <div class="column">
         <button class="button is-primary">Save Songs</button>
