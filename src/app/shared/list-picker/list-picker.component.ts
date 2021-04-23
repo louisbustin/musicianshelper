@@ -45,8 +45,11 @@ export class ListPickerComponent {
       if (Array.isArray(toAdd)) {
         return [...toAdd];
       } else {
-        toAdd.order = pickList.length;
-        return [...pickList, toAdd]
+        if (toAdd) {
+          toAdd.order = pickList.length;
+          return [...pickList, toAdd]
+        }
+        return [...pickList];
       }
     })
   )
@@ -81,8 +84,11 @@ export class ListPickerComponent {
   )
 
   pickItem(item: unknown): void {
-    console.log(item);
     this.pickedListAddSubject$.next(item);
+  }
+
+  unpickItem(item: unknown): void {
+    this.pickedListRemoveSubject$.next(item);
   }
 
 }
