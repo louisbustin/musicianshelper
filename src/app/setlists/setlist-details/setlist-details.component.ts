@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, pipe } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, mergeMap, shareReplay, tap } from 'rxjs/operators';
 import { ISetlist } from '../models/setlist.model';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';

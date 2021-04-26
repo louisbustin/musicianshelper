@@ -65,14 +65,60 @@ export class ListPickerComponent {
       if (Array.isArray(toRemove)) {
         return [...toRemove];
       } else {
-        const index = pickList.findIndex(l => l._id === toRemove._id);
-        if (index >= 0) {
-          pickList.splice(index, 1);
+        if (toRemove) {
+          const index = pickList.findIndex(l => l._id === toRemove._id);
+          if (index >= 0) {
+            pickList.splice(index, 1);
+          }
         }
         return [...pickList];
       }
     })
   );
+
+  private pickedListMoveUpSubject$ = new Subject<unknown>();
+  pickedListMoveUp$ = this.pickedListMoveUpSubject$.asObservable();
+  pickedListWithAddRemoveAndMoveUp$: Observable<unknown[]> = merge(
+    this.pickedListWithAddAndRemove$,
+    this.pickedListMoveUp$
+  ).pipe(
+    scan((pickList: any[], toMoveUp: any) => {
+      if (Array.isArray(toMoveUp)) {
+        return [...toMoveUp];
+      } else {
+        pickList.sort((a, b) => a.order - b.order)
+        const index = pickList.findIndex(l => l._id === toMoveUp._id);
+        if (index > 0) {
+          console.log(pickList);
+          pickList[index].order = index - 1;
+          pickList[index - 1].order = index;  
+          console.log(pickList);                 
+        }
+      }
+      return [...pickList];
+    })
+  )
+
+  private pickedListMoveDownSubject$ = new Subject<unknown>();
+  pickedListMoveDown$ = this.pickedListMoveDownSubject$.asObservable();
+  pickedListWithAddRemoveMoveUpAndDown$: Observable<unknown[]> = merge(
+    this.pickedListWithAddRemoveAndMoveUp$,
+    this.pickedListMoveDown$
+  ).pipe(
+    scan((pickList: any[], toMoveDown: any) => {
+      if (Array.isArray(toMoveDown)) {
+        return [...toMoveDown];
+      } else {
+        pickList.sort((a, b) => a.order - b.order)
+        const index = pickList.findIndex(l => l._id === toMoveDown._id);
+        if (index < pickList.length) {
+          pickList[index].order = index + 1;
+          pickList[index + 1].order = index;          
+        }
+      }
+      return [...pickList];
+    })
+  )
 
   completeListWithoutPickedItems$ = combineLatest([
     this.completeList$, 
@@ -89,6 +135,14 @@ export class ListPickerComponent {
 
   unpickItem(item: unknown): void {
     this.pickedListRemoveSubject$.next(item);
+  }
+
+  moveItemUp(item: unknown): void {
+    this.pickedListMoveUpSubject$.next(item);
+  }
+
+  moveItemDown(item: unknown): void {
+    this.pickedListMoveDownSubject$.next(item);
   }
 
 }
