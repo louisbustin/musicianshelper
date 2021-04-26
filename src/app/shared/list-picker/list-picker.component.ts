@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { combineLatest, Subject, merge, BehaviorSubject, Observable } from 'rxjs';
-import { map, scan, tap } from 'rxjs/operators';
+import { map, scan, shareReplay, take } from 'rxjs/operators';
 import _ from 'lodash'
 
 @Component({
@@ -12,11 +13,23 @@ import _ from 'lodash'
 export class ListPickerComponent {
 
 
+  @Input()
+  completeListHeader: string;
+
+  @Input()
+  pickedListHeader: string;
+
+  @Input()
+  saveButtonText: string;
+
+  @Output()
+  saveClickEvent= new EventEmitter<any[]>();
+
   private _pickedListSubject$ = new BehaviorSubject<unknown[]>([]);
   private _completeListSubject$ = new BehaviorSubject<unknown[]>([]);
 
   pickedList$ = this._pickedListSubject$.asObservable();
-  completeList$ = this._completeListSubject$.asObservable().pipe(tap(x => console.log(x)));
+  completeList$ = this._completeListSubject$.asObservable();
   
   @Input()
   set pickedList(value: unknown[]) {
@@ -33,42 +46,28 @@ export class ListPickerComponent {
   get completeList(): unknown[] {
     return this._completeListSubject$.getValue();
   }
-
+  
   private pickedListAddSubject$ = new Subject();
   pickedListAdd$ = this.pickedListAddSubject$.asObservable();
 
-  pickedListWithAdd$ = merge(
+  pickedListWithAddAndRemove$: Observable<unknown[]> = merge(
     this.pickedList$,
     this.pickedListAdd$
   ).pipe(
-    scan((pickList: unknown[], toAdd: any) => {
-      if (Array.isArray(toAdd)) {
-        return [...toAdd];
+    scan((pickList: any[], toAddRemove: any) => {      
+      if (Array.isArray(toAddRemove)) {
+        return [...toAddRemove];
       } else {
-        if (toAdd) {
-          toAdd.order = pickList.length;
-          return [...pickList, toAdd]
-        }
-        return [...pickList];
-      }
-    })
-  )
-
-  private pickedListRemoveSubject$ = new Subject<unknown>();
-  pickedListRemove$ = this.pickedListRemoveSubject$.asObservable();
-
-  pickedListWithAddAndRemove$: Observable<unknown[]> = merge(
-    this.pickedListWithAdd$,
-    this.pickedListRemove$
-  ).pipe(
-    scan((pickList: any[], toRemove: any) => {
-      if (Array.isArray(toRemove)) {
-        return [...toRemove];
-      } else {
-        if (toRemove) {
-          const index = pickList.findIndex(l => l._id === toRemove._id);
-          if (index >= 0) {
+        if (toAddRemove) {
+          const index = pickList.findIndex(l => l._id === toAddRemove._id);
+          if (index >= 0 && toAddRemove.remove) {
             pickList.splice(index, 1);
+            //loop through and update everyone else's order
+            pickList.forEach((item, i) => { item.order = i; })
+          }
+          if (index < 0 && !toAddRemove.remove) {
+            toAddRemove.order = pickList.length;
+            pickList = [...pickList, toAddRemove];
           }
         }
         return [...pickList];
@@ -89,11 +88,10 @@ export class ListPickerComponent {
         pickList.sort((a, b) => a.order - b.order)
         const index = pickList.findIndex(l => l._id === toMoveUp._id);
         if (index > 0) {
-          console.log(pickList);
           pickList[index].order = index - 1;
           pickList[index - 1].order = index;  
-          console.log(pickList);                 
         }
+        pickList.sort((a, b) => a.order - b.order)
       }
       return [...pickList];
     })
@@ -111,13 +109,16 @@ export class ListPickerComponent {
       } else {
         pickList.sort((a, b) => a.order - b.order)
         const index = pickList.findIndex(l => l._id === toMoveDown._id);
-        if (index < pickList.length) {
+        if (index < pickList.length - 1) {
           pickList[index].order = index + 1;
-          pickList[index + 1].order = index;          
+          pickList[index + 1].order = index;
         }
+        pickList.sort((a, b) => a.order - b.order)
       }
       return [...pickList];
-    })
+    }),
+    shareReplay(1)
+
   )
 
   completeListWithoutPickedItems$ = combineLatest([
@@ -129,12 +130,14 @@ export class ListPickerComponent {
     })
   )
 
-  pickItem(item: unknown): void {
+  pickItem(item: any): void {
+    item.remove = false;
     this.pickedListAddSubject$.next(item);
   }
 
-  unpickItem(item: unknown): void {
-    this.pickedListRemoveSubject$.next(item);
+  unpickItem(item: any): void {
+    item.remove = true;
+    this.pickedListAddSubject$.next(item);
   }
 
   moveItemUp(item: unknown): void {
@@ -143,6 +146,12 @@ export class ListPickerComponent {
 
   moveItemDown(item: unknown): void {
     this.pickedListMoveDownSubject$.next(item);
+  }
+
+  save(): void {
+    this.pickedListWithAddRemoveMoveUpAndDown$
+      .pipe(take(1))
+      .subscribe(x => this.saveClickEvent.emit(x));
   }
 
 }
