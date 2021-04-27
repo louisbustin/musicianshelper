@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ISetlist } from 'src/app/models/setlist.model';
+import { ISetlist } from '../models/setlist.model';
 
 @Component({
   selector: 'app-setlist-edit-form',

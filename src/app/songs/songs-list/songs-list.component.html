@@ -1,0 +1,46 @@
+<div class="columns">
+    <div class="column is-one-quarter">
+        <nav class="panel" *ngIf="songs$ | async as songs">
+            <p class="panel-heading">
+              Songs
+              <a class="button is-rounded is-small" routerLink="/songs/add">
+                <span class="icon is-right">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </a>
+            </p>
+            <div class="panel-block">
+              <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Search" (input)="searchTermChanged($event.target.value)" #searchBox >
+                <span class="icon is-left">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </span>
+              </p>
+            </div>
+            <a routerLink="/songs/{{song._id}}" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}" class="panel-block"  *ngFor="let song of songs">
+              <span class="panel-icon">
+                <i class="fas fa-music" aria-hidden="true"></i>
+              </span>
+              {{song.name}} <span *ngIf="showBandName">({{song.artist}})</span>
+            </a>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" (click)="showBandName=!showBandName">
+                <span *ngIf="showBandName">
+                  Hide band name
+                </span>
+                <span *ngIf="!showBandName">
+                  Show band name
+                </span>              
+              </button>
+            </div>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth" (click)="searchBox.value = ''; searchTermChanged('');">
+                Reset all filters
+              </button>
+            </div>
+          </nav>
+    </div>
+    <div class="column is-three-quarters">
+        <router-outlet></router-outlet>
+    </div>
+</div>

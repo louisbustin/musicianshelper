@@ -1,20 +1,31 @@
-
-<div class="container" *ngIf="currentSetlist$ | async as setlist">
-    <app-setlist-edit-form 
-    [setlist]="setlist" 
-    (cancelEvent)="cancel()" 
-    (submitEvent)="editSetlist($event)" 
-    [showDeleteButton]='true'
-    (deleteEvent)="deleteSetlist($event)"
-    ></app-setlist-edit-form>
+<div class="container mr-5" *ngIf="currentSetlist$ | async as setlist">
     <app-notification contents="Setlist saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
-
-    <div class="columns">
-        <div class="column">
-            list of songs here
-        </div>
-        <div class="column">
-            click a song, details here
-        </div>
+    <div class="content">
+        <h3 (click)="showDetails=!showDetails" data-tooltip="Click to edit name and notes">
+            <span *ngIf="!showDetails"><i class="fas fa-chevron-circle-right"></i></span>
+            <span *ngIf="showDetails"><i class="fas fa-chevron-circle-down"></i></span>
+            Edit setlist details</h3>
+           
     </div>
+    <app-setlist-edit-form 
+        [setlist]="setlist" 
+        (cancelEvent)="cancel()" 
+        (submitEvent)="editSetlist($event)" 
+        [showDeleteButton]='true'
+        (deleteEvent)="deleteSetlist($event)"
+        *ngIf="showDetails"
+    ></app-setlist-edit-form>
+    
+
+    <ng-container *ngIf="allSongs$ | async as allSongs">
+        <app-list-picker *ngIf="currentSetlistSongs$ | async as currentSongs"
+            [pickedList]="currentSongs"
+            [completeList]="allSongs"
+            displayProperty='song.name'
+            completeListHeader="Available Songs"
+            pickedListHeader="Songs in Setlist"
+            saveButtonText="Save Songs"
+            (saveClickEvent)="saveSetlistSongs($event, setlist)"
+        ></app-list-picker>
+    </ng-container> 
 </div>

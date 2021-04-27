@@ -23,6 +23,11 @@ export const appRoutes: Routes = [
       canActivate: [AuthGuard],
       loadChildren: () => import('./setlists/setlists.module').then(m => m.SetlistsModule)
     },
+    {
+      path: 'songs',
+      canActivate: [AuthGuard],
+      loadChildren: () => import('./songs/songs.module').then(m => m.SongsModule)
+    },
     { path: 'news', component: NewsComponent },
     { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
     { path: '', component: PublicComponent },

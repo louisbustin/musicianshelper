@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
-import { ISetlist } from '../models/setlist.model';
-import { SetlistService } from '../setlist.service';
+import { ISong } from 'src/app/models/song.model';
+import { SongsService } from '../songs.service';
 
 @Component({
-  selector: 'app-setlist-list',
-  templateUrl: './setlist-list.component.html',
-  styleUrls: ['./setlist-list.component.scss']
+  selector: 'app-songs-list',
+  templateUrl: './songs-list.component.html',
+  styleUrls: ['./songs-list.component.scss']
 })
-export class SetlistListComponent {
+export class SongsListComponent {
 
+  showBandName = true;
+  
   private searchTermSubject$ = new BehaviorSubject("");
   searchTerm$ = this.searchTermSubject$.asObservable();
-  setlists$: Observable<ISetlist[]> = this.searchTerm$.pipe(
-    mergeMap(searchTerm => this.setlistService.setlists$.pipe(
+  songs$: Observable<ISong[]> = this.searchTerm$.pipe(
+    mergeMap(searchTerm => this.songService.songs$.pipe(
       map(lists =>  {
         if (searchTerm === "") {
           return lists;
@@ -27,13 +28,11 @@ export class SetlistListComponent {
     ))
   );
 
-
   selectedBand$ = this.bandService.selectedBand$;
-
+  
   constructor(
-    private setlistService: SetlistService, 
-    private bandService: BandService,
-    private router: Router
+    private songService: SongsService,
+    private bandService: BandService
     ) { }
 
   searchTermChanged(searchText: string): void {

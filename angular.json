@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["lodash"],
             "outputPath": "dist/musicianshelper/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,11 +31,11 @@
             "styles": [
               "node_modules/bulma/bulma.sass",
               "node_modules/bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader.min.css",
-              "node_modules/bulma-extensions/bulma-accordion/dist/css/bulma-accordion.min.css",
+              "node_modules/@creativebulma/bulma-tooltip/dist/bulma-tooltip.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bulma-extensions/bulma-accordion/dist/js/bulma-accordion.min.js"
+              
             ]
           },
           "configurations": {
@@ -146,32 +147,6 @@
               "sourceMap": false,
               "optimization": true
             }
-          }
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "options": {
-            "browserTarget": "musicianshelper:build",
-            "serverTarget": "musicianshelper:server"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "musicianshelper:build:production",
-              "serverTarget": "musicianshelper:server:production"
-            }
-          }
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "browserTarget": "musicianshelper:build:production",
-            "serverTarget": "musicianshelper:server:production",
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {}
           }
         }
       }

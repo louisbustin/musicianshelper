@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
 import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
 import { BandService } from "../band/band.service";
-import { ISetlist } from "../models/setlist.model";
+import { ISetlist } from "./models/setlist.model";
 import { WebRequestService } from "../shared/services/web-request.service";
+import { ISetlistWithSongs } from "./models/setlist-with-songs.model";
 
 @Injectable({
     providedIn: 'root'
@@ -80,8 +81,30 @@ export class SetlistService {
         });
     }
 
-    getSetlist(setlistId: string): Observable<ISetlist> {
-        return this.webRequestService.get<ISetlist>(`setlists/${setlistId}`);
+    //this will only save the songs to a setlist, not a 
+    saveSetlistWithSongs(list: ISetlistWithSongs):void  {
+        console.log(list);
+        const songs = list.songs.map(x => {
+            return { 'order': x.order, 'song': x.song._id}
+        });
+        const updateList = {
+            _id: list._id,
+            songs: songs
+        }
+        console.log(updateList);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.webRequestService.put<any>(`setlists/${list._id}`, updateList).pipe(
+            catchError(err => { 
+                console.log(err);
+                return EMPTY;
+            })
+        ).subscribe(changedList => {
+            this.setlistToAdd$.next(changedList);
+        });
+    }
+
+    getSetlist(setlistId: string): Observable<ISetlistWithSongs> {
+        return this.webRequestService.get<ISetlistWithSongs>(`setlists/${setlistId}`);
     }
 
     deleteSetlist(setlistId: string): void {
