@@ -1,0 +1,11 @@
+# dependencies
+/node_modules
+
+#don't include environment files
+.env
+
+#and no need to include local logs
+/logs
+
+#leave out the build artifacts
+/build
