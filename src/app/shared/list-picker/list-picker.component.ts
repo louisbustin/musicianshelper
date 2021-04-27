@@ -3,7 +3,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { combineLatest, Subject, merge, BehaviorSubject, Observable } from 'rxjs';
 import { map, scan, shareReplay, take } from 'rxjs/operators';
-import _ from 'lodash'
 
 @Component({
   selector: 'app-list-picker',
@@ -21,6 +20,18 @@ export class ListPickerComponent {
 
   @Input()
   saveButtonText: string;
+
+  @Input()
+  displayProperty: string;
+
+  @Input()
+  orderProperty = 'order';
+
+  @Input()
+  completeListIdProperty = '_id';
+
+  @Input()
+  pickedListIdProperty = 'song._id';
 
   @Output()
   saveClickEvent= new EventEmitter<any[]>();
@@ -59,15 +70,21 @@ export class ListPickerComponent {
         return [...toAddRemove];
       } else {
         if (toAddRemove) {
-          const index = pickList.findIndex(l => l._id === toAddRemove._id);
+          let propText = this.completeListIdProperty;
+          if (toAddRemove.remove) {
+            propText = this.pickedListIdProperty;
+          }
+          const index = pickList.findIndex(l => this.getId(l, this.pickedListIdProperty) === this.getId(toAddRemove, propText));
           if (index >= 0 && toAddRemove.remove) {
             pickList.splice(index, 1);
             //loop through and update everyone else's order
-            pickList.forEach((item, i) => { item.order = i; })
+            pickList.forEach((item, i) => { item[this.orderProperty] = i; })
           }
           if (index < 0 && !toAddRemove.remove) {
-            toAddRemove.order = pickList.length;
-            pickList = [...pickList, toAddRemove];
+            const toAdd = {};
+            toAdd[this.orderProperty] = pickList.length;
+            toAdd[this.getSubItemText(this.pickedListIdProperty)] = toAddRemove;
+            pickList = [...pickList, toAdd];
           }
         }
         return [...pickList];
@@ -85,13 +102,13 @@ export class ListPickerComponent {
       if (Array.isArray(toMoveUp)) {
         return [...toMoveUp];
       } else {
-        pickList.sort((a, b) => a.order - b.order)
-        const index = pickList.findIndex(l => l._id === toMoveUp._id);
+        pickList.sort((a, b) => a[this.orderProperty] - b[this.orderProperty])
+        const index = pickList.findIndex(l => this.getId(l, this.pickedListIdProperty) === this.getId(toMoveUp, this.pickedListIdProperty));
         if (index > 0) {
-          pickList[index].order = index - 1;
-          pickList[index - 1].order = index;  
+          pickList[index][this.orderProperty] = index - 1;
+          pickList[index - 1][this.orderProperty] = index;  
         }
-        pickList.sort((a, b) => a.order - b.order)
+        pickList.sort((a, b) => a[this.orderProperty] - b[this.orderProperty])
       }
       return [...pickList];
     })
@@ -107,13 +124,14 @@ export class ListPickerComponent {
       if (Array.isArray(toMoveDown)) {
         return [...toMoveDown];
       } else {
-        pickList.sort((a, b) => a.order - b.order)
-        const index = pickList.findIndex(l => l._id === toMoveDown._id);
+        pickList.sort((a, b) => a[this.orderProperty] - b[this.orderProperty])
+        const index = pickList.findIndex(l => this.getId(l, this.pickedListIdProperty) === this.getId(toMoveDown, this.pickedListIdProperty)
+        );
         if (index < pickList.length - 1) {
-          pickList[index].order = index + 1;
-          pickList[index + 1].order = index;
+          pickList[index][this.orderProperty] = index + 1;
+          pickList[index + 1][this.orderProperty] = index;
         }
-        pickList.sort((a, b) => a.order - b.order)
+        pickList.sort((a, b) => a[this.orderProperty] - b[this.orderProperty])
       }
       return [...pickList];
     }),
@@ -126,7 +144,7 @@ export class ListPickerComponent {
     this.pickedListWithAddAndRemove$
   ]).pipe(
     map(([compList, pickList]) => {
-      return compList.filter(s => pickList.findIndex(setlistSong => _.isEqual(s, setlistSong))<0) 
+      return compList.filter(s => pickList.findIndex(setlistSong => this.getId(s, this.completeListIdProperty) === this.getId(setlistSong, this.pickedListIdProperty))<0) 
     })
   )
 
@@ -154,4 +172,29 @@ export class ListPickerComponent {
       .subscribe(x => this.saveClickEvent.emit(x));
   }
 
+  getDisplayText(item: unknown): string {
+    const properties = this.displayProperty.split('.');
+    let text = item;
+    for (let i=0; i < properties.length; i++) {
+      text = text[properties[i]];
+    }
+    return typeof text === 'string' ? text : undefined;
+  }
+
+  getId(item: unknown, idProperty: string) {
+    const properties = idProperty.split('.');
+    let text = item;
+    for (let i=0; i < properties.length; i++) {
+      text = text[properties[i]];
+    }
+    return typeof text === 'string' ? text : undefined;    
+  }
+
+  getSubItemText(idProperty: string): string {
+    const properties = idProperty.split('.');
+    if (properties.length > 1) {
+      return properties[0];
+    }
+    return "";
+  }
 }

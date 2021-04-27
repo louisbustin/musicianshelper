@@ -32,12 +32,12 @@
         <div class="box">
             <h1 class="title">{{pickedListHeader}}</h1>
         <ng-container *ngIf="pickedListWithAddRemoveMoveUpAndDown$ | async as pickedList">
-            <nav class="level" *ngFor='let p of pickedList | orderBy: { property: "order" }'>
+            <nav class="level" *ngFor='let p of pickedList | orderBy: { property: orderProperty }'>
                 <!-- Left side -->
                 <div class="level-left">
                   <div class="level-item">
                     <p class="subtitle is-6">
-                        {{p.name}} - {{p.order}}
+                        {{getDisplayText(p)}} - {{p[orderProperty]}}
                     </p>
                   </div>
                 </div>
