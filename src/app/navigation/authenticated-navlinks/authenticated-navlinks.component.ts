@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -6,11 +6,8 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './authenticated-navlinks.component.html',
   styleUrls: ['./authenticated-navlinks.component.scss']
 })
-export class AuthenticatedNavlinksComponent implements OnInit {
+export class AuthenticatedNavlinksComponent {
 
   constructor(public auth: AuthService) {}
-
-  ngOnInit(): void {
-  }
 
 }

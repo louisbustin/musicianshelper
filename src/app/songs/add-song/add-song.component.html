@@ -1,0 +1,11 @@
+
+<div class="content">
+    <h1>Add a new song</h1>
+</div>
+
+<app-song-edit-form
+[song]="song" 
+(cancelEvent)="cancel()" 
+(submitEvent)="addSong($event)" 
+[showDeleteButton]='false'
+></app-song-edit-form>

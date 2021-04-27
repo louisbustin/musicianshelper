@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -7,14 +7,8 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./public.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublicComponent implements OnInit {
+export class PublicComponent {
 
   constructor(private auth: AuthService) { }
-
-  ngOnInit(): void {
-
-  }
-
-
 
 }

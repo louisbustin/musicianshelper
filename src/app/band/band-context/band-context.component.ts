@@ -41,7 +41,7 @@ export class BandContextComponent implements OnInit, OnDestroy {
         this.bandSub = this.bandService.selectedBand$.subscribe(b => this.selectedBand = b);
     }
 
-    bandContextChanged() {
+    bandContextChanged(): void {
         this.pageloaderActiveSubject$.next(true);
         interval(1000).pipe(take(1)).subscribe(() => this.pageloaderActiveSubject$.next(false));
         this.bandService.selectBand(this.selectedBand);

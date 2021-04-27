@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
 import { IBand } from 'src/app/models/band.model';
-import { ISetlist } from 'src/app/models/setlist.model';
+import { ISetlist } from '../models/setlist.model';
 import { SetlistService } from '../setlist.service';
 
 @Component({

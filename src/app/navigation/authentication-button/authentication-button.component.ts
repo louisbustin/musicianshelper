@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -6,11 +6,8 @@ import { AuthService } from '@auth0/auth0-angular';
   templateUrl: './authentication-button.component.html',
   styleUrls: ['./authentication-button.component.scss']
 })
-export class AuthenticationButtonComponent implements OnInit {
+export class AuthenticationButtonComponent {
 
   constructor(public auth: AuthService) {}
-
-  ngOnInit(): void {
-  }
 
 }

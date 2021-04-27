@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BandService } from 'src/app/band/band.service';
 
 @Component({
@@ -6,13 +6,10 @@ import { BandService } from 'src/app/band/band.service';
   templateUrl: './left-nav.component.html',
   styleUrls: ['./left-nav.component.scss']
 })
-export class LeftNavComponent implements OnInit {
+export class LeftNavComponent {
 
   currentBand$ = this.bandService.selectedBand$;
 
   constructor(private bandService: BandService) { }
-
-  ngOnInit(): void {
-  }
 
 }

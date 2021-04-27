@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from '../../models/user';
-import { UserService } from 'src/app/services/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { GridOptions } from 'ag-grid-community';
 import { ButtonCellRendererComponent } from 'src/app/shared/button-cell-renderer/button-cell-renderer.component';
@@ -42,11 +43,11 @@ export class UsersComponent implements OnInit {
     frameworkComponents: this.frameworkComponents
   }
 
-  constructor(private userService: UserService, private dialog: MatDialog) {   
+  constructor(private dialog: MatDialog) {   
   }
 
   ngOnInit(): void {
-    this.userData = this.userService.getAll();
+    //this.userData = this.userService.getAll();
   }
 
 
@@ -61,7 +62,7 @@ export class UsersComponent implements OnInit {
   }
 
   addClicked() {
-    let newUser = new User(null, null, null, null, 'user');
+    const newUser = new User(null, null, null, null, 'user');
     const dialogRef = this.dialog.open(UserFormComponent, { data: newUser });
     
     dialogRef.afterClosed().subscribe(result => {

@@ -8,7 +8,7 @@
     </div>
     <div class="column is-one-half">
         <app-band-edit-form [band]="band" (cancelEvent)="cancel()" (submitEvent)="editBand($event)"></app-band-edit-form>
-        <app-notification [contents]="displayMessage" [closeInSeconds]="3" #notificationBox></app-notification>
+        <app-notification contents="Band saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
     </div>  
     <div class="column is-one-quarter"></div>
 </div>

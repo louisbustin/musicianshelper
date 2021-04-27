@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "scp -r -i /d/eforge/bracketweb.pem /d/eforge/musicianshelper/dist/musicianshelper/browser/* ubuntu@ec2-18-191-95-189.us-east-2.compute.amazonaws.com:/opt/frontend"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +24,7 @@
     "@angular/platform-server": "~11.0.6",
     "@angular/router": "~11.0.6",
     "@auth0/auth0-angular": "^1.4.0",
-    "@nguniversal/express-engine": "^11.2.1",
+    "@creativebulma/bulma-tooltip": "^1.2.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/lodash": "^4.14.168",
     "ag-grid-angular": "^25.1.0",
@@ -43,9 +44,11 @@
     "@angular-devkit/build-angular": "~0.1100.6",
     "@angular/cli": "~11.0.6",
     "@angular/compiler-cli": "~11.0.6",
-    "@nguniversal/builders": "^11.2.1",
     "@types/jasmine": "^3.6.9",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "codelyzer": "^6.0.0",
+    "eslint": "^7.24.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",

@@ -1,9 +1,14 @@
 <nav id="navbar" class="mh-navbar navbar">
   <div class="navbar-brand">
     <a routerLink="/" routerLinkActive="active" class="navbar-item">Musician's Helper</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="navToggle=!navToggle" [ngClass]="{'is-active': navToggle}">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div id="navMenuDocumentation" class="navbar-menu">
+  <div id="navMenuDocumentation" class="navbar-menu" [ngClass]="{'is-active': navToggle}">
     <div id="navbarStartOriginal" class="navbar-start bd-navbar-start bd-is-original">
 
       <!--Home-->
@@ -34,7 +39,7 @@
 
         <div class="navbar-dropdown bd-navbar-dropdown is-boxed">
           
-            <a class="navbar-item">
+            <a class="navbar-item" routerLink="/setlists">
                 <div>
                   <div class="icon-text">
                     <span class="icon has-text-extensions">
@@ -97,32 +102,18 @@
       </a>  
 
 
-    <!--News-->
+      <!--News-->
       <a class="navbar-item bd-navbar-item bd-navbar-item-bulma-book bd-navbar-item-more" routerLink="/news">
         <span class="icon has-text-bleeding">
           <em class="fas fa-rss"></em>
         </span>
         <span>News</span>
       </a>     
-
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-</div>
-
-
-<div class="navbar-end">
-      <div class="navbar-item bd-navbar-sponsor-button is-hidden-desktop">
-        <a class="button is-sponsor is-light">
-          <span class="icon is-small">
-            <em class="fas fa-thumbs-up"></em>
-          </span>
-        </a>
-      </div>
     </div>
-    <app-band-context></app-band-context>
-    <app-authentication-button></app-authentication-button>
+
+    <div class="navbar-end">
+      <app-band-context></app-band-context>
+      <app-authentication-button></app-authentication-button>
+    </div>
   </div>
 </nav>

@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from "@angular/core";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component } from "@angular/core";
 import { ICellRendererAngularComp } from "ag-grid-angular";
-import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid-community";
 
 @Component({
   selector: "btn-cell-renderer",
@@ -9,31 +9,26 @@ import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid-community"
     </div>
   `
 })
-export class ButtonCellRendererComponent implements ICellRendererAngularComp, OnDestroy {
+export class ButtonCellRendererComponent implements ICellRendererAngularComp {
 
   public params: any;
 
-  constructor() {}
-
-  refresh(params: ICellRendererParams): boolean {
+  refresh(): boolean {
       //throw new Error("Method not implemented.");
       return true;
   }
-  afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
+  afterGuiAttached?(): void {
       //throw new Error("Method not implemented.");
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   agInit(params: any): void {
         this.params = params;
   }
 
-  btnClickedHandler() {
+  btnClickedHandler(): void {
       //send the entire row to the function for clicked
     this.params.clicked(this.params.data);
   }
 
-  ngOnDestroy() {
-    // no need to remove the button click handler
-    // https://stackoverflow.com/questions/49083993/does-angular-automatically-remove-template-event-listeners
-  }
 }

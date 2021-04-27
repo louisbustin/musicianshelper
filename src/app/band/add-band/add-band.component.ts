@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBand } from 'src/app/models/band.model';
 import { BandService } from '../band.service';
@@ -8,7 +8,7 @@ import { BandService } from '../band.service';
   templateUrl: './add-band.component.html',
   styleUrls: ['./add-band.component.scss']
 })
-export class AddBandComponent implements OnInit {
+export class AddBandComponent {
 
   band: IBand = {
     _id: null,
@@ -17,9 +17,6 @@ export class AddBandComponent implements OnInit {
   };
 
   constructor(private router: Router, private bandService: BandService) { }
-
-  ngOnInit(): void {
-  }
 
   addBand(band: IBand): void {
     //here we will call the server to actually add this to the db
