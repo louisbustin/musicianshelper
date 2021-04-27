@@ -66,8 +66,10 @@ export class SetlistDetailsComponent {
   }
 
 
-  saveSetlistSongs(songs: IOrderedSong[]): void {
+  saveSetlistSongs(songs: IOrderedSong[], setlist: ISetlistWithSongs): void {
     console.log(songs);
-    //this.setlistService.editSetlist(setlist);
+
+    setlist.songs = songs;
+    this.setlistService.saveSetlistWithSongs(setlist);
   }
 }

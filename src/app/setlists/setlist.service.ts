@@ -5,6 +5,7 @@ import { BandService } from "../band/band.service";
 import { ISetlist } from "./models/setlist.model";
 import { WebRequestService } from "../shared/services/web-request.service";
 import { ISetlistWithSongs } from "./models/setlist-with-songs.model";
+import { ISetlistWithSongsPost } from './models/setlist-with-songs-post.model'
 
 @Injectable({
     providedIn: 'root'
@@ -72,6 +73,26 @@ export class SetlistService {
 
     editSetlist(list: ISetlist):void  {
         this.webRequestService.put(`setlists/${list._id}`, list).pipe(
+            catchError(err => { 
+                console.log(err);
+                return EMPTY;
+            })
+        ).subscribe(changedList => {
+            this.setlistToAdd$.next(changedList);
+        });
+    }
+
+    //this will only save the songs to a setlist, not a 
+    saveSetlistWithSongs(list: ISetlistWithSongs):void  {
+        const songs = list.songs.map(x => {
+            return { 'order': x.order, 'song': x._id}
+        });
+        const updateList = {
+            _id: list._id,
+            songs: songs
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.webRequestService.put<any>(`setlists/${list._id}`, updateList).pipe(
             catchError(err => { 
                 console.log(err);
                 return EMPTY;
