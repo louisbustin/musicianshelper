@@ -9,6 +9,7 @@ export interface IPost extends Document {
   postedAt: Date;
   body: string;
   teaser: string;
+  published: boolean;
 }
 
 const PostSchema: Schema = new Schema({
@@ -31,6 +32,7 @@ const PostSchema: Schema = new Schema({
     type: Date,
     default: Date.now,
     required: true,
+    indexed: true,
   },
   body: {
     type: String,
@@ -38,6 +40,11 @@ const PostSchema: Schema = new Schema({
   teaser: {
     type: String,
     length: 512,
+  },
+  published: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 

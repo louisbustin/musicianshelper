@@ -1,5 +1,5 @@
 
-<div class='container'>
-    This is the public home page. Welcome!
+<div class='container' *ngIf="homePageData$ | async as data">
+    <div class="content" [innerHTML]="data.body"></div>
 </div>
 

@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { appRoutes } from './app.routes';
-import { UserFormComponent } from './admin/users/user-form/user-form.component';
-import { UsersComponent } from './admin/users/users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment } from '../environments/environment';
@@ -18,9 +16,6 @@ import { NavigationModule } from './navigation/navigation.module';
 import { ButtonCellRendererComponent } from './shared/button-cell-renderer/button-cell-renderer.component';
 import { PublicComponent } from './public/public.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProfilePageComponent } from './public/pages/profile-page/profile-page.component';
-import { NewsComponent } from './public/news/news.component';
-import { AdminComponent } from './admin/admin.component';
 import { BandModule } from './band/band.module';
 
 @NgModule({
@@ -28,11 +23,6 @@ import { BandModule } from './band/band.module';
     AppComponent,
     PublicComponent,
     PageNotFoundComponent,
-    UsersComponent,
-    UserFormComponent,
-    ProfilePageComponent,
-    NewsComponent,
-    AdminComponent
   ],
   imports: [
     SharedModule,
@@ -61,6 +51,5 @@ import { BandModule } from './band/band.module';
   }
 ],
   bootstrap: [AppComponent],
-  entryComponents: [UsersComponent, UserFormComponent]
 })
 export class AppModule { }
