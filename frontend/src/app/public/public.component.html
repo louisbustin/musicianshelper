@@ -1,5 +1,8 @@
 
-<div class='container'>
-    This is the public home page. Welcome!
+<div class='container ml-3' *ngIf="homePageData$ | async as data">
+    <h1 class="title">{{data.title}}</h1>
+    <div class="content" [innerHTML]="data.body">
+    </div>
 </div>
+
 

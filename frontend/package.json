@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "deploy": "scp -r -i ../bracketweb.pem ./dist/musicianshelper/browser/* ubuntu@ec2-18-191-95-189.us-east-2.compute.amazonaws.com:/opt/frontend"
+    "deploy": "ng build --prod && scp -r -i ../../bracketweb.pem ./dist/musicianshelper/browser/* ubuntu@ec2-18-191-95-189.us-east-2.compute.amazonaws.com:/opt/frontend"
   },
   "private": true,
   "dependencies": {
