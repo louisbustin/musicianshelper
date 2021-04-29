@@ -17,12 +17,16 @@ import { ButtonCellRendererComponent } from './shared/button-cell-renderer/butto
 import { PublicComponent } from './public/public.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BandModule } from './band/band.module';
+import { PrivacyComponent } from './public/privacy/privacy.component';
+import { TosComponent } from './public/tos/tos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PublicComponent,
     PageNotFoundComponent,
+    PrivacyComponent,
+    TosComponent,
   ],
   imports: [
     SharedModule,
