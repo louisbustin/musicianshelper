@@ -1,0 +1,10 @@
+<h1 class="title">Musician Helper News</h1>
+<div class="columns is-multiline" *ngIf="topNewsItems$ | async as newsItems">
+    <div class="column is-one-third" *ngFor="let item of newsItems">
+        <div class="box">
+            <h1 class="title is-3"><a routerLink="/news/{{item._id}}">{{item.title}}</a></h1>
+            <h3 class="subtitle is-5" *ngIf="item.teaser">{{item.teaser}}</h3>
+            <span class="">{{item?.body?.substring(0, 100)}}<a routerLink="/news/{{item._id}}">...</a></span>
+        </div>
+    </div>
+</div>

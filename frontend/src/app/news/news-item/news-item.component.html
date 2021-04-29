@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="box" *ngIf="newsItem$ | async as item">
+        <h1 class="title is-3">{{item.title}}</h1>
+        <h3 class="subtitle is-5">{{item.teaser}}</h3>
+        <div class="content" [innerHTML]="item.body"></div>
+    </div>
+    <div>
+        <a routerLink="/news">Back to the news</a>
+    </div>
+</div>

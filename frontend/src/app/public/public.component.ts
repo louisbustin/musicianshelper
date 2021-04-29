@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
+import { INewsItem } from '../models/news-item.model';
+import { WebRequestService } from '../shared/services/web-request.service';
 
 @Component({
   selector: 'app-public',
@@ -8,7 +9,11 @@ import { AuthService } from '@auth0/auth0-angular';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PublicComponent {
+  private homePageId = "6089d163a3c0fc6fbb1b0b83";
 
-  constructor(private auth: AuthService) { }
+  homePageData$ = this.webRequestService.get<INewsItem>(`posts/${this.homePageId}`);
 
+  constructor(
+    private webRequestService: WebRequestService
+  ) { }
 }
