@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject, Observable, merge, EMPTY } from "rxjs";
-import { catchError, scan, shareReplay, tap } from "rxjs/operators";
+import { catchError, scan, shareReplay } from "rxjs/operators";
 import { IBand } from '../models/band.model'
 import { WebRequestService } from "../shared/services/web-request.service";
 
@@ -42,7 +42,6 @@ export class BandService {
     private bandSelectedSubject = new Subject<IBand>();
     selectedBand$ = this.bandSelectedSubject.asObservable()
     .pipe(
-        tap(band => console.log(`Selected band changed to: ${band._id} ${band.name}`)),
         shareReplay(1)
     );
 

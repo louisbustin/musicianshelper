@@ -39,7 +39,9 @@ import { BandModule } from './band/band.module';
       ...environment.auth,
       httpInterceptor: {
         allowedList: [
-          `${environment.API_URL}/*`,
+          `${environment.API_URL}/setlists*`,
+          `${environment.API_URL}/bands*`,
+          `${environment.API_URL}/songs*`,
         ],
       },
     })

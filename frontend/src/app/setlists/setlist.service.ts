@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { EMPTY, merge, Observable, Subject } from "rxjs";
-import { catchError, concatMap, scan, shareReplay, tap } from "rxjs/operators";
+import { catchError, concatMap, scan, shareReplay } from "rxjs/operators";
 import { BandService } from "../band/band.service";
 import { ISetlist } from "./models/setlist.model";
 import { WebRequestService } from "../shared/services/web-request.service";
@@ -63,8 +63,6 @@ export class SetlistService {
                 console.log(err);
                 return EMPTY;
             })
-        ).pipe(
-            tap(s => console.log(s))
         ).subscribe(addedList => {
             this.setlistToAdd$.next(addedList);
         });
