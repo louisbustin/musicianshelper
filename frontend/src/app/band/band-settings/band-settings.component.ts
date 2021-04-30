@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBand } from 'src/app/models/band.model';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
@@ -7,7 +7,8 @@ import { BandService } from '../band.service';
 @Component({
   selector: 'app-band-settings',
   templateUrl: './band-settings.component.html',
-  styleUrls: ['./band-settings.component.scss']
+  styleUrls: ['./band-settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BandSettingsComponent implements OnDestroy {
 

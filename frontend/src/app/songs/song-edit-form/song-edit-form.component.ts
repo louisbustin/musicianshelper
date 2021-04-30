@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ISong } from 'src/app/models/song.model';
 
 @Component({
   selector: 'app-song-edit-form',
   templateUrl: './song-edit-form.component.html',
-  styleUrls: ['./song-edit-form.component.scss']
+  styleUrls: ['./song-edit-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SongEditFormComponent {
 

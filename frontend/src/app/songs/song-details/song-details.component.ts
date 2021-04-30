@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { SongsService } from '../songs.service';
 @Component({
   selector: 'app-song-details',
   templateUrl: './song-details.component.html',
-  styleUrls: ['./song-details.component.scss']
+  styleUrls: ['./song-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SongDetailsComponent {
 

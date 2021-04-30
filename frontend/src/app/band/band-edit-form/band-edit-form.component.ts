@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBand } from 'src/app/models/band.model';
 
 @Component({
   selector: 'app-band-edit-form',
   templateUrl: './band-edit-form.component.html',
-  styleUrls: ['./band-edit-form.component.scss']
+  styleUrls: ['./band-edit-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BandEditFormComponent {
   @Input("band")

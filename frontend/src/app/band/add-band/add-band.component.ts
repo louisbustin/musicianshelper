@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IBand } from 'src/app/models/band.model';
 import { BandService } from '../band.service';
@@ -6,7 +6,8 @@ import { BandService } from '../band.service';
 @Component({
   selector: 'app-add-band',
   templateUrl: './add-band.component.html',
-  styleUrls: ['./add-band.component.scss']
+  styleUrls: ['./add-band.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddBandComponent {
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -9,7 +9,8 @@ import { SetlistService } from '../setlist.service';
 @Component({
   selector: 'app-setlist-list',
   templateUrl: './setlist-list.component.html',
-  styleUrls: ['./setlist-list.component.scss']
+  styleUrls: ['./setlist-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetlistListComponent {
 

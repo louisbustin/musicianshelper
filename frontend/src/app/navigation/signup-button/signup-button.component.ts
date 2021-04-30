@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-signup-button',
   templateUrl: './signup-button.component.html',
-  styleUrls: ['./signup-button.component.scss']
+  styleUrls: ['./signup-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignupButtonComponent {
   
