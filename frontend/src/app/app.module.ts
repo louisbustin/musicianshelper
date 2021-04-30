@@ -35,7 +35,8 @@ import { TosComponent } from './public/tos/tos.component';
     BrowserAnimationsModule,
     BrowserModule,
     RouterModule.forRoot(
-      appRoutes
+      appRoutes,
+      {scrollPositionRestoration: 'enabled'}
       ),
     BandModule,
     AgGridModule.withComponents([ButtonCellRendererComponent]),
