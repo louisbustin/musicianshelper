@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, mergeMap, shareReplay } from 'rxjs/operators';
@@ -12,7 +12,8 @@ import { IOrderedSong } from '../models/ordered-song.model';
 @Component({
   selector: 'app-setlist-details',
   templateUrl: './setlist-details.component.html',
-  styleUrls: ['./setlist-details.component.scss']
+  styleUrls: ['./setlist-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetlistDetailsComponent {
 

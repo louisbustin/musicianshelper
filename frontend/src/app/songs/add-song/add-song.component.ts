@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BandService } from 'src/app/band/band.service';
@@ -9,7 +9,8 @@ import { SongsService } from '../songs.service';
 @Component({
   selector: 'app-add-song',
   templateUrl: './add-song.component.html',
-  styleUrls: ['./add-song.component.scss']
+  styleUrls: ['./add-song.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSongComponent implements OnInit, OnDestroy {
 

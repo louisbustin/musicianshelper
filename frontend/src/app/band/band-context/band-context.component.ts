@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';
@@ -9,7 +9,8 @@ import { BandService } from '../band.service';
 @Component({
     selector: 'app-band-context',
     templateUrl: './band-context.component.html',
-    styleUrls: ['./band-context.component.scss']
+    styleUrls: ['./band-context.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BandContextComponent implements OnInit, OnDestroy {
     private pageloaderActiveSubject$ = new BehaviorSubject(false);

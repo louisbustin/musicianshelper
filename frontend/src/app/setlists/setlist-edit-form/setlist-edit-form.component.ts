@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ISetlist } from '../models/setlist.model';
 
 @Component({
   selector: 'app-setlist-edit-form',
   templateUrl: './setlist-edit-form.component.html',
-  styleUrls: ['./setlist-edit-form.component.scss']
+  styleUrls: ['./setlist-edit-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SetlistEditFormComponent {
 

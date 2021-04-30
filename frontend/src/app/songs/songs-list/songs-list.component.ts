@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { BandService } from 'src/app/band/band.service';
@@ -8,7 +8,8 @@ import { SongsService } from '../songs.service';
 @Component({
   selector: 'app-songs-list',
   templateUrl: './songs-list.component.html',
-  styleUrls: ['./songs-list.component.scss']
+  styleUrls: ['./songs-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SongsListComponent {
 

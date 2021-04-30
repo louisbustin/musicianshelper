@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -10,7 +10,8 @@ import { SetlistService } from '../setlist.service';
 @Component({
   selector: 'app-add-setlist',
   templateUrl: './add-setlist.component.html',
-  styleUrls: ['./add-setlist.component.scss']
+  styleUrls: ['./add-setlist.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddSetlistComponent implements OnInit {
 
