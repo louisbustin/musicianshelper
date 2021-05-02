@@ -2,9 +2,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
+import { Worker } from 'bullmq';
 import logger from './logger';
 
 import { router } from './routes/index';
+import emailSenderWorker from './workers/email-sender.worker';
 
 dotenv.config();
 
@@ -28,6 +30,17 @@ app.use((err:any, req: any, res: any) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('invalid token');
   }
+});
+
+// setup workers
+// Create a new connection in every instance
+// eslint-disable-next-line no-unused-vars
+const myWorker = new Worker('emails', emailSenderWorker, {
+  connection: {
+    host: 'redis-12534.c232.us-east-1-2.ec2.cloud.redislabs.com',
+    port: 12534,
+    password: process.env.redispass,
+  },
 });
 
 const port = process.env.PORT || 3000;
