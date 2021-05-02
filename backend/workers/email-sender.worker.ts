@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import logger from '../logger';
+import Email from '../models/email.model';
 
 async function emailSenderWorker(job: any) {
   const transporter = nodemailer.createTransport({
@@ -12,20 +13,28 @@ async function emailSenderWorker(job: any) {
     },
   });
 
-  const mailOptions = {
-    from: job.data.from,
-    to: job.data.to,
-    subject: job.data.subject,
-    text: job.data.body,
-  };
-
-  transporter.sendMail(mailOptions).then((info) => {
-    logger.info(info);
+  transporter.sendMail(job.data).then((info) => {
+    // log to the db
+    const emailInfo = {
+      error: '',
+      data: job.data,
+      successInfo: info,
+    };
+    Email.create(emailInfo).catch((err) => {
+      logger.error(`error logging email to db. Email WAS SUCCESSFULLY SENT, only logging to db failed: ${err}`);
+    });
   }).catch((err) => {
     logger.error(`send email failed: ${err}`);
+    // log to the db
+    const emailInfo = {
+      error: err,
+      data: job.data,
+      successInfo: null,
+    };
+    Email.create(emailInfo).catch((e) => {
+      logger.error(`error logging email to db. Email failed to send AND logging to db failed: ${e}`);
+    });
   });
-
-  logger.info(JSON.stringify(job.data));
 }
 
 export default emailSenderWorker;

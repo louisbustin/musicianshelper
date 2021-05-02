@@ -16,7 +16,7 @@ export default class EmailController {
     if (!request.body.from) {
       errors.push('must have from address');
     }
-    if (!request.body.body) {
+    if (!request.body.text) {
       errors.push('must have body');
     }
     if (errors.length > 0) {
