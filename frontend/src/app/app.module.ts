@@ -47,6 +47,7 @@ import { TosComponent } from './public/tos/tos.component';
           `${environment.API_URL}/setlists*`,
           `${environment.API_URL}/bands*`,
           `${environment.API_URL}/songs*`,
+          `${environment.API_URL}/profiles*`,
         ],
       },
     })

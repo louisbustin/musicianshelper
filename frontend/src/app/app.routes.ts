@@ -16,8 +16,14 @@ export const appRoutes: Routes = [
       canActivate: [AuthGuard],
       loadChildren: () => import('./songs/songs.module').then(m => m.SongsModule)
     },
-    { path: 'news', 
+    { 
+      path: 'news', 
       loadChildren: () => import('./news/news.module').then(m => m.NewsModule)
+    },
+    {
+      path: 'users',
+      canActivate: [AuthGuard],
+      loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
     },
     { path: 'privacy', component: PrivacyComponent},
     { path: 'tos', component: TosComponent},

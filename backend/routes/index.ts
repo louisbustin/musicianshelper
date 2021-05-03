@@ -5,6 +5,7 @@ import setlistRoutes from './setlists.routes';
 import songRoutes from './songs.routes';
 import postRoutes from './posts.routes';
 import emailRoutes from './email.routes';
+import profileRoutes from './profiles.routes';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.use('/posts', postRoutes);
 router.use('/setlists', setlistRoutes);
 router.use('/songs', songRoutes);
 router.use('/email', emailRoutes);
+router.use('/profiles', profileRoutes);
 
 // eslint-disable-next-line import/prefer-default-export
 export { router };
