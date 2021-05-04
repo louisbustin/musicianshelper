@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
-import { UsersService } from '../users.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
-  userProfile$ = this.userService.userProfile$;
+  constructor() { }
 
-  constructor(
-    private userService: UsersService
-  ) { }
+  ngOnInit(): void {
+  }
+
 }

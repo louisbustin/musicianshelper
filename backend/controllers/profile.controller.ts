@@ -97,4 +97,30 @@ export default class ProfileController {
       return response.status(500).send();
     });
   }
+
+  static uploadProfilePic = (request: any, response: Response) => {
+    // request.file should have the file in there
+    if (request.file) {
+      const updatedPic = {
+        profilePic: {
+          data: request.file.buffer,
+          contentType: request.file.mimetype,
+        },
+      };
+      Profile.findOneAndUpdate({ owner: request.user.sub }, updatedPic, { new: true })
+        .then((profile) => {
+          if (profile) {
+            return response.status(200).json(profile);
+          }
+          return response.status(404).send();
+        })
+        .catch((err) => {
+          logger.error(`unable to update profile pic: ${err}`);
+          return response.status(500).send();
+        });
+    } else {
+      logger.error('unable to update profile pic: no upload found');
+      return response.status(500).send();
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { combineLatest, EMPTY, Observable } from 'rxjs';
-import { catchError, map, mergeMap, take } from 'rxjs/operators';
+import { combineLatest, EMPTY, merge, Observable, Subject } from 'rxjs';
+import { catchError, map, mergeMap, shareReplay, take } from 'rxjs/operators';
 import { WebRequestService } from '../shared/services/web-request.service';
 import IProfileWithAuthModel from './models/profile-with-auth-model.model';
 import IProfile from './models/profile.model';
@@ -11,10 +11,13 @@ import IProfile from './models/profile.model';
 })
 export class UsersService {
 
+    private updatedProfileSubject$ = new Subject<IProfile>();
+    updatedProfile$ = this.updatedProfileSubject$.asObservable();
+
     // combine user from Auth0 with the profile from the database
     userProfile$ = combineLatest([
         this.auth.user$,
-        this.getProfile()
+        merge(this.getProfile(), this.updatedProfile$)
     ]).pipe(
         map(([authProfile, dbProfile]) => {
             const prof: IProfileWithAuthModel = {
@@ -22,7 +25,8 @@ export class UsersService {
                 ...dbProfile
             }
             return prof;
-        })
+        }),
+        shareReplay(1),
     );
 
     constructor(
@@ -75,5 +79,21 @@ export class UsersService {
             })
         )
         .toPromise();
+    }
+
+    uploadProfilePic(file: File): void {
+        if (file) {
+            const formData = new FormData();
+            formData.append("profilepic", file);
+            const upload$ = this.webRequestService.postFormData<IProfile>(`profiles/profilepic`, formData);
+            upload$.subscribe(p => this.updatedProfileSubject$.next(p));
+        }
+    }
+
+    updateProfile(profile: IProfileWithAuthModel): void {
+        this.webRequestService.put(`profiles/${profile._id}`, profile)
+        .subscribe(p => {
+            this.updatedProfileSubject$.next(p);
+        });
     }
 }

@@ -4,7 +4,9 @@ export default interface IProfile {
     email: string;
     useAuthProfilePic: boolean;
     profilePic: {
-        data: [];
+        data: {
+            data: []
+        };
         contentType: string;
     };
     owner: string;

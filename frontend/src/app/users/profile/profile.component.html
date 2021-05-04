@@ -1,38 +1,26 @@
-<ng-container *ngIf="userProfile$ | async as user">
-    <figure class="image is-128x128">
-        <img class="is-rounded" src="{{user.authModel.picture}}" *ngIf="user.useAuthProfilePic">
-    </figure>
-
-    <div class="field">
-        <label class="label">Name</label>
-        <div class="control has-icons-left">
-          <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-          <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-check"></i>
-          </span>
+<div class="columns">
+    <div class="column is-2">
+        <nav class="panel is-link">
+            <p class="panel-heading">
+                Profile
+            </p>
+            <a class="panel-block" routerLink="/users/profile/basic" routerLinkActive="is-active">
+                <span class="panel-icon">
+                    <i class="fas fa-user-circle" aria-hidden="true"></i>
+                </span>
+                Basic Settings
+            </a>
+            <a class="panel-block" routerLink="/users/profile/music" routerLinkActive="is-active">
+                <span class="panel-icon">
+                    <i class="fas fa-music" aria-hidden="true"></i>
+                </span>
+                Music Related
+            </a>
+        </nav>
+    </div>
+    <div class="column is-10">
+        <div class="mr-3">
+            <router-outlet></router-outlet>
         </div>
-        <p class="help is-success">This username is available</p>
-      </div>
-      
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control has-icons-left has-icons-right">
-          <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
-          </span>
-        </div>
-        <p class="help is-danger">This email is invalid</p>
-      </div>
-
-    <ul>    
-        <li>{{ user.name }}</li>
-        <li>{{ user.email }}</li>
-    </ul>
-</ng-container>
+    </div>
+</div>

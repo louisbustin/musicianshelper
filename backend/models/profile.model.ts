@@ -27,6 +27,10 @@ const ProfileSchema: Schema = new Schema({
     required: true,
     default: true,
   },
+  profilePic: {
+    data: Buffer,
+    contentType: String,
+  },
   owner: {
     type: String,
     required: true,
