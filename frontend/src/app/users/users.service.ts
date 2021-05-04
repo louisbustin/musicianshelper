@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
-import { catchError, map, take, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, take } from 'rxjs/operators';
 import { WebRequestService } from '../shared/services/web-request.service';
 import IProfileWithAuthModel from './models/profile-with-auth-model.model';
 import IProfile from './models/profile.model';
@@ -32,12 +32,12 @@ export class UsersService {
 
     getProfile(): Observable<IProfile> {
         return this.webRequestService.get<IProfile>(`profiles`).pipe(
-            tap(x => console.log(x)),
             catchError(err => {
                 if (err.status === 404) {
                     // this user did not have a profile record already. create one
-                    this.auth.user$.pipe(
-                        map(p => {
+                    return this.auth.user$.pipe(
+                        take(1),
+                        mergeMap(p => {
                             console.log('mapping');
                             const profile: IProfile = {
                                 _id: undefined,
@@ -50,11 +50,6 @@ export class UsersService {
                             return this.webRequestService.post('profiles', profile);
                         })
                     )
-
-
-                    //this.getProfileFromCurrentUser().then(p => {
-
-                    //})
                 } else {
                     console.log(err);
                     return EMPTY;

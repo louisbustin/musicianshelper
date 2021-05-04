@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { tap } from 'rxjs/operators';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -9,9 +8,7 @@ import { UsersService } from '../users.service';
 })
 export class ProfileComponent {
 
-  userProfile$ = this.userService.userProfile$.pipe(
-    tap((x) => console.log(x)),   
-  );
+  userProfile$ = this.userService.userProfile$;
 
   constructor(
     private userService: UsersService
