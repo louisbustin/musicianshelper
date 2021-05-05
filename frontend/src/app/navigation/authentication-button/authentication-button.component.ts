@@ -11,4 +11,7 @@ export class AuthenticationButtonComponent {
 
   constructor(public auth: AuthService) {}
 
+  blurMenu(event: { target: { blur: () => void; }; }): void {
+    event.target.blur();
+  }
 }
