@@ -1,4 +1,4 @@
-<aside class="menu">
+<aside class="menu is-hidden-touch">
   <p class="menu-label">
     General
   </p>
@@ -17,12 +17,10 @@
         <ul>
           <li><a routerLink='/band/members' routerLinkActive='is-active'>Members</a></li>
           <li><a routerLink='/band/settings' routerLinkActive='is-active'>Band Settings</a></li>
-          <li><a>Add a member</a></li>
         </ul>
       </li>
       <li><a routerLink='/setlists' routerLinkActive='is-active'>Setlists</a></li>
       <li><a routerLink='/songs' routerLinkActive='is-active'>Songs</a></li>
-      <li><a>Invitations</a></li>
     </ul>
   </span>
   <p class="menu-label">
@@ -30,6 +28,6 @@
   </p>
   <ul class="menu-list">
     <li><a routerLink='/users/profile' routerLinkActive="is-active">Edit Profile</a></li>
-    <li><a>Find Members</a></li>
+    <li><a routerLink='/users/search' routerLinkActive="is-active">Find Musicians</a></li>
   </ul>
 </aside>
