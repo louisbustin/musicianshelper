@@ -8,6 +8,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ListPickerComponent } from './list-picker/list-picker.component';
 import { OrderByPipe } from './order-by/order-by.pipe';
+import { ProfileImageComponent } from './profile-image/profile-image.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { OrderByPipe } from './order-by/order-by.pipe';
     NotificationComponent,
     ConfirmModalComponent,
     ListPickerComponent,
-    OrderByPipe
+    OrderByPipe,
+    ProfileImageComponent
   ],
   imports: [
     CommonModule
@@ -29,7 +31,8 @@ import { OrderByPipe } from './order-by/order-by.pipe';
     NotificationComponent,
     ConfirmModalComponent,
     ListPickerComponent,
-    OrderByPipe
+    OrderByPipe,
+    ProfileImageComponent
   ]
 })
 export class SharedModule { }

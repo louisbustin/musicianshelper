@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { combineLatest, EMPTY, merge, Observable, Subject } from 'rxjs';
 import { catchError, map, mergeMap, shareReplay, take } from 'rxjs/operators';
-import { WebRequestService } from '../shared/services/web-request.service';
-import IProfileWithAuthModel from './models/profile-with-auth-model.model';
-import IProfile from './models/profile.model';
+import { WebRequestService } from './web-request.service';
+import IProfileWithAuthModel from '../../users/models/profile-with-auth-model.model';
+import IProfile from '../../users/models/profile.model';
 
 @Injectable({
     providedIn: 'root'
