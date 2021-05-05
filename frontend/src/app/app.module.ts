@@ -14,11 +14,12 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { SharedModule } from './shared/shared.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { ButtonCellRendererComponent } from './shared/button-cell-renderer/button-cell-renderer.component';
-import { PublicComponent } from './public/public.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PublicComponent } from './public/public/public.component';
+import { PageNotFoundComponent } from './public/page-not-found/page-not-found.component';
 import { BandModule } from './band/band.module';
 import { PrivacyComponent } from './public/privacy/privacy.component';
 import { TosComponent } from './public/tos/tos.component';
+import { ContactUsComponent } from './public/contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TosComponent } from './public/tos/tos.component';
     PageNotFoundComponent,
     PrivacyComponent,
     TosComponent,
+    ContactUsComponent,
   ],
   imports: [
     SharedModule,
@@ -48,6 +50,7 @@ import { TosComponent } from './public/tos/tos.component';
           `${environment.API_URL}/bands*`,
           `${environment.API_URL}/songs*`,
           `${environment.API_URL}/profiles*`,
+          `${environment.API_URL}/email*`,
         ],
       },
     })

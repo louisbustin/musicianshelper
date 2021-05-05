@@ -1,9 +1,10 @@
 import { Routes } from "@angular/router";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { PublicComponent } from "./public/public.component";
+import { PageNotFoundComponent } from "./public/page-not-found/page-not-found.component";
+import { PublicComponent } from "./public/public/public.component";
 import { AuthGuard } from '@auth0/auth0-angular';
 import { PrivacyComponent } from './public/privacy/privacy.component';
 import { TosComponent } from './public/tos/tos.component';
+import { ContactUsComponent } from './public/contact-us/contact-us.component';
 
 export const appRoutes: Routes = [
     {
@@ -27,6 +28,7 @@ export const appRoutes: Routes = [
     },
     { path: 'privacy', component: PrivacyComponent},
     { path: 'tos', component: TosComponent},
+    { path: 'contactus', component: ContactUsComponent },
     { path: '', component: PublicComponent },
     { path: '**', component: PageNotFoundComponent }
   ];
