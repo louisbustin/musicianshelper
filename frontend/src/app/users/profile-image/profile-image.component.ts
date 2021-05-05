@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
 import IProfileWithAuthModel from '../models/profile-with-auth-model.model';
@@ -13,7 +13,8 @@ import { UsersService } from '../users.service';
 @Component({
   selector: 'app-profile-image',
   templateUrl: './profile-image.component.html',
-  styleUrls: ['./profile-image.component.scss']
+  styleUrls: ['./profile-image.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileImageComponent {
   imageBase64: SafeUrl;
@@ -23,11 +24,13 @@ export class ProfileImageComponent {
 
   profile$ = this.userService.userProfile$.pipe(
     tap((x: IProfileWithAuthModel) => {
-      const STRING_CHAR = x.profilePic.data.data.reduce((data, byte)=> {
-        return data + String.fromCharCode(byte);
-      }, '');
-      const base64String = btoa(STRING_CHAR);
-      this.imageBase64 = this.domSanitizer.bypassSecurityTrustUrl(`data:${x.profilePic.contentType};base64, ${base64String}`);
+      if (x.profilePic) {
+        const STRING_CHAR = x.profilePic.data.data.reduce((data, byte)=> {
+          return data + String.fromCharCode(byte);
+        }, '');
+        const base64String = btoa(STRING_CHAR);
+        this.imageBase64 = this.domSanitizer.bypassSecurityTrustUrl(`data:${x.profilePic.contentType};base64, ${base64String}`);
+      }
     }));
 
   constructor(

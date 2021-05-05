@@ -42,7 +42,6 @@ export class UsersService {
                     return this.auth.user$.pipe(
                         take(1),
                         mergeMap(p => {
-                            console.log('mapping');
                             const profile: IProfile = {
                                 _id: undefined,
                                 name: p.name,
