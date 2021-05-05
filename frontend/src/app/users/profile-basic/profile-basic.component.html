@@ -1,0 +1,51 @@
+<ng-container *ngIf="userProfile$ | async as user">
+    <div class="container has-text-centered">
+      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload
+        accept=".png,.jpg,.jpeg,.gif,image/png,image/jpeg,image/gif">
+      <div class="file-upload">
+        <figure class="image is-128x128 is-inline-block is-clickable" (click)="fileUpload.click()">
+          <app-profile-image cssClass="is-rounded"></app-profile-image>
+        </figure>
+      </div>
+    </div>
+    <form class="box" #form="ngForm">
+      <div class="field">
+          <label class="label">Name</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="Display Name" [(ngModel)]="user.name" 
+              required #name="ngModel" name="name">
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+            <span class="icon is-small is-right" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+            A display name is required
+          </p>
+        </div>
+        
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="Email" [(ngModel)]="user.email" required 
+              #email="ngModel" email name="email">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <p class="help is-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+            This email is invalid
+          </p>
+      </div>
+      <div class="buttons">
+        <button class="button is-link" (click)="saveClick(user)">Save</button>
+        <button class="button">Cancel</button>
+      </div>
+      <app-notification contents="Profile saved successfully." [closeInSeconds]="3" #notificationBox></app-notification>
+    </form>
+</ng-container>

@@ -24,6 +24,9 @@ export class WebRequestService {
   post<T>(uri: string, body: T): Observable<T> {
     return this.http.post<T>(`${this.API_URL}/${uri}`, body);
   }
+  postFormData<T>(uri: string, body: FormData): Observable<T> {
+    return this.http.post<T>(`${this.API_URL}/${uri}`, body);
+  }
   patch<T>(uri: string, body: T): Observable<T> {
     return this.http.patch<T>(`${this.API_URL}/${uri}`, body);
   }

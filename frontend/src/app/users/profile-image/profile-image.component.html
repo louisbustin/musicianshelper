@@ -1,0 +1,4 @@
+<ng-container *ngIf="profile$ | async as user">
+    <img class="{{cssClass}}" src="{{user.authModel.picture}}" *ngIf="!user.profilePic">
+    <img class="{{cssClass}}" [src]="imageBase64" *ngIf="user.profilePic">
+</ng-container>
