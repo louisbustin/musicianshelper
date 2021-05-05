@@ -17,6 +17,9 @@ export class NotificationComponent {
   @Input()
   closeInSeconds: number;
 
+  @Input()
+  cssClass = 'is-info';
+  
   close(): void {
     this.showSubject$.next(false);
   }

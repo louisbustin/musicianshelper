@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="notification is-primary">
+        Do you have any feedback or suggestions? Drop us a line! Use the form below to send a message to us at the Musican Helper.
+    </div>
+    <form class="box" #form="ngForm">
+        <div class="field">
+            <label class="label">Your Name</label>
+            <div class="control has-icons-right has-icons-left">
+                <input class="input" type="text" placeholder="Name" required #name="ngModel" id="name" name="name" [(ngModel)]="emailName">
+                <span class="icon is-small is-left">
+                    <em class="fas fa-users"></em>
+                </span>
+                <span class="icon is-small is-right" *ngIf="name.invalid && (name.dirty || name.touched)">
+                    <em class="fas fa-exclamation-triangle"></em>
+                </span>
+            </div>
+            <p class="help is-danger" *ngIf="name.invalid && (name.dirty || name.touched)">Name is required</p>
+        </div>
+
+        <div class="field">
+            <label class="label">Your Email</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="email" placeholder="Email Address" value="hello@" required #fromemail="ngModel"
+                    email id="email" name="email" [(ngModel)]="emailEmail">
+                <span class="icon is-small is-left">
+                    <em class="fas fa-envelope"></em>
+                </span>
+                <span class="icon is-small is-right" *ngIf="fromemail.invalid && (fromemail.dirty || fromemail.touched)">
+                    <em class="fas fa-exclamation-triangle"></em>
+                </span>
+            </div>
+            <p class="help is-danger" *ngIf="fromemail.invalid && (fromemail.dirty || fromemail.touched)">This email is invalid</p>
+        </div>
+
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control ">
+                <textarea class="textarea" required placeholder="Message" id="message" name="message" [(ngModel)]="emailBody" #message="ngModel"></textarea>
+            </div>
+            <p class="help is-danger" *ngIf="message.invalid && (message.dirty || message.touched)">Message is required</p>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" (click)="sendEmail()" [disabled]="form.invalid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <app-notification contents="Message sent successfully." [closeInSeconds]="3" #notificationBox></app-notification>
+    <app-notification contents="Message was not sent successfully Please contact admin@themusicianfinder.com for more info." [closeInSeconds]="0" cssClass="is-danger" #errorBox></app-notification>
+</div>
+

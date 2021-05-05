@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { INewsItem } from '../models/news-item.model';
-import { WebRequestService } from '../shared/services/web-request.service';
+import { INewsItem } from '../../models/news-item.model';
+import { WebRequestService } from '../../shared/services/web-request.service';
 
 @Component({
   selector: 'app-public',

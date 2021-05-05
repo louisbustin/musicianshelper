@@ -1,4 +1,4 @@
-<div class="notification is-info mb-5" *ngIf="showNotification$ | async">
+<div class="notification mb-5 {{cssClass}}" *ngIf="showNotification$ | async">
     <button class="delete" (click)="close()"></button>
     {{contents}}
 </div>
