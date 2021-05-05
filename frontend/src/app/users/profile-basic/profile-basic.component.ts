@@ -3,7 +3,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
-import { UsersService } from '../users.service';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
   selector: 'app-profile',

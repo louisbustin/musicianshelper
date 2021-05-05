@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -9,6 +9,9 @@ import { AuthService } from '@auth0/auth0-angular';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogoutButtonComponent {
+  @Input()
+  cssClass = "";
+
   constructor(
     public auth: AuthService,
     @Inject(DOCUMENT) private doc: Document

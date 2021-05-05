@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { tap } from 'rxjs/operators';
-import IProfileWithAuthModel from '../models/profile-with-auth-model.model';
-import { UsersService } from '../users.service';
+import IProfileWithAuthModel from '../../users/models/profile-with-auth-model.model';
+import { UsersService } from '../services/users.service';
 
 /**
  * This component will display an image tag (<img...>) with the current profile picture.

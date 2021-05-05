@@ -1,5 +1,24 @@
 <app-login-button *ngIf="(auth.isAuthenticated$ | async) === false">
-</app-login-button>
+</app-login-button>   
+    
+<div class="navbar-item has-dropdown is-hoverable" *ngIf="auth.isAuthenticated$ | async">
+    <a class="navbar-link">
+        <app-profile-image cssClass="is-rounded"></app-profile-image>
+    </a>
 
-<app-logout-button *ngIf="auth.isAuthenticated$ | async">
-</app-logout-button>
+    <div class="navbar-dropdown">
+        <a class="navbar-item" routerLink="/users/profile/basic" (click)="blurMenu($event);">
+            Profile
+        </a>
+
+        <app-logout-button cssClass="navbar-item" *ngIf="auth.isAuthenticated$ | async">
+        </app-logout-button>
+
+    </div>
+</div>
+
+
+
+
+
+
