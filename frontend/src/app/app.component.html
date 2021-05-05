@@ -3,10 +3,10 @@
   <navigation-top-nav></navigation-top-nav>
   
   <div class="columns">
-    <div class="column is-2" *ngIf="auth.isAuthenticated$ | async">
+    <div class="column is-2 is-hidden-touch" *ngIf="auth.isAuthenticated$ | async">
       <navigation-left-nav></navigation-left-nav>
     </div>
-    <div class='column is-10'>
+    <div class='column is-10 ml-3'>
       <router-outlet></router-outlet>
     </div>
   </div>

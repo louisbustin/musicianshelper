@@ -4,12 +4,14 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ProfileMusicComponent } from './profile-music/profile-music.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileSearchComponent } from './profile-search/profile-search.component';
 
 @NgModule({
   declarations: [
     ProfileBasicComponent,
     ProfileMusicComponent,
     ProfileComponent,
+    ProfileSearchComponent,
   ],
   imports: [
     SharedModule,
@@ -19,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
         { path: 'basic', component: ProfileBasicComponent },
         { path: 'music', component: ProfileMusicComponent },
       ]},
+      { path: 'search', component: ProfileSearchComponent },
     ]),
   ],
   exports: [
