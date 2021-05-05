@@ -36,6 +36,6 @@ jobs:
       with:
         name: backend
         path: |
-          backend
+          backend/build
    
       
