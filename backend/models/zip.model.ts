@@ -15,10 +15,6 @@ export interface IZip extends Document {
   density: number;
   countyFips: number;
   countyName: string;
-  countyWeights: [{
-    countyFip: number;
-    percent: number;
-  }]
   countyNames: [string];
   countyFipsAll: [number];
   imprecise: boolean;
@@ -71,14 +67,6 @@ const ZipSchema: Schema = new Schema({
   countyName: {
     type: String,
   },
-  countyWeights: [{
-    countyFip: {
-      type: Number,
-    },
-    percent: {
-      type: Number,
-    },
-  }],
   countyNames: [{
     type: String,
   }],
