@@ -7,6 +7,7 @@ import logger from './logger';
 
 import { router } from './routes/index';
 import emailSenderWorker from './workers/email-sender.worker';
+import updateZips from './workers/update-zips.worker';
 
 dotenv.config();
 
@@ -42,6 +43,8 @@ const myWorker = new Worker('emails', emailSenderWorker, {
     password: process.env.redispass,
   },
 });
+
+updateZips();
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
