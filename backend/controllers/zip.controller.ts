@@ -17,6 +17,14 @@ export default class ZipController {
     if (errors.length > 0) {
       return response.status(400).json(errors);
     }
-    
+    Zip.find({ zip: request.parmas.zip }).then((zip) => {
+      if (zip) {
+        return response.status(200).json(zip);
+      }
+      return response.status(404).send();
+    }).catch((err) => {
+      logger.error(`unable to get zip details: ${err}`);
+      return response.status(500).send();
+    });
   }
 }
