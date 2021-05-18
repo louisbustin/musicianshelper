@@ -1,0 +1,17 @@
+<div class="dropdown is-active">
+    <div class="dropdown-trigger">
+        <div class="field">
+            <p class="control is-expanded has-icons-right">
+                <input class="input" type="search" placeholder="Zip Code" (change)="onChange($event)" />
+                <span class="icon is-small is-right"><i class="fas fa-search"></i></span>
+            </p>
+        </div>
+    </div>
+    <ng-container *ngIf="zips$ | async as zips>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu" *ngIf="zips.length > 0">
+            <div class="dropdown-content">
+                <a class="dropdown-item" *ngFor="let zip of zips" (click)="selectZip(zip);">{{zip.zip}} - {{zip.city}}, {{zip.stateId}}</a>
+            </div>
+        </div>
+    </ng-container>
+</div>
