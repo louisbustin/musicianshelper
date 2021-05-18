@@ -1,4 +1,38 @@
 <div class="field">
     <label class="label">Zip Code</label>
-    <app-zip-dropdown selectedZip="" (zipChanged)="zipChanged($event);"></app-zip-dropdown>
+    <app-zip-dropdown selectedZip="{{selectedZip}}" (zipChanged)="zipChanged($event);"></app-zip-dropdown>
+</div>
+<div class="field">
+  <label class="label">Distance</label>
+  <div class="select">
+    <select [(ngModel)]="searchRadius">
+      <option value="10">10 miles</option>
+      <option value="25">25 miles</option>
+      <option value="50">50 miles</option>
+      <option value="100">100 miles</option>
+      <option value="200">200 miles</option>
+      <option value="300">300 miles</option>
+      <option value="400">400 miles</option>
+      <option value="500">500 miles</option>
+    </select>
   </div>
+</div>
+<div class="buttons">
+  <button class="button is-link" (click)="searchClick()" [disabled]="!selectedZip ? true : false">Search</button>
+</div>
+
+<div>
+  <table class="table" *ngIf="searchResults$ | async as results">
+    <tr *ngFor="let u of results">
+      <td>
+        {{u.firstName}}
+      </td>
+      <td>
+        {{u.lastName}}
+      </td>
+      <td>
+        {{u.email}}
+      </td>
+    </tr>
+  </table>
+</div>

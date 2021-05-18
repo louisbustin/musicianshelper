@@ -15,6 +15,16 @@ export class UsersService {
     private searchZipSubject$ = new Subject<string>();
     searchZip$ = this.searchZipSubject$.asObservable();
 
+    private searchRadiusSubject$ = new Subject<number>();
+    searchRadius$ = this.searchRadiusSubject$.asObservable();
+
+    searchResults$ = combineLatest([this.searchZip$, this.searchRadius$])
+    .pipe(
+        mergeMap(([searchZip, searchRadius]) => {
+            return this.webRequestService.get<IProfile>(`profiles/searchbydistance/${searchZip}/${searchRadius}`);
+        })
+    )
+
     //current user profile info
     private updatedProfileSubject$ = new Subject<IProfile>();
     updatedProfile$ = this.updatedProfileSubject$.asObservable();
@@ -101,5 +111,10 @@ export class UsersService {
         .subscribe(p => {
             this.updatedProfileSubject$.next(p);
         });
+    }
+
+    searchProfiles(zip: string, radius: number): void {
+        this.searchZipSubject$.next(zip);
+        this.searchRadiusSubject$.next(radius);
     }
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
   selector: 'app-profile-search',
@@ -8,7 +9,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class ProfileSearchComponent {
 
+  selectedZip: string;
+  searchRadius = 10;
+
+  searchResults$ = this.userService.searchResults$;
+
+  constructor(
+    private userService: UsersService
+  ) { }
+
   zipChanged(zipCode: string): void {
-    console.log(zipCode);
+    this.selectedZip = zipCode;
+  }
+
+  searchClick(): void {
+    this.userService.searchProfiles(this.selectedZip, this.searchRadius);
   }
 }
