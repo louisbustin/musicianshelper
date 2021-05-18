@@ -11,6 +11,11 @@ import IProfile from '../../users/models/profile.model';
 })
 export class UsersService {
 
+    // profile search results
+    private searchZipSubject$ = new Subject<string>();
+    searchZip$ = this.searchZipSubject$.asObservable();
+
+    //current user profile info
     private updatedProfileSubject$ = new Subject<IProfile>();
     updatedProfile$ = this.updatedProfileSubject$.asObservable();
 
