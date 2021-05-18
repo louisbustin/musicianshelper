@@ -35,6 +35,7 @@ export class ProfileBasicComponent {
   saveClick(user: any): void {
     //remove the profilepic, do not need it going up
     user.profilePic = undefined;
+    console.log(user);
     this.userService.updateProfile(user);
     this.notify.open();
   }

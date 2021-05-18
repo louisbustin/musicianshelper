@@ -42,8 +42,10 @@
             This email is invalid
           </p>
       </div>
-
-      <app-zip-dropdown></app-zip-dropdown>
+      <div class="field">
+        <label class="label">Zip Code</label>
+        <app-zip-dropdown selectedZip="{{user.zip}}" (zipChanged)="user.zip = $event;"></app-zip-dropdown>
+      </div>
       <div class="buttons">
         <button class="button is-link" (click)="saveClick(user)">Save</button>
         <button class="button">Cancel</button>

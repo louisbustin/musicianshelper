@@ -8,7 +8,7 @@ import { WebRequestService } from './web-request.service';
     providedIn: 'root'
 })
 export class ZipService {
-    private typedZipSubject$ = new BehaviorSubject('366');
+    private typedZipSubject$ = new BehaviorSubject('');
     typedZip$ = this.typedZipSubject$.asObservable();
 
     zips$ = this.typedZip$.pipe(
@@ -24,7 +24,7 @@ export class ZipService {
         private webRequestService: WebRequestService
     ) { }
 
-    zipChanged(key): void {
+    zipChanged(key: string): void {
         this.typedZipSubject$.next(key);
     }
 

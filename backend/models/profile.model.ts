@@ -11,6 +11,7 @@ export interface IProfile extends Document {
     contentType: String
   };
   owner: string;
+  zip: string;
 }
 
 const ProfileSchema: Schema = new Schema({
@@ -36,6 +37,10 @@ const ProfileSchema: Schema = new Schema({
     required: true,
     index: true,
     unique: true,
+  },
+  zip: {
+    type: String,
+    required: false,
   },
 });
 

@@ -10,4 +10,5 @@ export default interface IProfile {
         contentType: string;
     };
     owner: string;
+    zip: string;
 } 

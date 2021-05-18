@@ -48,7 +48,8 @@ export class UsersService {
                                 email: p.email,
                                 useAuthProfilePic: true,
                                 profilePic: undefined,
-                                owner: undefined
+                                owner: undefined,
+                                zip: p.zip,
                             }
                             return this.webRequestService.post('profiles', profile);
                         })
@@ -72,7 +73,8 @@ export class UsersService {
                     email: p.email,
                     useAuthProfilePic: true,
                     profilePic: undefined,
-                    owner: p.user_id
+                    owner: p.user_id,
+                    zip: p.zip,
                 }
                 return profile;
             })
