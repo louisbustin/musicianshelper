@@ -11,7 +11,7 @@ import { ZipService } from '../services/zip.service';
 })
 export class ZipDropdownComponent {
 
-  zipSelected = false;
+  zipSelected = true;
 
   @Input()
   selectedZip = "";
@@ -37,6 +37,7 @@ export class ZipDropdownComponent {
       } 
     } else {
       this.zipSelected = false;
+      this.zipService.zipChanged(zip);
     }
   }
 

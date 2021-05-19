@@ -25,10 +25,7 @@
   <table class="table" *ngIf="searchResults$ | async as results">
     <tr *ngFor="let u of results">
       <td>
-        {{u.firstName}}
-      </td>
-      <td>
-        {{u.lastName}}
+        {{u.name}}
       </td>
       <td>
         {{u.email}}
