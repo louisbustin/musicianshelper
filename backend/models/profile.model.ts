@@ -6,6 +6,7 @@ export interface IProfile extends Document {
   name: string;
   email: string;
   useAuthProfilePic: boolean,
+  ssoProfilePicLink: string,
   profilePic: {
     data: Buffer,
     contentType: String
@@ -27,6 +28,10 @@ const ProfileSchema: Schema = new Schema({
     type: Boolean,
     required: true,
     default: true,
+  },
+  ssoProfilePicLink: {
+    type: String,
+    required: false,
   },
   profilePic: {
     data: Buffer,

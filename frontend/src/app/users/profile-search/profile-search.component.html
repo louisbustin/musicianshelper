@@ -25,6 +25,9 @@
   <table class="table" *ngIf="searchResults$ | async as results">
     <tr *ngFor="let u of results">
       <td>
+        <app-profile-image userId="{{u._id}}"></app-profile-image>
+      </td>
+      <td>
         {{u.name}}
       </td>
       <td>

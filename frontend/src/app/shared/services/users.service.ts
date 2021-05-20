@@ -62,6 +62,7 @@ export class UsersService {
                                 name: p.name,
                                 email: p.email,
                                 useAuthProfilePic: true,
+                                ssoProfilePicLink: p.ssoProfilePicLink,
                                 profilePic: undefined,
                                 owner: undefined,
                                 zip: p.zip,
@@ -77,6 +78,16 @@ export class UsersService {
         );
     }
 
+    getProfileById(userId: string): Observable<IProfile> {
+        return this.webRequestService.get<IProfile>(`profiles/${userId}`)
+            .pipe(
+                catchError( err => {
+                    console.log(err);
+                    return EMPTY;
+                })
+            )
+    }
+
     getProfileFromCurrentUser(): Promise<IProfile> {
         return this.auth.user$
         .pipe(
@@ -87,6 +98,7 @@ export class UsersService {
                     name: p.name,
                     email: p.email,
                     useAuthProfilePic: true,
+                    ssoProfilePicLink: p.ssoProfilePicLink,
                     profilePic: undefined,
                     owner: p.user_id,
                     zip: p.zip,
@@ -107,8 +119,11 @@ export class UsersService {
     }
 
     updateProfile(profile: IProfileWithAuthModel): void {
+        const profilePic = profile.profilePic;
+        profile.profilePic = undefined; // make sure this is cleared, we do not want to send this up every time.
         this.webRequestService.put(`profiles/${profile._id}`, profile)
         .subscribe(p => {
+            p.profilePic = profilePic;
             this.updatedProfileSubject$.next(p);
         });
     }

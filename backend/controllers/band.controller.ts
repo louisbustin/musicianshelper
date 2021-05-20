@@ -33,7 +33,7 @@ export default class BandController {
       // validate
       if (request.params.bandId) {
         if (request.params.bandId !== request.body._id) {
-          return response.status(400).json({ error: 'id must math in parameter and body' });
+          return response.status(400).json({ error: 'id must match in parameter and body' });
         }
       } else {
         return response.status(400).json({ error: 'bandId must be in parameters' });

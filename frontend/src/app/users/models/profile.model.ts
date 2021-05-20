@@ -3,6 +3,7 @@ export default interface IProfile {
     name: string;
     email: string;
     useAuthProfilePic: boolean;
+    ssoProfilePicLink: string;
     profilePic: {
         data: {
             data: []

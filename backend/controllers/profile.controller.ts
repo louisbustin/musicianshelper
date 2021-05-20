@@ -20,21 +20,17 @@ export default class ProfileController {
   }
 
   /**
-   * Returns a single profile owned by the login from the bearer token
+   * Returns a single profile
    * @param request request of the API call
    * @param response reponse to send to client
    */
   static getOneByProfileId = (request: any, response: Response) => {
     // validate
-    if (request.params.profileId) {
-      if (request.params.profileId !== request.body._id) {
-        return response.status(400).json({ error: 'id must math in parameter and body' });
-      }
-    } else {
+    if (!request.params.profileId) {
       return response.status(400).json({ error: 'profileId must be in parameters' });
     }
 
-    Profile.findOne({ _id: request.params.profileId, owner: request.user.sub }).then((p) => {
+    Profile.findOne({ _id: request.params.profileId }).then((p) => {
       if (p) {
         return response.status(200).json(p);
       }
@@ -73,7 +69,7 @@ export default class ProfileController {
     // validate
     if (request.params.profileId) {
       if (request.params.profileId !== request.body._id) {
-        return response.status(400).json({ error: 'id must math in parameter and body' });
+        return response.status(400).json({ error: 'id must match in parameter and body' });
       }
     } else {
       return response.status(400).json({ error: 'profileId must be in parameters' });
