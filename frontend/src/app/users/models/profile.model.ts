@@ -12,4 +12,6 @@ export default interface IProfile {
     };
     owner: string;
     zip: string;
+    instrumentTags: string[];
+    lookingForTags: string[];
 } 

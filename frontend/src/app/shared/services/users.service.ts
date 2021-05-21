@@ -62,10 +62,12 @@ export class UsersService {
                                 name: p.name,
                                 email: p.email,
                                 useAuthProfilePic: true,
-                                ssoProfilePicLink: p.ssoProfilePicLink,
+                                ssoProfilePicLink: p.picture,
                                 profilePic: undefined,
                                 owner: undefined,
                                 zip: p.zip,
+                                instrumentTags: undefined,
+                                lookingForTags: undefined,
                             }
                             return this.webRequestService.post('profiles', profile);
                         })
@@ -98,10 +100,12 @@ export class UsersService {
                     name: p.name,
                     email: p.email,
                     useAuthProfilePic: true,
-                    ssoProfilePicLink: p.ssoProfilePicLink,
+                    ssoProfilePicLink: p.picture,
                     profilePic: undefined,
                     owner: p.user_id,
                     zip: p.zip,
+                    instrumentTags: undefined,
+                    lookingForTags: undefined                   
                 }
                 return profile;
             })

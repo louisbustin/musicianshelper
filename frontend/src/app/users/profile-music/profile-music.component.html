@@ -1,1 +1,10 @@
-Musican profile settings coming soon.
+<form class="box" #form="ngForm" *ngIf="profile$ | async as prof">
+    <div class="field box">
+        <label class="label">Instruments Played</label>
+        <app-tag-cloud [tags]="prof.instrumentTags" placeholder="Instrument" (tagsChanged)="instrumentTagsChanged($event)"></app-tag-cloud>
+    </div>
+    <div class="field box">
+        <label class="label">Looking For</label>
+        <app-tag-cloud [tags]="prof.lookingForTags" placeholder="Looking For" (tagsChanged)="lookingForTagsChanged($event)"></app-tag-cloud>
+    </div>
+</form>
