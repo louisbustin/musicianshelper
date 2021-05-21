@@ -3,6 +3,7 @@ export default interface IProfile {
     name: string;
     email: string;
     useAuthProfilePic: boolean;
+    ssoProfilePicLink: string;
     profilePic: {
         data: {
             data: []
@@ -10,4 +11,5 @@ export default interface IProfile {
         contentType: string;
     };
     owner: string;
+    zip: string;
 } 

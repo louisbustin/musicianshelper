@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+import IProfile from 'src/app/users/models/profile.model';
 import IProfileWithAuthModel from '../../users/models/profile-with-auth-model.model';
 import { UsersService } from '../services/users.service';
 
@@ -16,25 +18,54 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./profile-image.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileImageComponent {
+export class ProfileImageComponent implements OnInit {
   imageBase64: SafeUrl;
   
   @Input()
   cssClass: string;
 
-  profile$ = this.userService.userProfile$.pipe(
-    tap((x: IProfileWithAuthModel) => {
-      if (x.profilePic) {
-        const STRING_CHAR = x.profilePic.data.data.reduce((data, byte)=> {
-          return data + String.fromCharCode(byte);
-        }, '');
-        const base64String = btoa(STRING_CHAR);
-        this.imageBase64 = this.domSanitizer.bypassSecurityTrustUrl(`data:${x.profilePic.contentType};base64, ${base64String}`);
-      }
-    }));
+  @Input()
+  userId: string;
+
+  profileWithModel$: Observable<IProfileWithAuthModel>;
+  profile$: Observable<IProfile>;
 
   constructor(
     private userService: UsersService,
     private domSanitizer: DomSanitizer
   ) { }
+
+  ngOnInit(): void {
+    if (this.userId) {
+      // just get the profile itself, don't worry about combining with Auth0 Models.
+      this.profile$ = this.userService.getProfileById(this.userId).pipe(
+        tap((x: IProfile) => {
+          if (x.profilePic) {
+            const STRING_CHAR = x.profilePic.data.data.reduce((data, byte)=> {
+              return data + String.fromCharCode(byte);
+            }, '');
+            const base64String = btoa(STRING_CHAR);
+            this.imageBase64 = this.domSanitizer.bypassSecurityTrustUrl(`data:${x.profilePic.contentType};base64, ${base64String}`);
+          }          
+        })
+
+      );
+    } else {
+      this.profileWithModel$ = this.userService.userProfile$.pipe(
+        take(1),
+        tap((x: IProfileWithAuthModel) => {
+          if (x.ssoProfilePicLink !== x.authModel.picture) {
+            x.ssoProfilePicLink = x.authModel.picture;
+            this.userService.updateProfile(x);
+          }
+          if (x.profilePic) {
+            const STRING_CHAR = x.profilePic.data.data.reduce((data, byte)=> {
+              return data + String.fromCharCode(byte);
+            }, '');
+            const base64String = btoa(STRING_CHAR);
+            this.imageBase64 = this.domSanitizer.bypassSecurityTrustUrl(`data:${x.profilePic.contentType};base64, ${base64String}`);
+          }
+        }));
+    }
+  }
 }

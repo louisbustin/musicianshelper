@@ -9,6 +9,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { ListPickerComponent } from './list-picker/list-picker.component';
 import { OrderByPipe } from './order-by/order-by.pipe';
 import { ProfileImageComponent } from './profile-image/profile-image.component';
+import { ZipDropdownComponent } from './zip-dropdown/zip-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProfileImageComponent } from './profile-image/profile-image.component';
     ConfirmModalComponent,
     ListPickerComponent,
     OrderByPipe,
-    ProfileImageComponent
+    ProfileImageComponent,
+    ZipDropdownComponent
   ],
   imports: [
     CommonModule
@@ -32,7 +34,8 @@ import { ProfileImageComponent } from './profile-image/profile-image.component';
     ConfirmModalComponent,
     ListPickerComponent,
     OrderByPipe,
-    ProfileImageComponent
+    ProfileImageComponent,
+    ZipDropdownComponent
   ]
 })
 export class SharedModule { }

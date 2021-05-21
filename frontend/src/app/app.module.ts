@@ -51,6 +51,7 @@ import { ContactUsComponent } from './public/contact-us/contact-us.component';
           `${environment.API_URL}/songs*`,
           `${environment.API_URL}/profiles*`,
           `${environment.API_URL}/email*`,
+          `${environment.API_URL}/zips*`,
         ],
       },
     })

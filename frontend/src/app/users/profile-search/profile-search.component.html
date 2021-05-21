@@ -1,1 +1,40 @@
-<p>Profile Search coming soon!</p>
+<div class="field">
+    <label class="label">Zip Code</label>
+    <app-zip-dropdown selectedZip="{{selectedZip}}" (zipChanged)="zipChanged($event);"></app-zip-dropdown>
+</div>
+<div class="field">
+  <label class="label">Distance</label>
+  <div class="select">
+    <select [(ngModel)]="searchRadius">
+      <option value="10">10 miles</option>
+      <option value="25">25 miles</option>
+      <option value="50">50 miles</option>
+      <option value="100">100 miles</option>
+      <option value="200">200 miles</option>
+      <option value="300">300 miles</option>
+      <option value="400">400 miles</option>
+      <option value="500">500 miles</option>
+    </select>
+  </div>
+</div>
+<div class="buttons">
+  <button class="button is-link" (click)="searchClick()" [disabled]="!selectedZip ? true : false">Search</button>
+</div>
+
+<div>
+  <table class="table" *ngIf="searchResults$ | async as results">
+    <tr *ngFor="let u of results">
+      <td>
+        <figure class="image is-64x64 is-inline-block">
+          <app-profile-image userId="{{u._id}}"></app-profile-image>
+        </figure>
+      </td>
+      <td>
+        {{u.name}}
+      </td>
+      <td>
+        {{u.email}}
+      </td>
+    </tr>
+  </table>
+</div>

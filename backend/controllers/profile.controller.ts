@@ -2,6 +2,7 @@
 import { Response } from 'express';
 import logger from '../logger';
 import Profile from '../models/profile.model';
+import ZipController from './zip.controller';
 
 export default class ProfileController {
   /**
@@ -19,21 +20,17 @@ export default class ProfileController {
   }
 
   /**
-   * Returns a single profile owned by the login from the bearer token
+   * Returns a single profile
    * @param request request of the API call
    * @param response reponse to send to client
    */
   static getOneByProfileId = (request: any, response: Response) => {
     // validate
-    if (request.params.profileId) {
-      if (request.params.profileId !== request.body._id) {
-        return response.status(400).json({ error: 'id must math in parameter and body' });
-      }
-    } else {
+    if (!request.params.profileId) {
       return response.status(400).json({ error: 'profileId must be in parameters' });
     }
 
-    Profile.findOne({ _id: request.params.profileId, owner: request.user.sub }).then((p) => {
+    Profile.findOne({ _id: request.params.profileId }).then((p) => {
       if (p) {
         return response.status(200).json(p);
       }
@@ -72,7 +69,7 @@ export default class ProfileController {
     // validate
     if (request.params.profileId) {
       if (request.params.profileId !== request.body._id) {
-        return response.status(400).json({ error: 'id must math in parameter and body' });
+        return response.status(400).json({ error: 'id must match in parameter and body' });
       }
     } else {
       return response.status(400).json({ error: 'profileId must be in parameters' });
@@ -122,5 +119,45 @@ export default class ProfileController {
       logger.error('unable to update profile pic: no upload found');
       return response.status(500).send();
     }
+  }
+
+  /**
+   * Request will contain two parameters, one will be the zip code to base the search and
+   * the second will be the radius distance from that zip code to search
+   * @param request request
+   * @param response response
+   * @returns all profiles within radius distance of the provided zip code
+   */
+  static getByDistanceFromZip = (request: any, response: Response) => {
+    const errors = [];
+    ZipController.verifyZipParam(request.params).forEach((x) => errors.push(x));
+
+    if (!request.params.radius) {
+      errors.push('must include radius parameter');
+    } else if (request.params.radius > 500) {
+      errors.push('search radius must be 500 miles or less');
+    }
+    if (errors.length > 0) {
+      return response.status(400).json(errors);
+    }
+
+    // first we will find all zip codes within the x miles of the provided zip code
+    ZipController.getAllZipsWithinRadiusOfZip(
+      request.params.zip,
+      request.params.radius,
+    ).then((zips) => {
+      Profile.where('zip').in(zips.map((z) => z.zip)).then((profiles) => {
+        if (profiles) {
+          return response.status(200).json(profiles);
+        }
+        return response.status(404).send();
+      }).catch((err) => {
+        logger.error(`unable to retrieve profiles: ${err}`);
+        return response.status(500).send();
+      });
+    }).catch((err) => {
+      logger.error(err);
+      return response.status(500).send();
+    });
   }
 }

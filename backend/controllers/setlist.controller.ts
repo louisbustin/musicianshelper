@@ -55,7 +55,7 @@ export default class SetlistController {
       // validate
       if (request.params.setlistId) {
         if (request.params.setlistId !== request.body._id) {
-          return response.status(400).json({ error: 'id must math in parameter and body' });
+          return response.status(400).json({ error: 'id must match in parameter and body' });
         }
       } else {
         return response.status(400).json({ error: 'setlistid must be in parameters' });

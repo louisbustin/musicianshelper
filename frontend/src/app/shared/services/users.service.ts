@@ -11,6 +11,21 @@ import IProfile from '../../users/models/profile.model';
 })
 export class UsersService {
 
+    // profile search results
+    private searchZipSubject$ = new Subject<string>();
+    searchZip$ = this.searchZipSubject$.asObservable();
+
+    private searchRadiusSubject$ = new Subject<number>();
+    searchRadius$ = this.searchRadiusSubject$.asObservable();
+
+    searchResults$ = combineLatest([this.searchZip$, this.searchRadius$])
+    .pipe(
+        mergeMap(([searchZip, searchRadius]) => {
+            return this.webRequestService.get<IProfile>(`profiles/searchbydistance/${searchZip}/${searchRadius}`);
+        })
+    )
+
+    //current user profile info
     private updatedProfileSubject$ = new Subject<IProfile>();
     updatedProfile$ = this.updatedProfileSubject$.asObservable();
 
@@ -47,8 +62,10 @@ export class UsersService {
                                 name: p.name,
                                 email: p.email,
                                 useAuthProfilePic: true,
+                                ssoProfilePicLink: p.ssoProfilePicLink,
                                 profilePic: undefined,
-                                owner: undefined
+                                owner: undefined,
+                                zip: p.zip,
                             }
                             return this.webRequestService.post('profiles', profile);
                         })
@@ -61,6 +78,16 @@ export class UsersService {
         );
     }
 
+    getProfileById(userId: string): Observable<IProfile> {
+        return this.webRequestService.get<IProfile>(`profiles/${userId}`)
+            .pipe(
+                catchError( err => {
+                    console.log(err);
+                    return EMPTY;
+                })
+            )
+    }
+
     getProfileFromCurrentUser(): Promise<IProfile> {
         return this.auth.user$
         .pipe(
@@ -71,8 +98,10 @@ export class UsersService {
                     name: p.name,
                     email: p.email,
                     useAuthProfilePic: true,
+                    ssoProfilePicLink: p.ssoProfilePicLink,
                     profilePic: undefined,
-                    owner: p.user_id
+                    owner: p.user_id,
+                    zip: p.zip,
                 }
                 return profile;
             })
@@ -90,9 +119,17 @@ export class UsersService {
     }
 
     updateProfile(profile: IProfileWithAuthModel): void {
+        const profilePic = profile.profilePic;
+        profile.profilePic = undefined; // make sure this is cleared, we do not want to send this up every time.
         this.webRequestService.put(`profiles/${profile._id}`, profile)
         .subscribe(p => {
+            p.profilePic = profilePic;
             this.updatedProfileSubject$.next(p);
         });
+    }
+
+    searchProfiles(zip: string, radius: number): void {
+        this.searchZipSubject$.next(zip);
+        this.searchRadiusSubject$.next(radius);
     }
 }

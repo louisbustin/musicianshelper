@@ -51,7 +51,7 @@ export default class SongController {
     // validate
     if (request.params.songId) {
       if (request.params.songId !== request.body._id) {
-        return response.status(400).json({ error: 'id must math in parameter and body' });
+        return response.status(400).json({ error: 'id must match in parameter and body' });
       }
     } else {
       return response.status(400).json({ error: 'songid must be in parameters' });

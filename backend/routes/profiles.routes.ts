@@ -8,6 +8,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 router.get('/', checkJwt, controller.getOneByCurrentUser);
+router.get('/searchbydistance/:zip/:radius', checkJwt, controller.getByDistanceFromZip);
 router.get('/:profileId', checkJwt, controller.getOneByProfileId);
 
 router.post('/', checkJwt, controller.create);
