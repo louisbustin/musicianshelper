@@ -13,6 +13,9 @@ export interface IProfile extends Document {
   };
   owner: string;
   zip: string;
+  instrumentTags: [string];
+  lookingForTags: [string];
+  bio: string;
 }
 
 const ProfileSchema: Schema = new Schema({
@@ -45,6 +48,22 @@ const ProfileSchema: Schema = new Schema({
   },
   zip: {
     type: String,
+    required: false,
+  },
+  instrumentTags: {
+    type: [String],
+    required: false,
+  },
+  lookingForTags: {
+    type: [String],
+    required: false,
+  },
+  bio: {
+    type: String,
+    required: false,
+  },
+  influencesTags: {
+    type: [String],
     required: false,
   },
 });
