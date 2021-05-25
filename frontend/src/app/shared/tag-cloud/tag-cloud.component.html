@@ -1,7 +1,7 @@
 <div class="control">
     <div class="field has-addons">
         <div class="control">
-            <input class="input" type="text" placeholder="{{placeholder}}" name="tag" #newtagname>
+            <input class="input" type="text" placeholder="{{placeholder}}" name="tag" #newtagname (keyup.enter)="addTag(newtagname.value); newtagname.value = '';">
         </div>
         <div class="control">
             <button class="button is-primary" (click)="addTag(newtagname.value)">Add</button>

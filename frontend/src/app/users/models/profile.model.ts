@@ -14,4 +14,6 @@ export default interface IProfile {
     zip: string;
     instrumentTags: string[];
     lookingForTags: string[];
+    influencesTags: string[];
+    bio: string;
 } 

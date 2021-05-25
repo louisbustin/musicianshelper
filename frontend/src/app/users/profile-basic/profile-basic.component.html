@@ -43,6 +43,12 @@
           </p>
       </div>
       <div class="field">
+        <label class="label">Biography</label>
+        <div class="control">
+          <textarea class="textarea" name="bio" id="bio" [(ngModel)]="user.bio" maxlength="4000"></textarea>
+        </div>
+    </div>
+      <div class="field">
         <label class="label">Zip Code</label>
         <app-zip-dropdown selectedZip="{{user.zip}}" (zipChanged)="user.zip = $event;"></app-zip-dropdown>
       </div>

@@ -13,21 +13,23 @@ export class TagCloudComponent {
   @Input()
   placeholder = "";
 
+  @Input()
+  readOnly = false;
+
   @Output()
   tagsChanged = new EventEmitter<string[]>();
 
   deleteClick(tag: string): void {
-    this.tags = this.tags.filter((ele) => ele != tag);
-    this.tagsChanged.emit(this.tags);
-  }
-
-  addTag(tag: string): void {
-    if (tag && this.tags.findIndex((ele) => ele === tag) < 0) {
-      this.tags.push(tag);
+    if (!this.readOnly) {
+      this.tags = this.tags.filter((ele) => ele != tag);
       this.tagsChanged.emit(this.tags);
     }
   }
 
-
-
+  addTag(tag: string): void {
+    if (!this.readOnly && tag && this.tags.findIndex((ele) => ele === tag.toLocaleLowerCase()) < 0) {
+      this.tags.push(tag.toLowerCase());
+      this.tagsChanged.emit(this.tags);
+    }
+  }
 }

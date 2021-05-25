@@ -68,6 +68,8 @@ export class UsersService {
                                 zip: p.zip,
                                 instrumentTags: undefined,
                                 lookingForTags: undefined,
+                                influencesTags: undefined,
+                                bio: ''
                             }
                             return this.webRequestService.post('profiles', profile);
                         })
@@ -105,7 +107,9 @@ export class UsersService {
                     owner: p.user_id,
                     zip: p.zip,
                     instrumentTags: undefined,
-                    lookingForTags: undefined                   
+                    lookingForTags: undefined,
+                    influencesTags: undefined,
+                    bio: '',
                 }
                 return profile;
             })

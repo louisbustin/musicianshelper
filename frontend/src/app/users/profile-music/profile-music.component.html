@@ -7,4 +7,8 @@
         <label class="label">Looking For</label>
         <app-tag-cloud [tags]="prof.lookingForTags" placeholder="Looking For" (tagsChanged)="lookingForTagsChanged($event)"></app-tag-cloud>
     </div>
+    <div class="field box">
+        <label class="label">Influences</label>
+        <app-tag-cloud [tags]="prof.influencesTags" placeholder="Influences" (tagsChanged)="influencesTagsChanged($event)"></app-tag-cloud>
+    </div>
 </form>

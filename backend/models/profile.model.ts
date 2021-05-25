@@ -15,6 +15,7 @@ export interface IProfile extends Document {
   zip: string;
   instrumentTags: [string];
   lookingForTags: [string];
+  bio: string;
 }
 
 const ProfileSchema: Schema = new Schema({
@@ -54,6 +55,14 @@ const ProfileSchema: Schema = new Schema({
     required: false,
   },
   lookingForTags: {
+    type: [String],
+    required: false,
+  },
+  bio: {
+    type: String,
+    required: false,
+  },
+  influencesTags: {
     type: [String],
     required: false,
   },

@@ -29,4 +29,9 @@ export class ProfileMusicComponent {
     this.profile.lookingForTags = tags;
     this.userService.updateProfile(this.profile);
   }
+
+ influencesTagsChanged(tags: string[]): void {
+    this.profile.influencesTags = tags;
+    this.userService.updateProfile(this.profile);
+  }
 }
