@@ -11,6 +11,7 @@ router.get('/', checkJwt, controller.getOneByCurrentUser);
 router.get('/searchbydistance/:zip/:radius', checkJwt, controller.getByDistanceFromZip);
 router.get('/:profileId', checkJwt, controller.getOneByProfileId);
 
+router.post('/search', checkJwt, controller.search);
 router.post('/', checkJwt, controller.create);
 
 router.patch('/:profileId', checkJwt, controller.update);

@@ -160,4 +160,17 @@ export default class ProfileController {
       return response.status(500).send();
     });
   }
+
+  /**
+   * Request body will contain search parameters;
+   *   zip
+   *   radius
+   *   influences
+   *   lookingFor
+   * @param request request containing search params in the body
+   * @param response response to be sent to the client
+   */
+  static search = (request:any, response: Response) => {
+
+  }
 }
