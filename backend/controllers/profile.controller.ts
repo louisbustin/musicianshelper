@@ -165,12 +165,58 @@ export default class ProfileController {
    * Request body will contain search parameters;
    *   zip
    *   radius
-   *   influences
-   *   lookingFor
+   *   influencesTags
+   *   instrumentTags
+   *   lookingForTags
    * @param request request containing search params in the body
    * @param response response to be sent to the client
    */
   static search = (request:any, response: Response) => {
+    const { lookingForTags } = request.body;
+    const { influencesTags } = request.body;
+    const { instrumentTags } = request.body;
+    const { zip } = request.body;
+    const { radius } = request.body;
 
+    let query = Profile.find();
+
+    if (lookingForTags) {
+      query = query.where({ lookingForTags: { $in: lookingForTags } });
+    }
+
+    if (influencesTags) {
+      query = query.where({ influencesTags: { $in: influencesTags } });
+    }
+
+    if (instrumentTags) {
+      query = query.where({ instrumentTags: { $in: instrumentTags } });
+    }
+
+    if (zip && radius) {
+      ZipController.getAllZipsWithinRadiusOfZip(zip, radius).then((zips) => {
+        query.where('zip').in(zips.map((z) => z.zip)).then((profiles) => {
+          if (profiles) {
+            return response.status(200).json(profiles);
+          }
+          return response.status(404).send();
+        }).catch((err) => {
+          logger.error(err);
+          return response.status(500).send();
+        });
+      }).catch((err) => {
+        logger.error(err);
+        return response.status(500).send();
+      });
+    } else {
+      query.then((profiles) => {
+        if (profiles) {
+          return response.status(200).json(profiles);
+        }
+        return response.status(404).send();
+      }).catch((err) => {
+        logger.error(`unable to search profiles ${err}`);
+        return response.status(500).send();
+      });
+    }
   }
 }

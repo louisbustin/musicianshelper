@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -21,7 +23,7 @@ export class WebRequestService {
   delete<T>(uri: string): Observable<T> {
     return this.http.delete<T>(`${this.API_URL}/${uri}`);
   }
-  post<T>(uri: string, body: T): Observable<T> {
+  post<T>(uri: string, body: any): Observable<T> {
     return this.http.post<T>(`${this.API_URL}/${uri}`, body);
   }
   postFormData<T>(uri: string, body: FormData): Observable<T> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { combineLatest, EMPTY, merge, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, EMPTY, merge, Observable, Subject } from 'rxjs';
 import { catchError, map, mergeMap, shareReplay, take } from 'rxjs/operators';
 import { WebRequestService } from './web-request.service';
 import IProfileWithAuthModel from '../../users/models/profile-with-auth-model.model';
@@ -18,10 +18,13 @@ export class UsersService {
     private searchRadiusSubject$ = new Subject<number>();
     searchRadius$ = this.searchRadiusSubject$.asObservable();
 
-    searchResults$ = combineLatest([this.searchZip$, this.searchRadius$])
+    private searchLookingForTagsSubject$ = new BehaviorSubject<string[]>(undefined);
+    searchLookingForTags$ = this.searchLookingForTagsSubject$.asObservable();
+
+    searchResults$ = combineLatest([this.searchZip$, this.searchRadius$, this.searchLookingForTags$])
     .pipe(
-        mergeMap(([searchZip, searchRadius]) => {
-            return this.webRequestService.get<IProfile>(`profiles/searchbydistance/${searchZip}/${searchRadius}`);
+        mergeMap(([zip, radius, lookingForTags]) => {
+            return this.webRequestService.post<IProfile>('profiles/search', { zip, radius, lookingForTags });
         })
     )
 
@@ -71,7 +74,7 @@ export class UsersService {
                                 influencesTags: undefined,
                                 bio: ''
                             }
-                            return this.webRequestService.post('profiles', profile);
+                            return this.webRequestService.post<IProfile>('profiles', profile);
                         })
                     )
                 } else {
