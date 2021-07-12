@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { UsersService } from 'src/app/shared/services/users.service';
-import IProfileWithAuthModel from '../models/profile-with-auth-model.model';
 
 @Component({
   selector: 'app-profile-music',
@@ -11,7 +10,8 @@ import IProfileWithAuthModel from '../models/profile-with-auth-model.model';
 })
 export class ProfileMusicComponent {
 
-  private profile: IProfileWithAuthModel;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private profile: any;
 
   profile$ = this.userService.userProfile$
   .pipe(tap((x) => this.profile = x));

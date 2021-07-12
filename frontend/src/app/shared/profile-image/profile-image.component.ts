@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -53,7 +54,7 @@ export class ProfileImageComponent implements OnInit {
     } else {
       this.profileWithModel$ = this.userService.userProfile$.pipe(
         take(1),
-        tap((x: IProfileWithAuthModel) => {
+        tap((x: any) => {
           if (x.ssoProfilePicLink !== x.authModel.picture) {
             x.ssoProfilePicLink = x.authModel.picture;
             this.userService.updateProfile(x);
