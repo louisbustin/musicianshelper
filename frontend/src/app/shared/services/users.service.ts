@@ -38,7 +38,7 @@ export class UsersService {
         merge(this.getProfile(), this.updatedProfile$)
     ]).pipe(
         map(([authProfile, dbProfile]) => {
-            const prof: IProfileWithAuthModel = {
+            const prof = {
                 authModel: authProfile,
                 ...dbProfile
             }
